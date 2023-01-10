@@ -20,6 +20,8 @@ Route::get('/login', [AuthController::class, 'login'])->middleware('guest')->nam
 Route::post('/login', [AuthController::class, 'loginPost'])->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/logout', [AuthController::class, "logout"]);
+
     Route::get('/', [DashboardController::class, "index"]);
 });
 

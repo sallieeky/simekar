@@ -8,8 +8,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
-	<link href="/dashboard_assets/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
-	<title>Dashboard | Upmin</title>
+	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>Dashboard | SIMEKAR</title>
 </head>
 
 <body class="preload-active aside-active aside-mobile-minimized aside-desktop-maximized">
@@ -241,7 +241,7 @@
 											<!-- END Grid Nav -->
 										</div>
 										<div class="portlet-footer portlet-footer-bordered rounded-0">
-											<button class="btn btn-label-danger logout-trigger">Sign out</button>
+											<a href="/logout" class="btn btn-label-danger logout-trigger">Sign out</a>
 										</div>
 									</div>
 									<!-- END Portlet -->
