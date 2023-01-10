@@ -21,14 +21,6 @@
                     <div class="card-body">
                         <form action="/reset-password" method="POST">
                             @csrf
-                            <div class="form-group" hidden>
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ $email }}">
-                            </div>
-                            <div class="form-group" hidden>
-                                <label for="token">Token</label>
-                                <input type="text" name="token" id="token" class="form-control" value="{{ $token }}">
-                            </div>
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control">
