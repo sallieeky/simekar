@@ -84,7 +84,7 @@
 											</div>
 										@endif
 										<div class="d-flex align-items-center justify-content-between">
-											<span><a href="register.html">Lupa password?</a></span>
+											<span><a href="/lupa-password">Lupa password?</a></span>
 											<button type="submit" class="btn btn-label-primary btn-lg btn-widest" id="login-button">Login</button>
 										</div>
 										<!-- END Flex -->

@@ -30,5 +30,13 @@ class UserSeeder extends Seeder
             'role' => 'user',
             'no_hp' => '081243942304'
         ]);
+
+        User::create([
+            'nama' => "Yus Fadillah",
+            "email" => "10191059@student.itk.ac.id",
+            "password" => bcrypt("yus12345"),
+            'role' => 'user',
+            'no_hp' => '081234567890'
+        ]);
     }
 }
