@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/login', [AuthController::class, 'login'])->middleware('guest')->name('login');
+Route::post('/login', [AuthController::class, 'loginPost'])->middleware('guest');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, "index"]);
 });
 
 Route::get('/kirim', function () {
