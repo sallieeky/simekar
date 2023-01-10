@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+});
+
+Route::get('/kirim', function () {
+    Mail::send('mail.tes', [], function ($message) {
+        $message->from('eksype72@gmail.com', 'SIMEKAR');
+        $message->to('sallieeky@gmail.com', 'Sallie Eky');
+        $message->subject("Tes Kirim Dari SIMEKAR");
+    });
+    return "BERHASIL";
 });
