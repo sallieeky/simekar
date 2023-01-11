@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Kendaraan;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -39,10 +41,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('master-data')->middleware('admin')->group(function () {
         Route::get('/user', [UserController::class, "index"]);
-        Route::post('/user/tambah', [UserController::class, "tambah"]);
         Route::get('/user/get/{user}', [UserController::class, "get"]);
+        Route::post('/user/tambah', [UserController::class, "tambah"]);
         Route::post('/user/edit/', [UserController::class, "edit"]);
         Route::delete('/user/delete/', [UserController::class, "delete"]);
+
+        Route::get('/kendaraan', [KendaraanController::class, "index"]);
+        Route::post('/kendaraan/tampilkan/{kendaraan}', [KendaraanController::class, "tampilkan"]);
     });
 });
 
@@ -119,4 +124,17 @@ Route::get('/kirim', function () {
         $message->subject("Tes Kirim Dari SIMEKAR");
     });
     return "BERHASIL";
+});
+
+Route::get("/tes", function () {
+    $file = fopen(public_path('kendaraan.csv'), 'r');
+    while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
+        $data = explode(";", $row[0]);
+        Kendaraan::create([
+            'no_polisi' => $data[0],
+            'merk' => $data[1],
+            'tipe' => $data[2],
+        ]);
+    }
+    fclose($file);
 });
