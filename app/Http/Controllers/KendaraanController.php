@@ -91,8 +91,10 @@ class KendaraanController extends Controller
         return redirect()->back()->with('success', 'Berhasil mengubah data');
     }
 
-    public function delete(Kendaraan $kendaraan)
+    public function delete(Request $request)
     {
-        // 
+        $kendaraan = Kendaraan::find($request->id);
+        $kendaraan->delete();
+        return redirect()->back()->with('success', 'Berhasil menghapus data');
     }
 }

@@ -152,21 +152,21 @@
   </div>
 </div>
 
-{{-- make delete user modal --}}
-{{-- <div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus-user" aria-hidden="true">
+{{-- make delete modal --}}
+<div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Hapus User</h5>
+        <h5 class="modal-title">Hapus Kendaraan</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Apakah anda yakin ingin menghapus user ini?</p>
+        <p>Apakah anda yakin ingin menghapus kendaraan ini?</p>
       </div>
       <div class="modal-footer">
-        <form action="/master-data/user/delete" method="POST">
+        <form action="/master-data/kendaraan/delete" method="POST">
           @csrf
           @method("DELETE")
           <input type="hidden" name="id" id="hapus_id">
@@ -176,7 +176,7 @@
       </div>
     </div>
   </div>
-</div> --}}
+</div>
 
 @endsection
 
@@ -246,11 +246,11 @@
     });
 
     // make ajax for delete
-    // $(".btn-hapus").click(function () {
-    //   let id = $(this).data("id");
-    //   $("#hapus_id").val(id);
-    //   $("#hapus-modal").modal("show");
-    // });
+    $("#table-kendaraan").on('click', 'tbody tr td .btn-hapus',function () {
+      let id = $(this).data("id");
+      $("#hapus_id").val(id);
+      $("#hapus-modal").modal("show");
+    });
   });
 </script>
 
