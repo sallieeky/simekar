@@ -53,6 +53,8 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->id,
             'no_hp' => 'required|numeric',
+            'password' => 'nullable|min:8',
+            'password_confirmation' => 'nullable|same:password'
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
             'email.required' => 'Email tidak boleh kosong',
@@ -60,12 +62,17 @@ class UserController extends Controller
             'email.unique' => 'Email sudah terdaftar',
             'no_hp.required' => 'No HP tidak boleh kosong',
             'no_hp.numeric' => 'No HP harus angka',
+            'password.min' => 'Password minimal 8 karakter',
+            'password_confirmation.same' => 'Konfirmasi password tidak sama',
         ]);
 
         $user = User::find($request->id);
         $user->nama = $request->nama;
         $user->email = $request->email;
         $user->no_hp = $request->no_hp;
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
         $user->save();
 
         return redirect()->back()->with('success', 'Berhasil mengubah data');

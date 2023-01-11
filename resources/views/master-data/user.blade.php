@@ -171,6 +171,24 @@
               @enderror
             </div>
           </div>
+          <div class="validation-container mb-4">
+            <div class="form-floating">
+              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="edit_password" placeholder="Password" name="password">
+              <label for="password">Password</label>
+              @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
+          </div>
+          <div class="validation-container mb-4">
+            <div class="form-floating">
+              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="edit_password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
+              <label for="password_confirmation">Konfirmasi Password</label>
+              @error('password_confirmation')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

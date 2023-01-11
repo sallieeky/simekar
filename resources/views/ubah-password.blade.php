@@ -51,7 +51,8 @@
           </div>
         </div>
       </div>
-      <div class="portlet-footer portlet-footer-bordered text-end">
+      <div class="portlet-footer portlet-footer-bordered d-flex justify-content-between">
+        <a href="/profile" class="btn btn-link">Kembali ke profile</a>
         <button class="btn btn-primary" type="submit" id="ubah-data">Simpan</button>
       </div>
       </form>
