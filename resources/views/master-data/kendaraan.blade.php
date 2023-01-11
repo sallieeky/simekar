@@ -25,52 +25,54 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
-            <table class="table table-striped table-bordered table-hover" id="table-kendaraan">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nomor Polisi</th>
-                  <th>Merk</th>
-                  <th>Tipe</th>
-                  <th>Tampilkan</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($kendaraan as $dt)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $dt->no_polisi }}</td>
-                  <td>{{ $dt->merk }}</td>
-                  <td>{{ $dt->tipe }}</td>
-                  <td>
-                    <div class="form-check-inline">
-                      <label class="form-check-label">
-                        {{-- tampilkan dan sembunyikan menggunakan tombol mata --}}
-                        @if ($dt->isShow)
-                        <button type="button" class="btn btn-sm btn-label-primary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                          <i class="fa fa-eye"></i>
-                        </button>
-                        @else
-                        <button type="button" class="btn btn-sm btn-label-secondary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                          <i class="fa fa-eye-slash"></i>
-                        </button>
-                        @endif
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $dt->id }}">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $dt->id }}">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="table-kendaraan">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nomor Polisi</th>
+                    <th>Merk</th>
+                    <th>Tipe</th>
+                    <th>Tampilkan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($kendaraan as $dt)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $dt->no_polisi }}</td>
+                    <td>{{ $dt->merk }}</td>
+                    <td>{{ $dt->tipe }}</td>
+                    <td>
+                      <div class="form-check-inline">
+                        <label class="form-check-label">
+                          {{-- tampilkan dan sembunyikan menggunakan tombol mata --}}
+                          @if ($dt->isShow)
+                          <button type="button" class="btn btn-sm btn-label-primary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
+                            <i class="fa fa-eye"></i>
+                          </button>
+                          @else
+                          <button type="button" class="btn btn-sm btn-label-secondary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
+                            <i class="fa fa-eye-slash"></i>
+                          </button>
+                          @endif
+                        </label>
+                      </div>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $dt->id }}">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $dt->id }}">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
