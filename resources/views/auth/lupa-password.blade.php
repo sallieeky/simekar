@@ -1,44 +1,105 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
+<head>
+	<!-- BEGIN Import Firebase Auth Scripts -->
+	<!-- BEGIN Import Analytics Scripts -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
+	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
+	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
+	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>Lupa Password | SIMEKAR</title>
+</head>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Forgot Password</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="/lupa-password" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Send Password Reset Link</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-      
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+<body class="preload-active">
+	<!-- BEGIN Preload -->
+	<div class="preload">
+		<div class="preload-dialog">
+			<!-- BEGIN Spinner -->
+			<div class="spinner-border text-primary preload-spinner"></div>
+			<!-- END Spinner -->
+		</div>
+	</div>
+	<!-- END Preload -->
+	<!-- BEGIN Page Holder -->
+	<div class="holder">
+		<!-- BEGIN Page Wrapper -->
+		<div class="wrapper ">
+			<!-- BEGIN Page Content -->
+			<div class="content">
+				<div class="container-fluid g-4">
+					<div class="row g-0 align-items-center justify-content-center h-100" style="flex-direction: column">
+						<img src="/logo.png" alt="Logo JR" class="img-fluid" style="width: 150px">
+						<h3 class="text-center">Sistem Informasi Manajemen Kendaraan</h3>
+
+						<div class="col-sm-8 col-md-6 col-lg-4 col-xl-4">
+							<!-- BEGIN Portlet -->
+							<div class="portlet">
+								<div class="portlet-body">
+									<div class="mt-3 mb-3">
+                                        <h5>Lupa Password</h5>
+									</div>
+									<!-- BEGIN Form -->
+									<form class="d-grid gap-3" id="login-form" method="POST" action="/lupa-password">
+										@csrf 
+										<!-- BEGIN Validation Container -->
+										<div class="validation-container">
+											<!-- BEGIN Form Floating -->
+											<div class="form-floating">
+												<input class="form-control form-control-lg @error('email') is-invalid @enderror" type="text" id="email" name="email" placeholder="Please insert your email" value="{{ old('email') }}">
+												<label for="email">Email</label>
+												@error('email')
+													<div class="invalid-feedback">{{ $message }}</div>
+												@enderror
+											</div>
+											<!-- END Form Floating -->
+										</div>
+										<!-- END Validation Container -->
+										<!-- BEGIN Flex -->
+										{{-- show error email atau password salah --}}
+										@if (session('error'))
+											<div class="alert alert-danger alert-dismissible fade show" role="alert">
+												{{ session('error') }}
+												<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+											</div>
+										@endif
+										<div class="d-flex align-items-center justify-content-between">
+											<button type="submit" class="btn btn-label-primary btn-lg btn-widest w-100" id="login-button">Kirim Reset Password Link</button>
+										</div>
+                                        @if(session('status'))
+                                        <div class="alert alert-dismissible alert-outline-success fade show">
+                                            <div class="alert-content">
+                                                <strong>Berhasil!</strong> Link untuk merubah password telah di kirim ke email anda.
+                                            </div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                        </div>
+                                        @endif
+										<!-- END Flex -->
+									</form>
+									<!-- END Form -->
+								</div>
+							</div>
+							<!-- END Portlet -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END Page Content -->
+		</div>
+		<!-- END Page Wrapper -->
+	</div>
+	<!-- END Page Holder -->
+	<script type="text/javascript" src="/dashboard_assets/assets/build/scripts/mandatory.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/build/scripts/core.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/build/scripts/vendor.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/sticky-header.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/copyright-year.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/theme-switcher.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/tooltip-popover.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/dropdown-scrollbar.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/fullscreen-trigger.js"></script>
+</body>
 </html>

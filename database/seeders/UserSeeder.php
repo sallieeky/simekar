@@ -38,5 +38,13 @@ class UserSeeder extends Seeder
             'role' => 'user',
             'no_hp' => '081234567890'
         ]);
+
+        User::create([
+            'nama' => "Sallie Eky",
+            "email" => "sallieeky@gmail.com",
+            'password' => bcrypt('eky12345'),
+            'role' => 'user',
+            'no_hp' => '081234567890'
+        ]);
     }
 }

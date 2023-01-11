@@ -40,11 +40,7 @@
 							<div class="portlet">
 								<div class="portlet-body">
 									<div class="text-center mt-4 mb-5">
-										<!-- BEGIN Avatar -->
-										{{-- <div class="avatar avatar-label-primary avatar-circle widget12">
-											<img src="logo.png" alt="logo" class="img-fluid">
-										</div> --}}
-										<!-- END Avatar -->
+										{{--  --}}
 									</div>
 									<!-- BEGIN Form -->
 									<form class="d-grid gap-3" id="login-form" method="POST" action="/login">
@@ -78,10 +74,12 @@
 										<!-- BEGIN Flex -->
 										{{-- show error email atau password salah --}}
 										@if (session('error'))
-											<div class="alert alert-danger alert-dismissible fade show" role="alert">
+										<div class="alert alert-dismissible alert-outline-danger fade show">
+											<div class="alert-content">
 												{{ session('error') }}
-												<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 											</div>
+											<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+										</div>
 										@endif
 										<div class="d-flex align-items-center justify-content-between">
 											<span><a href="/lupa-password">Lupa password?</a></span>

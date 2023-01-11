@@ -48,7 +48,13 @@ Route::get('/lupa-password', function () {
 })->middleware('guest')->name('password.request');
 
 Route::post('/lupa-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
+    $request->validate([
+        'email' => 'required|email|exists:users,email',
+    ], [
+        'email.exists' => 'Email tidak terdaftar',
+        'email.required' => 'Email tidak boleh kosong',
+        'email.email' => 'Email tidak valid',
+    ]);
 
     $status = Password::sendResetLink(
         $request->only('email')
@@ -67,7 +73,16 @@ Route::post('/reset-password', function (Request $request) {
     $request->validate([
         'token' => 'required',
         'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
+        'password' => 'required|min:8',
+        'password_confirmation' => 'required|same:password',
+    ], [
+        'token.required' => 'Token tidak boleh kosong',
+        'email.required' => 'Email tidak boleh kosong',
+        'email.email' => 'Email tidak valid',
+        'password.required' => 'Password tidak boleh kosong',
+        'password.min' => 'Password minimal 8 karakter',
+        'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong',
+        'password_confirmation.same' => 'Konfirmasi password tidak sama',
     ]);
 
     $status = Password::reset(
