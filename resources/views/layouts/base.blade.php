@@ -58,6 +58,7 @@
 					<!-- END Menu Section -->
 
 					{{-- INI UNTUK ADMIN AJA --}}
+					@if(Auth::user()->role == "admin")
 					<div class="menu-item">
 						<button class="menu-item-link menu-item-toggle">
 							<div class="menu-item-icon">
@@ -71,31 +72,31 @@
 						<!-- BEGIN Menu Submenu -->
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/master-data/kendaraan" data-menu-path="/master-data/kendaraan" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Kendaraan</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/master-data/driver" data-menu-path="/master-data/driver" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Driver</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/master-data/asset" data-menu-path="/master-data/asset" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Asset</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/master-data/service" data-menu-path="/master-data/service" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Service</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/master-data/user" data-menu-path="/master-data/user" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">User</span>
 								</a>
@@ -104,6 +105,7 @@
 						<!-- END Menu Submenu -->
 					</div>
 					{{-- SAMPAI SINI AJA YANG UNTUK ADMIN --}}
+					@endif
 
 					<div class="menu-item">
 						<button class="menu-item-link menu-item-toggle">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -27,15 +28,22 @@ Route::post('/login', [AuthController::class, 'loginPost'])->middleware('guest')
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, "index"]);
     Route::get('/logout', [AuthController::class, "logout"]);
+
     Route::get("/profile", [ProfileController::class, "profile"]);
     Route::post("/profile/ubah-data", [ProfileController::class, "ubahDataProfile"]);
 
     Route::get("/profile/ubah-password", [ProfileController::class, "ubahPassword"]);
     Route::post("/profile/ubah-password", [ProfileController::class, "ubahPasswordPost"]);
 
-
-    Route::get('/', [DashboardController::class, "index"]);
+    Route::prefix('master-data')->middleware('admin')->group(function () {
+        Route::get('/user', [UserController::class, "index"]);
+        Route::post('/user/tambah', [UserController::class, "tambah"]);
+        Route::get('/user/get/{user}', [UserController::class, "get"]);
+        Route::post('/user/edit/', [UserController::class, "edit"]);
+        Route::delete('/user/delete/', [UserController::class, "delete"]);
+    });
 });
 
 // FORGET PASSWORD
