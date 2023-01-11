@@ -329,33 +329,6 @@
 												<a href="/logout" class="btn btn-label-danger logout-trigger">Sign out</a>
 											</div>
 										</div>
-										<!-- END Portlet -->
-										<script type="module">
-											import {
-												onAuthStateChanged,
-												signOut
-											} from "https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js";
-											onAuthStateChanged(window.firebaseAuth, (user) => {
-												if (user) {
-													// get email
-													const email = user.email
-													// Get full name
-													const fullName = user.displayName;
-													// Insert data to the elements
-													if (fullName) {
-														$(".thumbnail-email").text(email);
-														$(".thumbnail-fullname").text(fullName);
-													}
-												}
-											});
-											$('.logout-trigger').on('click', async () => {
-												// Logout function
-												await signOut(window.firebaseAuth);
-												// Redirect to login page
-												window.location.replace("/login.html");
-											});
-
-										</script>
 									</div>
 								</div>
 								<!-- END Dropdown -->
@@ -371,12 +344,13 @@
 						<div class="header-wrap header-wrap-block justify-content-start w-100">
 							<!-- BEGIN Breadcrumb -->
 							<div class="breadcrumb breadcrumb-transparent mb-0">
-								<a href="/dashboard_assets/index.html" class="breadcrumb-item">
+								<a href="/" class="breadcrumb-item">
 									<div class="breadcrumb-icon">
 										<i data-feather="home"></i>
 									</div>
 									<span class="breadcrumb-text">Dashboard</span>
 								</a>
+								@yield('breadcrumb')
 							</div>
 							<!-- END Breadcrumb -->
 						</div>
