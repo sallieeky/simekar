@@ -78,60 +78,42 @@
   </div>
 </div>
 
-{{-- Make modal tambah user --}}
-{{-- <div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah-user" aria-hidden="true">
+{{-- Make modal tambah kendaraan --}}
+<div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah-kendaraan" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Tambah User</h5>
+        <h5 class="modal-title">Tambah Kendaraan</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/master-data/user/tambah" method="POST">
+      <form action="/master-data/kendaraan/tambah" method="POST">
         @csrf
         <div class="modal-body">
           <div class="validation-container mb-4">
             <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
+              <input class="form-control form-control-lg @error('no_polisi') is-invalid @enderror" type="text" id="no_polisi" placeholder="Nomor Polisi" name="no_polisi">
+              <label for="no_polisi">Nomor Polisi</label>
+              @error('no_polisi')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
           </div>
           <div class="validation-container mb-4">
             <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
+              <input class="form-control form-control-lg @error('merk') is-invalid @enderror" type="text" id="merk" placeholder="Merk" name="merk">
+              <label for="merk">Merk</label>
+              @error('merk')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
           </div>
           <div class="validation-container mb-4">
             <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
+              <input class="form-control form-control-lg @error('tipe') is-invalid @enderror" type="text" id="tipe" placeholder="Tipe" name="tipe">
+              <label for="tipe">Tipe</label>
+              @error('tipe')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>
@@ -144,10 +126,10 @@
       </form>
     </div>
   </div>
-</div> --}}
+</div>
 
 {{-- make edit user modal with ajax --}}
-{{-- <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit-user" aria-hidden="true">
+<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -156,55 +138,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/master-data/user/edit" method="POST">
+      <form action="/master-data/kendaraan/edit" method="POST">
         @csrf
-        <input type="hidden" name="id" id="edit_id">
         <div class="modal-body modal-edit-body">
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="edit_nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="edit_email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="edit_no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="edit_password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="edit_password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
+          {{--  --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -213,7 +150,7 @@
       </form>
     </div>
   </div>
-</div> --}}
+</div>
 
 {{-- make delete user modal --}}
 {{-- <div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus-user" aria-hidden="true">
@@ -246,10 +183,11 @@
 @section("script")
 <script>
   $(document).ready(function () {
-    $("#table-kendaraan").DataTable();
+    $("#table-kendaraan").DataTable({});
 
     // make ajax for btn-tampilkan
-    $(".btn-tampilkan").click(function () {
+    $("#table-kendaraan").on('click', 'tbody tr td .btn-tampilkan',  function () {
+      console.log("clicked");
       let id = $(this).data("id");
       let value = $(this).data("value");
       let element = $(this);
@@ -293,23 +231,21 @@
         });
     });
 
-    // make ajax for edit user
-    // $(".btn-edit").click(function () {
-    //   let id = $(this).data("id");
-    //   $.ajax({
-    //     url: "/master-data/user/get/" + id,
-    //     type: "GET",
-    //     success: function (data) {
-    //       $("#edit_id").val(data.id);
-    //       $("#edit_nama").val(data.nama);
-    //       $("#edit_email").val(data.email);
-    //       $("#edit_no_hp").val(data.no_hp);
-    //       $("#edit-modal").modal("show");
-    //     },
-    //   });
-    // });
+    // make ajax for edit
+    $("#table-kendaraan").on('click', 'tbody tr td .btn-edit', function () {
+      let id = $(this).data("id");
+      $.ajax({
+        url: "/master-data/kendaraan/get/" + id,
+        type: "GET",
+        success: function (data) {
+          console.log(data);
+          $(".modal-edit-body").html(data);
+          $("#edit-modal").modal("show");
+        },
+      });
+    });
 
-    // make ajax for delete user
+    // make ajax for delete
     // $(".btn-hapus").click(function () {
     //   let id = $(this).data("id");
     //   $("#hapus_id").val(id);

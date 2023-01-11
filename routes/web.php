@@ -48,6 +48,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/kendaraan', [KendaraanController::class, "index"]);
         Route::post('/kendaraan/tampilkan/{kendaraan}', [KendaraanController::class, "tampilkan"]);
+        Route::get('/kendaraan/get/{kendaraan}', [KendaraanController::class, "get"]);
+        Route::post('/kendaraan/tambah', [KendaraanController::class, "tambah"]);
+        Route::post('/kendaraan/edit', [KendaraanController::class, "edit"]);
+        Route::post('/kendaraan/delete', [KendaraanController::class, "delete"]);
     });
 });
 
