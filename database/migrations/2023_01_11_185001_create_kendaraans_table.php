@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('kendaraans', function (Blueprint $table) {
             $table->id();
-            $table->string('no_polisi', 10)->unique();
+            $table->string('no_polisi', 16)->unique();
             $table->string('merk');
             $table->string('tipe');
             $table->boolean('isShow')->default(1);
