@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -27,20 +28,15 @@ Route::post('/login', [AuthController::class, 'loginPost'])->middleware('guest')
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, "logout"]);
+    Route::get("/profile", [ProfileController::class, "profile"]);
+    Route::post("/profile/ubah-data", [ProfileController::class, "ubahDataProfile"]);
+
+    Route::get("/profile/ubah-password", [ProfileController::class, "ubahPassword"]);
+    Route::post("/profile/ubah-password", [ProfileController::class, "ubahPasswordPost"]);
+
 
     Route::get('/', [DashboardController::class, "index"]);
 });
-
-Route::get('/kirim', function () {
-    Mail::send('mail.tes', [], function ($message) {
-        $message->from('eksype72@gmail.com', 'SIMEKAR');
-        $message->to('sallieeky@gmail.com', 'Sallie Eky');
-        $message->subject("Tes Kirim Dari SIMEKAR");
-    });
-    return "BERHASIL";
-});
-
-
 
 // FORGET PASSWORD
 Route::get('/lupa-password', function () {
@@ -102,3 +98,17 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+
+
+
+
+
+Route::get('/kirim', function () {
+    Mail::send('mail.tes', [], function ($message) {
+        $message->from('info@simekar.foundid.my.id', 'SIMEKAR');
+        $message->to('sallieeky@gmail.com', 'Sallie Eky');
+        $message->subject("Tes Kirim Dari SIMEKAR");
+    });
+    return "BERHASIL";
+});
