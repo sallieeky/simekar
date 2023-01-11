@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -52,6 +53,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/kendaraan/tambah', [KendaraanController::class, "tambah"]);
         Route::post('/kendaraan/edit', [KendaraanController::class, "edit"]);
         Route::delete('/kendaraan/delete', [KendaraanController::class, "delete"]);
+
+        Route::get("/driver", [DriverController::class, 'index']);
+        Route::post('/driver/tampilkan/{driver}', [DriverController::class, "tampilkan"]);
+        Route::get("/driver/get/{driver}", [DriverController::class, 'get']);
+        Route::post("/driver/tambah", [DriverController::class, 'tambah']);
+        Route::post("/driver/edit", [DriverController::class, 'edit']);
+        Route::delete("/driver/delete", [DriverController::class, 'delete']);
     });
 });
 
