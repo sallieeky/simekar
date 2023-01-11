@@ -41,7 +41,7 @@
 				<!-- BEGIN Menu -->
 				<div class="menu">
 					<div class="menu-item">
-						<a href="/dashboard_assets/index.html" data-menu-path="/index.html" class="menu-item-link">
+						<a href="/" data-menu-path="/index.html" class="menu-item-link">
 							<div class="menu-item-icon">
 								<i class="fa fa-desktop"></i>
 							</div>
