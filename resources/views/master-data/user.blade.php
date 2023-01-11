@@ -25,36 +25,38 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
-            {{-- make table with datatable --}}
-            <table class="table table-striped table-bordered table-hover" id="table-user">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama</th>
-                  <th>Email</th>
-                  <th>Nomor Handphone</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($user as $us)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $us->nama }}</td>
-                  <td>{{ $us->email }}</td>
-                  <td>{{ $us->no_hp }}</td>
-                  <td>
-                    <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $us->id }}">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $us->id }}">
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
+            {{-- table overflow x scroll --}}
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="table-user">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Nomor Handphone</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($user as $us)
+                  <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $us->nama }}</td>
+                    <td>{{ $us->email }}</td>
+                    <td>{{ $us->no_hp }}</td>
+                    <td>
+                      <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $us->id }}">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $us->id }}">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
