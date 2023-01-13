@@ -61,6 +61,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/driver/edit", [DriverController::class, 'edit']);
         Route::delete("/driver/delete", [DriverController::class, 'delete']);
     });
+
+    Route::prefix('peminjaman')->group(function () {
+        // 
+    });
+    Route::prefix('reimbursement')->group(function () {
+        // 
+    });
 });
 
 // FORGET PASSWORD
@@ -139,14 +146,5 @@ Route::get('/kirim', function () {
 });
 
 Route::get("/tes", function () {
-    $file = fopen(public_path('kendaraan.csv'), 'r');
-    while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
-        $data = explode(";", $row[0]);
-        Kendaraan::create([
-            'no_polisi' => $data[0],
-            'merk' => $data[1],
-            'tipe' => $data[2],
-        ]);
-    }
-    fclose($file);
+    return view("tes");
 });

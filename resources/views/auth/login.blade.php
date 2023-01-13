@@ -49,7 +49,8 @@
 										<div class="validation-container">
 											<!-- BEGIN Form Floating -->
 											<div class="form-floating">
-												<input class="form-control form-control-lg @error('email') is-invalid @enderror" type="text" id="email" name="email" placeholder="Please insert your email" value="{{ old('email') }}">
+												{{-- set default value of email from session --}}
+												<input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="email" name="email" placeholder="Please insert your email" value="@if(old('email')) {{ old('email') }} @else {{ session('email') }} @endif">
 												<label for="email">Email</label>
 												@error('email')
 													<div class="invalid-feedback">{{ $message }}</div>
@@ -71,6 +72,11 @@
 											<!-- END Form Floating -->
 										</div>
 										<!-- END Validation Container -->
+										{{-- make remember me --}}
+										<div class="form-check mb-3">
+											<input class="form-check-input" type="checkbox" id="remember" name="remember_me" checked>
+											<label class="form-check-label" for="remember">Remember me</label>
+										</div>
 										<!-- BEGIN Flex -->
 										{{-- show error email atau password salah --}}
 										@if (session('error'))

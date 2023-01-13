@@ -120,15 +120,15 @@
 						<!-- BEGIN Menu Submenu -->
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/peminjaman/pengajuan" data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Pengajuan</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'admin') href="/peminjaman/rekapitulasi" @else href="/peminjaman/riwayat" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
-									<span class="menu-item-text">Rekapitulasi</span>
+									<span class="menu-item-text">@if(Auth::user()->role == 'admin') Rekapitulasi @else Riwayat @endif</span>
 								</a>
 							</div>
 						</div>
@@ -147,15 +147,15 @@
 						<!-- BEGIN Menu Submenu -->
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a href="/reimbursement/pengajuan" data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Pengajuan</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'admin') href="/reimbursement/rekapitulasi" @else href="/reimbursement/riwayat" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
-									<span class="menu-item-text">Rekapitulasi</span>
+									<span class="menu-item-text">@if(Auth::user()->role == 'admin') Rekapitulasi @else Riwayat @endif</span>
 								</a>
 							</div>
 						</div>
@@ -403,6 +403,8 @@
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/home.js"></script>
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/toastr.js"></script>
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/sweet-alert.js"></script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&amp;libraries=places&amp;callback=initMap"></script>
 
 	<script>
 		toastr.options = {

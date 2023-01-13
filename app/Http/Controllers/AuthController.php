@@ -14,6 +14,13 @@ class AuthController extends Controller
 
     public function loginPost(Request $request)
     {
+        // store email in session if remember me is checked
+        if ($request->remember_me) {
+            $request->session()->put('email', $request->email);
+        } else {
+            $request->session()->forget('email');
+        }
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8'
