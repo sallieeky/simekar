@@ -4,9 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
-use App\Models\Kendaraan;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -63,10 +64,12 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('peminjaman')->group(function () {
-        // 
+        Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
+        Route::get("/riwayat", [PeminjamanController::class, 'riwayat']);
     });
     Route::prefix('reimbursement')->group(function () {
-        // 
+        Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
+        Route::get("/riwayat", [ReimbursementController::class, 'riwayat']);
     });
 });
 
@@ -133,9 +136,6 @@ Route::post('/reset-password', function (Request $request) {
 
 
 
-
-
-
 Route::get('/kirim', function () {
     Mail::send('mail.tes', [], function ($message) {
         $message->from('info@simekar.foundid.my.id', 'SIMEKAR');
@@ -146,5 +146,5 @@ Route::get('/kirim', function () {
 });
 
 Route::get("/tes", function () {
-    return view("tes");
+    return view("tes3");
 });

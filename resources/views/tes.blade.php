@@ -28,7 +28,8 @@
     </div>
 
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUZC0h75vc7XWnralRk_NqIXmFkP5_2Uw&amp;libraries=places&amp;callback=initMap"></script> --}}
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&callback=initMap&libraries=places" async></script>
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&callback=initMap&libraries=places" async></script> --}}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&libraries=places&callback=initMap" async></script>
     <script>
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {

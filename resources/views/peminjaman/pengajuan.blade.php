@@ -1,11 +1,11 @@
 @extends("layouts.base")
-@section("title", "Kelola Driver")
+@section("title", "Pengajuan Peminjaman")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Master Data</span>
+  <span class="breadcrumb-text">Peminjaman</span>
 </a>
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Kelola Driver</span>
+  <span class="breadcrumb-text">Pengajuan</span>
 </a>
 @endsection
 @section("content")
@@ -14,79 +14,102 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Kelola Driver</h3>
-        <div class="portlet-tools">
-          <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tambah-modal">
-            <i class="fa fa-plus"></i>
-            Tambah Driver
-          </button>
-        </div>
+        <h3 class="portlet-title">Formulir Peminjaman</h3>
       </div>
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
-            <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover" id="table-driver">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Nomor Handphone</th>
-                    <th>Status</th>
-                    <th>Tampilkan</th>
-                    <th>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($driver as $dt)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt->nama }}</td>
-                    <td>{{ $dt->no_hp }}</td>
-                    <td>
-                      @if ($dt->isReady == 1)
-                      <span class="badge badge-success">Tersedia</span>
-                      @else
-                      <span class="badge badge-danger">Tidak Tersedia</span>
-                      @endif
-                    </td>
-                    <td>
-                      <div class="form-check-inline">
-                        <label class="form-check-label">
-                          @if ($dt->isShow)
-                          <button type="button" class="btn btn-sm btn-label-primary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                            <i class="fa fa-eye"></i>
-                          </button>
-                          @else
-                          <button type="button" class="btn btn-sm btn-label-secondary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                            <i class="fa fa-eye-slash"></i>
-                          </button>
-                          @endif
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $dt->id }}">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $dt->id }}">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
+            {{-- buat form nama, tanggal_peminjaman, tujuan, keperluan, waktu_peminjaman, waktu_selesai --}}
+            <form action="/peminjaman/pengajuan" method="POST">
+              @csrf
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="nama" placeholder="Nama" name="nama" value="{{ Auth::user()->nama }}" readonly>
+                      <label for="nama">Nama</label>
+                      @error('nama')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="no_hp" placeholder="No HP" name="no_hp" value="{{ Auth::user()->no_hp }}" readonly>
+                      <label for="no_hp">No HP</label>
+                      @error('no_hp')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="d-flex align-items-baseline gap-3">
+                    <button class="btn btn-label-primary mb-4" type="button" id="button-addon2">Pilih Lokasi <i class="fas fa-map-marker-alt"></i></button>
+                    <p>Belum ada lokasi</p>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  {{-- keperluan with textarea --}}
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <textarea class="form-control form-control-lg @error('keperluan') is-invalid @enderror" id="keperluan" placeholder="Keperluan" name="keperluan" rows="5"></textarea>
+                      <label for="keperluan">Keperluan</label>
+                      @error('keperluan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('tanggal_peminjaman') is-invalid @enderror" type="date" id="tanggal_peminjaman" placeholder="Tanggal Peminjaman" name="tanggal_peminjaman" value="{{ date('Y-m-d') }}" readonly>
+                      <label for="tanggal_peminjaman">Tanggal Peminjaman</label>
+                      @error('tanggal_peminjaman')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('waktu_peminjaman') is-invalid @enderror" type="time" id="waktu_peminjaman" placeholder="Waktu Peminjaman" name="waktu_peminjaman">
+                      <label for="waktu_peminjaman">Waktu Peminjaman</label>
+                      @error('waktu_peminjaman')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('waktu_selesai') is-invalid @enderror" type="time" id="waktu_selesai" placeholder="Waktu Selesai" name="waktu_selesai">
+                      <label for="waktu_selesai">Estimasi Waktu Selesai</label>
+                      @error('waktu_selesai')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
+      <div class="portlet-footer d-flex justify-content-end">
+        <button class="btn btn-primary" type="submit">Ajukan</button>
       </div>
     </div>
   </div>
 </div>
 
-{{-- Make modal tambah kendaraan --}}
-<div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah" aria-hidden="true">
+{{-- Make modal tambah --}}
+{{-- <div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -124,10 +147,10 @@
       </form>
     </div>
   </div>
-</div>
+</div> --}}
 
 {{-- make edit modal with ajax --}}
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+{{-- <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -139,7 +162,6 @@
       <form action="/master-data/driver/edit" method="POST">
         @csrf
         <div class="modal-body modal-edit-body">
-          {{--  --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -148,10 +170,10 @@
       </form>
     </div>
   </div>
-</div>
+</div> --}}
 
 {{-- make delete modal --}}
-<div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
+{{-- <div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -174,12 +196,12 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @endsection
 
 @section("script")
-<script>
+{{-- <script>
   $(document).ready(function () {
     $("#table-driver").DataTable({});
 
@@ -248,7 +270,7 @@
       $("#hapus-modal").modal("show");
     });
   });
-</script>
+</script> --}}
 
 @if(session('success'))
 <script>

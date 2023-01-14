@@ -9,7 +9,7 @@ class DriverController extends Controller
 {
     public function index()
     {
-        $driver = Driver::all();
+        $driver = Driver::orderBy('isShow', 'asc')->get();
         return view('master-data.driver', compact('driver'));
     }
 
