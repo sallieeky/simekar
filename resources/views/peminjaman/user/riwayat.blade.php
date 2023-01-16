@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Kelola Driver</h3>
+        <h3 class="portlet-title">Riwayat Peminjaman</h3>
         <div class="portlet-tools">
           <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tambah-modal">
             <i class="fa fa-plus"></i>

@@ -45,9 +45,9 @@
                     <td>{{ $dt->no_hp }}</td>
                     <td>
                       @if ($dt->isReady == 1)
-                      <span class="badge badge-success">Tersedia</span>
+                      <span class="badge badge-success status-badge">Tersedia</span>
                       @else
-                      <span class="badge badge-danger">Tidak Tersedia</span>
+                      <span class="badge badge-danger status-badge">Tidak Tersedia</span>
                       @endif
                     </td>
                     <td>
@@ -207,11 +207,19 @@
               element.html('<i class="fas fa-eye-slash"></i>');
               element.removeClass("btn-label-primary");
               element.addClass("btn-label-secondary");
+
+              element.parent().parent().parent().parent().find(".status-badge").html("Tidak Tersedia");
+              element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-success");
+              element.parent().parent().parent().parent().find(".status-badge").addClass("badge-danger");
             } else {
               element.data("value", 1);
               element.html('<i class="fas fa-eye"></i>');
               element.removeClass("btn-label-secondary");
               element.addClass("btn-label-primary");
+
+              element.parent().parent().parent().parent().find(".status-badge").html("Tersedia");
+              element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-danger");
+              element.parent().parent().parent().parent().find(".status-badge").addClass("badge-success");
             }
             $.ajax({
               url: "/master-data/driver/tampilkan/" + id,

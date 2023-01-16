@@ -9,14 +9,15 @@ class DriverController extends Controller
 {
     public function index()
     {
-        $driver = Driver::orderBy('isShow', 'asc')->get();
+        $driver = Driver::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();
         return view('master-data.driver', compact('driver'));
     }
 
     public function tampilkan(Request $request, Driver $driver)
     {
         $driver->update([
-            'isShow' => !$request->isShow
+            'isShow' => !$request->isShow,
+            'isReady' => !$request->isShow
         ]);
         return true;
     }

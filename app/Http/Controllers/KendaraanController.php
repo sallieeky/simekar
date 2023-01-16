@@ -9,7 +9,7 @@ class KendaraanController extends Controller
 {
     public function index()
     {
-        $kendaraan = Kendaraan::orderBy('isShow', 'asc')->get();
+        $kendaraan = Kendaraan::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();
         return view('master-data.kendaraan', compact('kendaraan'));
     }
 
@@ -42,7 +42,8 @@ class KendaraanController extends Controller
     public function tampilkan(Request $request, Kendaraan $kendaraan)
     {
         $kendaraan->update([
-            'isShow' => !$request->isShow
+            'isShow' => !$request->isShow,
+            'isReady' => !$request->isShow,
         ]);
         return $kendaraan;
     }

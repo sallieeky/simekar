@@ -19,7 +19,9 @@ return new class extends Migration
             $table->integer('kendaraan_id')->nullable();
             $table->integer('driver_id')->nullable();
             $table->integer('tujuan_peminjaman_id');
+            $table->text('keperluan');
             $table->string('status');
+            $table->dateTime('waktu_peminjaman');
             $table->dateTime('waktu_selesai');
             $table->timestamps();
         });

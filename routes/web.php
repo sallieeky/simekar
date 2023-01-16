@@ -63,13 +63,31 @@ Route::middleware(['auth'])->group(function () {
         Route::delete("/driver/delete", [DriverController::class, 'delete']);
     });
 
-    Route::prefix('peminjaman')->group(function () {
-        Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
-        Route::get("/riwayat", [PeminjamanController::class, 'riwayat']);
+    Route::prefix('user')->middleware("user")->group(function () {
+        Route::prefix('peminjaman')->group(function () {
+            Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
+            Route::post("/pengajuan", [PeminjamanController::class, 'pengajuanPost']);
+            Route::post("/pengajuan/cek", [PeminjamanController::class, 'pengajuanCek']);
+
+
+            Route::get("/riwayat", [PeminjamanController::class, 'riwayat']);
+        });
+
+        Route::prefix('reimbursement')->group(function () {
+            Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
+            Route::get("/riwayat", [ReimbursementController::class, 'riwayat']);
+        });
     });
-    Route::prefix('reimbursement')->group(function () {
-        Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
-        Route::get("/riwayat", [ReimbursementController::class, 'riwayat']);
+    Route::prefix('admin')->middleware("admin")->group(function () {
+        Route::prefix('peminjaman')->group(function () {
+            Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
+            Route::get("/rekap", [PeminjamanController::class, 'rekap']);
+        });
+
+        Route::prefix('reimbursement')->group(function () {
+            Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
+            Route::get("/rekap", [ReimbursementController::class, 'rekap']);
+        });
     });
 });
 

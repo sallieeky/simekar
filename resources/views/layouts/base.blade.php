@@ -120,13 +120,13 @@
 						<!-- BEGIN Menu Submenu -->
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="/peminjaman/pengajuan" data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'user') href="/user/peminjaman/pengajuan" @else href="/admin/peminjaman/pengajuan" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Pengajuan</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a @if(Auth::user()->role == 'admin') href="/peminjaman/rekapitulasi" @else href="/peminjaman/riwayat" @endif data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'admin') href="/admin/peminjaman/rekapitulasi" @else href="/user/peminjaman/riwayat" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">@if(Auth::user()->role == 'admin') Rekapitulasi @else Riwayat @endif</span>
 								</a>
@@ -147,13 +147,13 @@
 						<!-- BEGIN Menu Submenu -->
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="/reimbursement/pengajuan" data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'user') href="/user/reimbursement/pengajuan" @else href="/admin/reimbursement/pengajuan" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Pengajuan</span>
 								</a>
 							</div>
 							<div class="menu-item">
-								<a @if(Auth::user()->role == 'admin') href="/reimbursement/rekapitulasi" @else href="/reimbursement/riwayat" @endif data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'admin') href="/admin/reimbursement/rekapitulasi" @else href="/admin/reimbursement/riwayat" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">@if(Auth::user()->role == 'admin') Rekapitulasi @else Riwayat @endif</span>
 								</a>
