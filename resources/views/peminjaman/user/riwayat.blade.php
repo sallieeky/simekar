@@ -15,55 +15,43 @@
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
         <h3 class="portlet-title">Riwayat Peminjaman</h3>
-        <div class="portlet-tools">
-          <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tambah-modal">
-            <i class="fa fa-plus"></i>
-            Tambah Driver
-          </button>
-        </div>
       </div>
       <div class="portlet-body">
-        {{-- <div class="row">
+        <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <table class="table table-striped table-bordered table-hover" id="table-driver">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Nomor Handphone</th>
-                    <th>Tampilkan</th>
-                    <th>Aksi</th>
+                    <th>Nomor Polisi</th>
+                    <th>Merk</th>
+                    <th>Tipe</th>
+                    <th>Nama Driver</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>  
+                    <th>Tujuan</th>  
+                    <th>Keperluan</th>  
+                    <th>Nota</th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($driver as $dt)
+                  @foreach ($data as $dt)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt->nama }}</td>
-                    <td>{{ $dt->no_hp }}</td>
+                    <td>{{ $dt->kendaraan->no_polisi }}</td>
+                    <td>{{ $dt->kendaraan->merk }}</td>
+                    <td>{{ $dt->kendaraan->tipe }}</td>
+                    <td>{{ $dt->driver->nama }}</td>
+                    <td>{{ $dt->waktuPeminjamanFormated }}</td>
+                    <td>{{ $dt->waktuSelesaiFormated }}</td>
+                    <td>{{ $dt->tujuan_peminjaman->nama }}</td>
+                    <td>{{ $dt->keperluan }}</td>
                     <td>
-                      <div class="form-check-inline">
-                        <label class="form-check-label">
-                          @if ($dt->isShow)
-                          <button type="button" class="btn btn-sm btn-label-primary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                            <i class="fa fa-eye"></i>
-                          </button>
-                          @else
-                          <button type="button" class="btn btn-sm btn-label-secondary btn-tampilkan" data-id="{{ $dt->id }}" data-value={{ $dt->isShow }}>
-                            <i class="fa fa-eye-slash"></i>
-                          </button>
-                          @endif
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-sm btn-primary btn-edit" data-id="{{ $dt->id }}">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button type="button" class="btn btn-sm btn-danger btn-hapus" data-id="{{ $dt->id }}">
-                        <i class="fa fa-trash"></i>
-                      </button>
+                      {{-- nota with icon --}}
+                      <a href="{{ $dt->nota }}" target="_blank">
+                        <i class="fas fa-file-pdf" style="font-size: 1.5em"></i>
+                      </a>
                     </td>
                   </tr>
                   @endforeach
@@ -71,7 +59,7 @@
               </table>
             </div>
           </div>
-        </div> --}}
+        </div>
       </div>
     </div>
   </div>

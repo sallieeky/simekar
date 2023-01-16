@@ -110,6 +110,7 @@ class PeminjamanController extends Controller
 
     public function riwayat()
     {
-        return view('peminjaman.user.riwayat');
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where('user_id', Auth::user()->id)->get();
+        return view('peminjaman.user.riwayat', compact('data'));
     }
 }
