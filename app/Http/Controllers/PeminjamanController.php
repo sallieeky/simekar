@@ -57,10 +57,10 @@ class PeminjamanController extends Controller
         $request->validate([
             // 'latitude' => 'required',
             // 'longitude' => 'required',
-            'keperluan' => 'required',
-            'tanggal_peminjaman' => 'required',
-            'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i') . '|before:17:00',
-            'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
+            // 'keperluan' => 'required',
+            // 'tanggal_peminjaman' => 'required',
+            // 'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i') . '|before:17:00',
+            // 'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
         ], [
             // 'latitude.required' => 'Lokasi tidak boleh kosong',
             // 'longitude.required' => 'Lokasi tidak boleh kosong',
