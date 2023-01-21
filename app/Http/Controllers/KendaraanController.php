@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Kendaraan;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
@@ -51,6 +52,31 @@ class KendaraanController extends Controller
             'isShow' => !$request->isShow,
             'isReady' => !$request->isShow,
         ]);
+
+        if ($kendaraan->isShow == 1) {
+            // cek apakah ada driver yang tersedia pilih random
+            $driver = Driver::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
+            if ($driver) {
+                // cek user yang sedang dalam antrian
+                $cek = Peminjaman::where('status', 'menunggu')->orderBy('created_at', 'asc')->first();
+                if ($cek) {
+                    $cek->update([
+                        'status' => 'dipakai',
+                        'kendaraan_id' => $kendaraan->id,
+                        'driver_id' => $driver->id,
+                    ]);
+
+                    $driver->update([
+                        'isReady' => 0,
+                    ]);
+
+                    $kendaraan->update([
+                        'isReady' => 0,
+                    ]);
+                }
+            }
+        }
+
         return true;
     }
 

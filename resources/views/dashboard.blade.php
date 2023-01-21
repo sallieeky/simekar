@@ -11,7 +11,7 @@
       <div class="widget10 widget10-vertical-md">
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["kendaraan"] }}</h2>
             <span class="widget10-subtitle">Kendaraan Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -26,7 +26,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["driver"] }}</h2>
             <span class="widget10-subtitle">Driver Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -41,7 +41,15 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">Tidak Ada</h2>
+            <h2 class="widget10-title">
+              @if($data["status_peminjaman"] == null)
+              Tidak Ada
+              @elseif($data["status_peminjaman"] == "menunggu")
+              Dalam Antrian
+              @elseif($data["status_peminjaman"] == "dipakai")
+              Dalam Peminjaman
+              @endif
+            </h2>
             <span class="widget10-subtitle">Status Peminjaman</span>
           </div>
           <div class="widget10-addon">
@@ -56,7 +64,10 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">Tidak Ada</h2>
+            <h2 class="widget10-title">
+              {{-- BELAKANGAN AJA --}}
+              KOSONG
+            </h2>
             <span class="widget10-subtitle">Status Reimburse</span>
           </div>
           <div class="widget10-addon">
@@ -180,8 +191,15 @@
                 <h6 class="mb-0">({{ $peminjaman->driver->nama }})</h6>
               </div>
               <div class="col-md-4 my-4">
-                <h5 class="mb-0">Estimasi Waktu Selesai <br><span class="h1">Senin, 2 januari 2023</span> <br>
-                  <span class="h5">08:00</span>
+                <h5 class="mb-0">Estimasi Waktu Selesai <br><span class="h1">
+                  {{ Carbon\Carbon::parse($peminjaman->waktu_selesai)->translatedFormat('l, d M Y') }}
+                </span> <br>
+                  <span class="h5">
+                    @php
+                      $date = new DateTime($peminjaman->waktu_selesai);
+                      echo $date->format('H:i');
+                    @endphp
+                  </span>
                 </h5>
               </div>
               <div class="col-md-4">
@@ -250,6 +268,7 @@
           </div>
           @endif
 
+          @isset($antrian)
           @foreach ($antrian as $dt)
           <div class="portlet mb-0">
             <div class="portlet-body">
@@ -258,15 +277,15 @@
                 <div class="widget5-group">
                   <div class="widget5-item">
                     <span class="widget5-info">Tanggal Peminjaman</span>
-                    <span class="widget5-value">{{ $dt->waktu_peminjaman }}</span>
+                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_peminjaman)->translatedFormat('l, d M Y') }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Waktu Peminjaman</span>
-                    <span class="widget5-value">{{ $dt->waktu_peminjaman }}</span>
+                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('H:i') }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Estimasi Pulang</span>
-                    <span class="widget5-value">{{ $dt->waktu_selesai }}</span>
+                    <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('l, d M Y') }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Tujuan</span>
@@ -283,6 +302,7 @@
             </div>
           </div>
           @endforeach
+          @endisset
         </div>
       </div>
     </div>
