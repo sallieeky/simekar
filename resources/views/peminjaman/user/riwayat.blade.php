@@ -158,76 +158,76 @@
 @endsection
 
 @section("script")
-{{-- <script>
+<script>
   $(document).ready(function () {
     $("#table-driver").DataTable({});
 
     // make ajax for btn-tampilkan
-    $("#table-driver").on('click', 'tbody tr td .btn-tampilkan',  function () {
-      let id = $(this).data("id");
-      let value = $(this).data("value");
-      let element = $(this);
+  //   $("#table-driver").on('click', 'tbody tr td .btn-tampilkan',  function () {
+  //     let id = $(this).data("id");
+  //     let value = $(this).data("value");
+  //     let element = $(this);
 
-      swal
-        .fire({
-          title: "Apakah anda yakin?",
-          text: `Kamu akan ${ value == 1 ? "menyembunyikan" : "menampilkan" } driver ini!`,
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: `${ value == 1 ? "Sembunyikan" : "Tampilkan" }`,
-          cancelButtonText: "Batal",
-        })
-        .then(function (result) {
-          if (result.isConfirmed) {
-            if (value == 1) {
-              element.data("value", 0);
-              element.html('<i class="fas fa-eye-slash"></i>');
-              element.removeClass("btn-label-primary");
-              element.addClass("btn-label-secondary");
-            } else {
-              element.data("value", 1);
-              element.html('<i class="fas fa-eye"></i>');
-              element.removeClass("btn-label-secondary");
-              element.addClass("btn-label-primary");
-            }
-            $.ajax({
-              url: "/master-data/driver/tampilkan/" + id,
-              type: "POST",
-              data: {
-                _token: "{{ csrf_token() }}",
-                isShow: value,
-              },
-              success: function (data) {
-              },
-            });
-          }
-        });
-    });
+  //     swal
+  //       .fire({
+  //         title: "Apakah anda yakin?",
+  //         text: `Kamu akan ${ value == 1 ? "menyembunyikan" : "menampilkan" } driver ini!`,
+  //         icon: "warning",
+  //         showCancelButton: true,
+  //         confirmButtonColor: "#3085d6",
+  //         cancelButtonColor: "#d33",
+  //         confirmButtonText: `${ value == 1 ? "Sembunyikan" : "Tampilkan" }`,
+  //         cancelButtonText: "Batal",
+  //       })
+  //       .then(function (result) {
+  //         if (result.isConfirmed) {
+  //           if (value == 1) {
+  //             element.data("value", 0);
+  //             element.html('<i class="fas fa-eye-slash"></i>');
+  //             element.removeClass("btn-label-primary");
+  //             element.addClass("btn-label-secondary");
+  //           } else {
+  //             element.data("value", 1);
+  //             element.html('<i class="fas fa-eye"></i>');
+  //             element.removeClass("btn-label-secondary");
+  //             element.addClass("btn-label-primary");
+  //           }
+  //           $.ajax({
+  //             url: "/master-data/driver/tampilkan/" + id,
+  //             type: "POST",
+  //             data: {
+  //               _token: "{{ csrf_token() }}",
+  //               isShow: value,
+  //             },
+  //             success: function (data) {
+  //             },
+  //           });
+  //         }
+  //       });
+  //   });
 
-    // make ajax for edit
-    $("#table-driver").on('click', 'tbody tr td .btn-edit', function () {
-      let id = $(this).data("id");
-      $.ajax({
-        url: "/master-data/driver/get/" + id,
-        type: "GET",
-        success: function (data) {
-          console.log(data);
-          $(".modal-edit-body").html(data);
-          $("#edit-modal").modal("show");
-        },
-      });
-    });
+  //   // make ajax for edit
+  //   $("#table-driver").on('click', 'tbody tr td .btn-edit', function () {
+  //     let id = $(this).data("id");
+  //     $.ajax({
+  //       url: "/master-data/driver/get/" + id,
+  //       type: "GET",
+  //       success: function (data) {
+  //         console.log(data);
+  //         $(".modal-edit-body").html(data);
+  //         $("#edit-modal").modal("show");
+  //       },
+  //     });
+  //   });
 
-    // make ajax for delete
-    $("#table-driver").on('click', 'tbody tr td .btn-hapus',function () {
-      let id = $(this).data("id");
-      $("#hapus_id").val(id);
-      $("#hapus-modal").modal("show");
-    });
+  //   // make ajax for delete
+  //   $("#table-driver").on('click', 'tbody tr td .btn-hapus',function () {
+  //     let id = $(this).data("id");
+  //     $("#hapus_id").val(id);
+  //     $("#hapus-modal").modal("show");
+  //   });
   });
-</script> --}}
+</script>
 
 @if(session('success'))
 <script>

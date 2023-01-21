@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('tujuan_peminjamen', function (Blueprint $table) {
             $table->id();
             $table->text('nama');
-            $table->text('alamat');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->text('alamat')->nullable();
+            // $table->string('latitude');
+            // $table->string('longitude');
             $table->timestamps();
         });
     }

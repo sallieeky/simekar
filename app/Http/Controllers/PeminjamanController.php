@@ -26,44 +26,52 @@ class PeminjamanController extends Controller
         $driver = Driver::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
         $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
 
-        // jika ada driver dan kendaraan yang tersedia
-        if ($driver && $kendaraan) {
+        // cek apakah user sudah pernah melakukan peminjaman where status dipakai dan menunggu
+        $peminjaman = Peminjaman::where('user_id', Auth::user()->id)->where('status', '!=', 'selesai')->first();
+
+        // jika user sudah pernah melakukan peminjaman
+        if ($peminjaman) {
             return response()->json([
-                'status' => 'success',
-                'message' => 'Driver dan kendaraan tersedia',
-                'driver' => $driver,
-                'kendaraan' => $kendaraan,
-            ]);
-        } else if (!$driver && $kendaraan) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Driver tidak tersedia',
-            ]);
-        } else if ($driver && !$kendaraan) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Kendaraan tidak tersedia',
+                'status' => 'exist',
+                'message' => 'Peminjaman ditolak',
             ]);
         } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Driver dan kendaraan tidak tersedia',
-            ]);
+            if ($driver && $kendaraan) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Driver dan kendaraan tersedia',
+                    'driver' => $driver,
+                    'kendaraan' => $kendaraan,
+                ]);
+            } else if (!$driver && $kendaraan) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Driver tidak tersedia',
+                ]);
+            } else if ($driver && !$kendaraan) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Kendaraan tidak tersedia',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Driver dan kendaraan tidak tersedia',
+                ]);
+            }
         }
     }
 
     public function pengajuanPost(Request $request)
     {
         $request->validate([
-            // 'latitude' => 'required',
-            // 'longitude' => 'required',
-            // 'keperluan' => 'required',
-            // 'tanggal_peminjaman' => 'required',
-            // 'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i') . '|before:17:00',
-            // 'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
+            'nama_tujuan' => 'required',
+            'keperluan' => 'required',
+            'tanggal_peminjaman' => 'required',
+            'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i', strtotime('-5 minutes')) . '|before:17:00',
+            'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
         ], [
-            // 'latitude.required' => 'Lokasi tidak boleh kosong',
-            // 'longitude.required' => 'Lokasi tidak boleh kosong',
+            'nama_tujuan.required' => 'Nama tujuan tidak boleh kosong',
             'keperluan.required' => 'Keperluan tidak boleh kosong',
             'tanggal_peminjaman.required' => 'Tanggal peminjaman tidak boleh kosong',
             'waktu_peminjaman.required' => 'Waktu peminjaman tidak boleh kosong',
@@ -75,10 +83,8 @@ class PeminjamanController extends Controller
         ]);
 
         $tujuanPeminjaman = TujuanPeminjaman::create([
-            'nama' => "Institut Teknologi Kalimantan",
-            'alamat' => "Jl. Soekarno Hatta No. 1, Samarinda, Kalimantan Timur, Indonesia",
-            'latitude' => "0.500000",
-            'longitude' => "117.150000",
+            'nama' => $request->nama_tujuan,
+            'alamat' => $request->alamat_tujuan,
         ]);
 
         if ($request->driver_id != null || $request->kendaraan_id != null) {

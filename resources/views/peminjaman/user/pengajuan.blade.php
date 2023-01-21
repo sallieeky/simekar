@@ -46,10 +46,33 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12">
+                {{-- <div class="col-md-12">
                   <div class="d-flex align-items-baseline gap-3">
                     <button class="btn btn-label-primary mb-4" type="button" id="button-addon2">Pilih Lokasi <i class="fas fa-map-marker-alt"></i></button>
                     <p>Belum ada lokasi</p>
+                  </div>
+                </div> --}}
+                {{-- buat input nama lokasi dan alamat col 6 --}}
+                <div class="col-md-6">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('nama_tujuan') is-invalid @enderror" type="text" id="nama_tujuan" placeholder="Nama Tujuan" name="nama_tujuan" value="{{ old('nama_tujuan') }}">
+                      <label for="nama_tujuan">Nama Tujuan</label>
+                      @error('nama_tujuan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="validation-container mb-4">
+                    <div class="form-floating">
+                      <input class="form-control form-control-lg @error('alamat_tujuan') is-invalid @enderror" type="text" id="alamat_tujuan" placeholder="Alamat Tujuan" name="alamat_tujuan" value="{{ old('alamat_tujuan') }}">
+                      <label for="alamat_tujuan">Alamat Tujuan</label>
+                      @error('alamat_tujuan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                      @enderror
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -142,6 +165,19 @@
             $("#kendaraan_id").val(data.kendaraan.id);
             $("#driver_id").val(data.driver.id);
             form.submit();
+          } else if(data.status == "exist") {
+            $("#btn-ajukan").attr("disabled", false);
+            $("#btn-ajukan").html("Ajukan");
+
+            Swal.fire({
+              title: data.message,
+              text: "Dikarenakan peminjaman sedang berlangsung",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Ok",
+            }).then(function (result) {
+            });
           } else {
             $("#btn-ajukan").attr("disabled", false);
             $("#btn-ajukan").html("Ajukan");
@@ -171,7 +207,17 @@
 
 @if(session('success'))
 <script>
-  toastr.success("{{ session('success') }}")
+  Swal.fire({
+    title: "Berhasil melakukan peminjaman",
+    icon: "success",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Lihat Detail",
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      window.location.href = "/user/peminjaman/detail/";
+    }
+  });
 </script>
 @endif
 
