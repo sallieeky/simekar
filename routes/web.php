@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::post("/peminjaman/selesai/{peminjaman}", [PeminjamanController::class, 'selesai']);
+    Route::post("/peminjaman/batal/{peminjaman}", [PeminjamanController::class, 'batal']);
 });
 
 // FORGET PASSWORD

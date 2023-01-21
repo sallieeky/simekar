@@ -211,7 +211,10 @@
               </div>
               <div class="col-md-4">
                 <h5 class="mb-3">Apabila ingin melakukan pembatalan peminjaman</h5>
-                <button class="btn btn-danger w-50">Batal</button>
+                <form action="/peminjaman/batal/{{ $peminjaman->id }}" method="POST">
+                  @csrf
+                  <button class="btn btn-danger w-50">Batal</button>
+                </form>
               </div>
             </div>
           </div>
@@ -235,6 +238,18 @@
       </div>
       <div class="portlet-body">
         <div class="d-grid gap-2">
+
+          @if (count($antrian) == 0)
+          <div class="portlet mb-0">
+            <div class="portlet-body">
+              <div class="widget5">
+                {{-- text center --}}
+                <h4 class="widget5-title text-center mb-0">Tidak ada antrian</h4>
+              </div>
+            </div>
+          </div>
+          @endif
+
           @foreach ($antrian as $dt)
           <div class="portlet mb-0">
             <div class="portlet-body">
@@ -274,5 +289,18 @@
   </div>
 </div>
 
+@endsection
 
+@section("script")
+@if(session('success'))
+<script>
+  Swal.fire({
+    title: "{{ session('success') }}",
+    icon: "success",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ok",
+  })
+</script>
+@endif
 @endsection

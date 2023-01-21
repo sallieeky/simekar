@@ -181,4 +181,15 @@ class PeminjamanController extends Controller
             return redirect()->back()->with('success', 'Peminjaman berhasil di selesaikan');
         }
     }
+
+    public function batal(Peminjaman $peminjaman)
+    {
+        if (Auth::user()->role == "user" && $peminjaman->user_id == Auth::user()->id) {
+            $peminjaman->delete();
+        } else if (Auth::user()->role == "admin") {
+            $peminjaman->delete();
+        }
+
+        return redirect()->back()->with('success', 'Peminjaman berhasil di batalkan');
+    }
 }
