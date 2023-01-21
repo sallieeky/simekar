@@ -122,7 +122,48 @@ class PeminjamanController extends Controller
 
     public function riwayat()
     {
-        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where('user_id', Auth::user()->id)->get();
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->get();
         return view('peminjaman.user.riwayat', compact('data'));
+    }
+
+    public function selesai(Peminjaman $peminjaman)
+    {
+        if (Auth::user()->role == "user") {
+            if ($peminjaman->user_id == Auth::user()->id) {
+                $peminjaman->status = "selesai";
+                $peminjaman->save();
+
+                // cek peminjaman status menunggu
+                $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
+                if ($peminjamanMenunggu) {
+                    $peminjamanMenunggu->driver_id = $peminjaman->driver_id;
+                    $peminjamanMenunggu->kendaraan_id = $peminjaman->kendaraan_id;
+                    $peminjamanMenunggu->status = "dipakai";
+                    $peminjamanMenunggu->save();
+                } else {
+                    // update isReady driver dan kendaraan menjadi true
+                    Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
+                    Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
+                }
+                return redirect()->back()->with('success', 'Peminjaman berhasil di selesaikan');
+            }
+        } else if (Auth::user()->role == "admin") {
+            $peminjaman->status = "selesai";
+            $peminjaman->save();
+
+            // cek peminjaman status menunggu
+            $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
+            if ($peminjamanMenunggu) {
+                $peminjamanMenunggu->driver_id = $peminjaman->driver_id;
+                $peminjamanMenunggu->kendaraan_id = $peminjaman->kendaraan_id;
+                $peminjamanMenunggu->status = "dipakai";
+                $peminjamanMenunggu->save();
+            } else {
+                // update isReady driver dan kendaraan menjadi true
+                Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
+                Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
+            }
+            return redirect()->back()->with('success', 'Peminjaman berhasil di selesaikan');
+        }
     }
 }

@@ -1,55 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat</title>
+</head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-    
-    {{-- show list of kendaraan with table --}}
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Daftar Kendaraan</h3>
-            </div>
-            <div class="card-body">
-              <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>No Polisi</th>
-                    <th>Merk</th>
-                    <th>Tipe</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($kendaraan as $dt)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt->no_polisi }}</td>
-                    <td>{{ $dt->merk }}</td>
-                    <td>{{ $dt->tipe }}</td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+<body>
+    <div class="">
+        <table align="center">
+            <tr>
+                <td width="50"><img src="logo_landscape.jpg" alt="logo" width="75" height="75"></td>  
+                <td width="380"><center>
+                    <font size="4"><b>PEMERINTAH KOTA BALIKPAPAN</b></font><br>
+                    <font size="6" ><b>DINAS PEKERJAAN UMUM</b></font><br>
+                    <font size="3"><b>Jalan Ruhui Rahayu I Balikpapan - Telp. ( 0542 ) 874084</b></font>
+                    </center>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2 "><hr></td>
+            </tr>
+        </table>
+
+        <table align="center">
+            <tr>
+            <td><center>
+                <font size="3"><b>BERITA ACARA PEMBAYARAN</b></font><br>
+                </center>
+            </td> 
+            <tr>
+                <td height="10"></td>
+            </tr>
+            </tr>
+        </table>
+
+        <table border="1" align="center">
+            <tr align="justify">
+                <td width="60">Pekerjaan</td>
+                <td width="160"> awdadawa</td>
+                <td width="60">Nomor</td>
+                <td width="150">awdada</td>
+
+            </tr>
+            <tr align="justify">
+                <td width="60">Lokasi</td>
+                <td width="160">Balikpapan</td> 
+                <td width="60">Tanggal</td>
+            </tr>
+        </table>
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+</body>
 </html>

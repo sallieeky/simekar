@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -50,11 +51,15 @@ class KendaraanController extends Controller
 
     public function tampilkan(Request $request, Kendaraan $kendaraan)
     {
+        $cek = Peminjaman::where('kendaraan_id', $kendaraan->id)->where('status', 'dipakai')->first();
+        if ($cek) {
+            return false;
+        }
         $kendaraan->update([
             'isShow' => !$request->isShow,
             'isReady' => !$request->isShow,
         ]);
-        return $kendaraan;
+        return true;
     }
 
     public function tambah(Request $request)

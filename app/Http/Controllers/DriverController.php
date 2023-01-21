@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -15,6 +16,12 @@ class DriverController extends Controller
 
     public function tampilkan(Request $request, Driver $driver)
     {
+        // cek apakah driver sedang dipakai
+        $cek = Peminjaman::where('driver_id', $driver->id)->where('status', 'dipakai')->first();
+        if ($cek) {
+            return false;
+        }
+
         $driver->update([
             'isShow' => !$request->isShow,
             'isReady' => !$request->isShow

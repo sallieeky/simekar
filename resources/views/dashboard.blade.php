@@ -176,8 +176,8 @@
           <div class="widget1-dialog-content widget1-dialog-content py-5">
             <div class="row align-items-center">
               <div class="col-md-4 ">
-                <h5 class="mb-0">Anda sedang memakai kendaraan <br><span class="h1">KT 1234 KT</span></h5>
-                <h6 class="mb-0">(Muhammad Yus Fadillah)</h6>
+                <h5 class="mb-0">Anda sedang memakai kendaraan <br><span class="h1">{{ $peminjaman->kendaraan->no_polisi }}</span></h5>
+                <h6 class="mb-0">({{ $peminjaman->driver->nama }})</h6>
               </div>
               <div class="col-md-4 my-4">
                 <h5 class="mb-0">Estimasi Waktu Selesai <br><span class="h1">Senin, 2 januari 2023</span> <br>
@@ -186,7 +186,10 @@
               </div>
               <div class="col-md-4">
                 <h5 class="mb-3">Harap melakukan konfirmasi apabila telah selesai melakukan peminjaman</h5>
-                <a href="/selesai/{{ $peminjaman->id }}" class="btn btn-success w-50">Selesai</a>
+                <form action="/peminjaman/selesai/{{ $peminjaman->id }}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-success w-50">Selesai</button>
+                </form>
               </div>
             </div>
           </div>

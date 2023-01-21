@@ -91,6 +91,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get("/rekap", [ReimbursementController::class, 'rekap']);
         });
     });
+
+    Route::post("/peminjaman/selesai/{peminjaman}", [PeminjamanController::class, 'selesai']);
 });
 
 // FORGET PASSWORD
@@ -168,23 +170,24 @@ Route::get('/kirim', function () {
 Route::get("/tes", function () {
     return view("tes3");
 });
-Route::get("/selesai/{peminjaman}", function (Peminjaman $peminjaman) {
-    $peminjaman->status = "selesai";
-    $peminjaman->save();
 
-    // cek peminjaman status menunggu
-    $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
-    if ($peminjamanMenunggu) {
-        $peminjamanMenunggu->driver_id = $peminjaman->driver_id;
-        $peminjamanMenunggu->kendaraan_id = $peminjaman->kendaraan_id;
-        $peminjamanMenunggu->status = "dipakai";
-        $peminjamanMenunggu->save();
-    } else {
-        // update isReady driver dan kendaraan menjadi true
-        Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
-        Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
-    }
-    return redirect()->back();
-});
+// Route::get("/selesai/{peminjaman}", function (Peminjaman $peminjaman) {
+//     $peminjaman->status = "selesai";
+//     $peminjaman->save();
+
+//     // cek peminjaman status menunggu
+//     $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
+//     if ($peminjamanMenunggu) {
+//         $peminjamanMenunggu->driver_id = $peminjaman->driver_id;
+//         $peminjamanMenunggu->kendaraan_id = $peminjaman->kendaraan_id;
+//         $peminjamanMenunggu->status = "dipakai";
+//         $peminjamanMenunggu->save();
+//     } else {
+//         // update isReady driver dan kendaraan menjadi true
+//         Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
+//         Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
+//     }
+//     return redirect()->back();
+// });
 
 Route::get('/export-pdf', [KendaraanController::class, "exportPdf"]);

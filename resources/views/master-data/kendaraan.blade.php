@@ -216,26 +216,6 @@
         })
         .then(function (result) {
           if (result.isConfirmed) {
-            if (value == 1) {
-              element.data("value", 0);
-              element.html('<i class="fas fa-eye-slash"></i>');
-              element.removeClass("btn-label-primary");
-              element.addClass("btn-label-secondary");
-
-              element.parent().parent().parent().parent().find(".status-badge").html("Tidak Tersedia");
-              element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-success");
-              element.parent().parent().parent().parent().find(".status-badge").addClass("badge-danger");
-
-            } else {
-              element.data("value", 1);
-              element.html('<i class="fas fa-eye"></i>');
-              element.removeClass("btn-label-secondary");
-              element.addClass("btn-label-primary");
-
-              element.parent().parent().parent().parent().find(".status-badge").html("Tersedia");
-              element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-danger");
-              element.parent().parent().parent().parent().find(".status-badge").addClass("badge-success");
-            }
             $.ajax({
               url: "/master-data/kendaraan/tampilkan/" + id,
               type: "POST",
@@ -244,6 +224,36 @@
                 isShow: value,
               },
               success: function (data) {
+                if(data == false) {
+                  swal.fire({
+                    title: "Gagal!",
+                    text: "Kendaraan sedang digunakan",
+                    icon: "error",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Ok",
+                  });
+                } else {
+                  if (value == 1) {
+                    element.data("value", 0);
+                    element.html('<i class="fas fa-eye-slash"></i>');
+                    element.removeClass("btn-label-primary");
+                    element.addClass("btn-label-secondary");
+
+                    element.parent().parent().parent().parent().find(".status-badge").html("Tidak Tersedia");
+                    element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-success");
+                    element.parent().parent().parent().parent().find(".status-badge").addClass("badge-danger");
+
+                  } else {
+                    element.data("value", 1);
+                    element.html('<i class="fas fa-eye"></i>');
+                    element.removeClass("btn-label-secondary");
+                    element.addClass("btn-label-primary");
+
+                    element.parent().parent().parent().parent().find(".status-badge").html("Tersedia");
+                    element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-danger");
+                    element.parent().parent().parent().parent().find(".status-badge").addClass("badge-success");
+                  }
+                }
               },
             });
           }

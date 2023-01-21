@@ -32,6 +32,7 @@
                     <th>Tanggal Kembali</th>  
                     <th>Tujuan</th>  
                     <th>Keperluan</th>  
+                    <th>Status</th>  
                     <th>Nota</th>
                   </tr>
                 </thead>
@@ -47,6 +48,14 @@
                     <td>{{ $dt->waktuSelesaiFormated }}</td>
                     <td>{{ $dt->tujuan_peminjaman->nama }}</td>
                     <td>{{ $dt->keperluan }}</td>
+                    <td>
+                      @if ($dt->status == 'menunggu')
+                        <span class="badge bg-secondary">Antrian</span>
+                      @elseif ($dt->status == 'dipakai')
+                        <span class="badge bg-warning">Dipakai</span>
+                      @elseif ($dt->status == 'selesai')
+                        <span class="badge bg-success">Selesai</span>
+                      @endif
                     <td>
                       @isset($dt->kendaraan)
                       <a href="{{ $dt->nota }}" target="_blank">
