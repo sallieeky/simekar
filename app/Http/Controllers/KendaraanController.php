@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
 {
+
+    public function exportPdf()
+    {
+        $kendaraan = Kendaraan::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('tespdf', compact('kendaraan'));
+        return $pdf->stream();
+    }
+
     public function index()
     {
         $kendaraan = Kendaraan::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();

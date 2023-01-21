@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -166,3 +165,5 @@ Route::get('/kirim', function () {
 Route::get("/tes", function () {
     return view("tes3");
 });
+
+Route::get('/export-pdf', [KendaraanController::class, "exportPdf"]);

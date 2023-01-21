@@ -12,6 +12,9 @@
 
 <div class="row">
   <div class="col-md-12">
+
+    <a href="/export-pdf" class="btn btn-primary">Export PDF</a>
+
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
         <h3 class="portlet-title">Kelola Kendaraan</h3>
