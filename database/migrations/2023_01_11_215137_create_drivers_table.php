@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("nama");
             $table->string('no_hp');
             $table->boolean('isShow')->default(1);
-            $table->boolean('isReady')->default(1);
+            $table->boolean('isReady')->default(0);
             $table->timestamps();
         });
     }

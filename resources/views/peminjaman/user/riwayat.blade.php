@@ -39,19 +39,22 @@
                   @foreach ($data as $dt)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $dt->kendaraan->no_polisi }}</td>
-                    <td>{{ $dt->kendaraan->merk }}</td>
-                    <td>{{ $dt->kendaraan->tipe }}</td>
-                    <td>{{ $dt->driver->nama }}</td>
+                    <td>@isset($dt->kendaraan) {{ $dt->kendaraan->no_polisi }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
+                    <td>@isset($dt->kendaraan) {{ $dt->kendaraan->merk }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
+                    <td>@isset($dt->kendaraan) {{ $dt->kendaraan->tipe }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
+                    <td>@isset($dt->driver) {{ $dt->driver->nama }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>{{ $dt->waktuPeminjamanFormated }}</td>
                     <td>{{ $dt->waktuSelesaiFormated }}</td>
                     <td>{{ $dt->tujuan_peminjaman->nama }}</td>
                     <td>{{ $dt->keperluan }}</td>
                     <td>
-                      {{-- nota with icon --}}
+                      @isset($dt->kendaraan)
                       <a href="{{ $dt->nota }}" target="_blank">
                         <i class="fas fa-file-pdf" style="font-size: 1.5em"></i>
                       </a>
+                      @else
+                      <span class="text-black-50">Belum tersedia</span>
+                      @endisset
                     </td>
                   </tr>
                   @endforeach

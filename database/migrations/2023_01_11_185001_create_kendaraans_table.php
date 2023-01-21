@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('merk');
             $table->string('tipe');
             $table->boolean('isShow')->default(1);
-            $table->boolean('isReady')->default(1);
+            $table->boolean('isReady')->default(0);
             $table->timestamps();
         });
     }

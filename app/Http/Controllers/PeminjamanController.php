@@ -111,7 +111,13 @@ class PeminjamanController extends Controller
             'waktu_selesai' => $request->waktu_selesai,
         ]);
 
-        return back()->with('success', 'Pengajuan peminjaman berhasil dikirim');
+        if ($status == 'menunggu') {
+            $pesan = "Anda sedang dalam antrian, silahkan menunggu!";
+        } else {
+            $pesan = "Peminjaman berhasil";
+        }
+
+        return back()->with('success', $pesan);
     }
 
     public function riwayat()

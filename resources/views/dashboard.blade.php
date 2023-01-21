@@ -166,6 +166,8 @@
 @endif
 
 @if(Auth::user()->role == 'user')
+@if($peminjaman)
+@if($peminjaman->status == 'dipakai')
 <div class="row">
   <div class="col-md-12">
     <div class="portlet widget1">
@@ -184,7 +186,7 @@
               </div>
               <div class="col-md-4">
                 <h5 class="mb-3">Harap melakukan konfirmasi apabila telah selesai melakukan peminjaman</h5>
-                <button class="btn btn-success w-50">Selesai</button>
+                <a href="/selesai/{{ $peminjaman->id }}" class="btn btn-success w-50">Selesai</a>
               </div>
             </div>
           </div>
@@ -193,7 +195,7 @@
     </div>
   </div>
 </div>
-
+@elseif ($peminjaman->status == 'menunggu')
 <div class="row">
   <div class="col-md-12">
     <div class="portlet widget1">
@@ -216,6 +218,8 @@
   </div>
 </div>
 @endif
+@endif
+@endif
 
 <div class="row">
   <div class="col-md-6 col-xl-12">
@@ -228,26 +232,27 @@
       </div>
       <div class="portlet-body">
         <div class="d-grid gap-2">
+          @foreach ($antrian as $dt)
           <div class="portlet mb-0">
             <div class="portlet-body">
               <div class="widget5">
-                <h4 class="widget5-title">Sallie Trixie ZM</h4>
+                <h4 class="widget5-title">{{ $dt->user->nama }}</h4>
                 <div class="widget5-group">
                   <div class="widget5-item">
                     <span class="widget5-info">Tanggal Peminjaman</span>
-                    <span class="widget5-value">2021-01-01</span>
+                    <span class="widget5-value">{{ $dt->waktu_peminjaman }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Waktu Peminjaman</span>
-                    <span class="widget5-value">08:00</span>
+                    <span class="widget5-value">{{ $dt->waktu_peminjaman }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Estimasi Pulang</span>
-                    <span class="widget5-value">08:00</span>
+                    <span class="widget5-value">{{ $dt->waktu_selesai }}</span>
                   </div>
                   <div class="widget5-item">
                     <span class="widget5-info">Tujuan</span>
-                    <span class="widget5-value">Jakarta</span>
+                    <span class="widget5-value">{{ $dt->tujuan_peminjaman->nama }}</span>
                   </div>
                   @if(Auth::user()->role == 'admin')
                   <div class="widget5-item">
@@ -259,37 +264,7 @@
               </div>
             </div>
           </div>
-          <div class="portlet mb-0">
-            <div class="portlet-body">
-              <div class="widget5">
-                <h4 class="widget5-title">Sallie Trixie ZM</h4>
-                <div class="widget5-group">
-                  <div class="widget5-item">
-                    <span class="widget5-info">Tanggal Peminjaman</span>
-                    <span class="widget5-value">2021-01-01</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Waktu Peminjaman</span>
-                    <span class="widget5-value">08:00</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Estimasi Pulang</span>
-                    <span class="widget5-value">08:00</span>
-                  </div>
-                  <div class="widget5-item">
-                    <span class="widget5-info">Tujuan</span>
-                    <span class="widget5-value">Jakarta</span>
-                  </div>
-                  @if(Auth::user()->role == 'admin')
-                  <div class="widget5-item">
-                    <span class="widget5-info">Hapus</span>
-                    <button class="btn btn-danger w-50"><i class="fa-solid fa-trash"></i></button>
-                  </div>
-                  @endif
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </div>

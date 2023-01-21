@@ -208,14 +208,14 @@
 @if(session('success'))
 <script>
   Swal.fire({
-    title: "Berhasil melakukan peminjaman",
+    title: "{{ session('success') }}",
     icon: "success",
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Lihat Detail",
   }).then(function (result) {
     if (result.isConfirmed) {
-      window.location.href = "/user/peminjaman/detail/";
+      window.location.href = "/";
     }
   });
 </script>
