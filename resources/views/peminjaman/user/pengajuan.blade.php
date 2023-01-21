@@ -46,13 +46,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- <div class="col-md-12">
-                  <div class="d-flex align-items-baseline gap-3">
-                    <button class="btn btn-label-primary mb-4" type="button" id="button-addon2">Pilih Lokasi <i class="fas fa-map-marker-alt"></i></button>
-                    <p>Belum ada lokasi</p>
-                  </div>
-                </div> --}}
-                {{-- buat input nama lokasi dan alamat col 6 --}}
                 <div class="col-md-6">
                   <div class="validation-container mb-4">
                     <div class="form-floating">

@@ -186,9 +186,9 @@
               </div>
               <div class="col-md-4">
                 <h5 class="mb-3">Harap melakukan konfirmasi apabila telah selesai melakukan peminjaman</h5>
-                <form action="/peminjaman/selesai/{{ $peminjaman->id }}" method="POST">
+                <form action="/peminjaman/selesai/{{ $peminjaman->id }}" method="POST" id="form-selesai">
                   @csrf
-                  <button type="submit" class="btn btn-success w-50">Selesai</button>
+                  <button type="button" class="btn btn-success w-50" id="btn-selesai">Selesai</button>
                 </form>
               </div>
             </div>
@@ -211,9 +211,9 @@
               </div>
               <div class="col-md-4">
                 <h5 class="mb-3">Apabila ingin melakukan pembatalan peminjaman</h5>
-                <form action="/peminjaman/batal/{{ $peminjaman->id }}" method="POST">
+                <form action="/peminjaman/batal/{{ $peminjaman->id }}" method="POST" id="form-batal">
                   @csrf
-                  <button class="btn btn-danger w-50">Batal</button>
+                  <button type="button" class="btn btn-danger w-50" id="btn-batal">Batal</button>
                 </form>
               </div>
             </div>
@@ -303,4 +303,41 @@
   })
 </script>
 @endif
+
+
+<script>
+  $(document).ready(function () {
+    $("#btn-batal").click(function () {
+      Swal.fire({
+        title: "Apakah anda yakin ingin membatalkan peminjaman?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $("#form-batal").submit();
+        }
+      });
+    });
+
+    $("#btn-selesai").click(function () {
+      Swal.fire({
+        title: "Apakah anda yakin telah selesai melakukan peminjaman?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $("#form-selesai").submit();
+        }
+      });
+    });
+  });
+</script>
 @endsection
