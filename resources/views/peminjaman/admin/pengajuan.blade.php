@@ -1,11 +1,11 @@
 @extends("layouts.base")
-@section("title", "Riwayat Peminjaman")
+@section("title", "Data Pengajuan Peminjaman")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
   <span class="breadcrumb-text">Peminjaman</span>
 </a>
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Riwayat</span>
+  <span class="breadcrumb-text">Data Pengajuan Peminjaman</span>
 </a>
 @endsection
 @section("content")
@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Riwayat Peminjaman</h3>
+        <h3 class="portlet-title">Data Pengajuan Peminjaman Hari Ini ( {{ Carbon\Carbon::parse(date('d-m-Y'))->translatedFormat('l, d M Y') }} )</h3>
       </div>
       <div class="portlet-body">
         <div class="row">
@@ -24,12 +24,13 @@
                 <thead>
                   <tr>
                     <th>No</th>
+                    <th>Nama Pegawai</th>
                     <th>Nomor Polisi</th>
                     <th>Merk</th>
                     <th>Tipe</th>
                     <th>Nama Driver</th>
-                    <th>Tanggal Pinjam</th>
-                    <th>Tanggal Kembali</th>  
+                    <th>Waktu Pinjam</th>
+                    <th>Waktu Kembali</th>  
                     <th>Tujuan</th>  
                     <th>Keperluan</th>  
                     <th>Status</th>  
@@ -40,12 +41,17 @@
                   @foreach ($data as $dt)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $dt->user->nama }}</td>
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->no_polisi }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->merk }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->tipe }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>@isset($dt->driver) {{ $dt->driver->nama }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
-                    <td>{{ $dt->waktuPeminjamanFormated }}</td>
-                    <td>{{ $dt->waktuSelesaiFormated }}</td>
+                    <td>
+                      {{ Carbon\Carbon::parse($dt->waktu_peminjaman)->translatedFormat('H:i') }}
+                    </td>
+                    <td>
+                      {{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('H:i') }}
+                    </td>
                     <td>{{ $dt->tujuan_peminjaman->nama }}</td>
                     <td>{{ $dt->keperluan }}</td>
                     <td>
@@ -56,6 +62,7 @@
                       @elseif ($dt->status == 'selesai')
                         <span class="badge bg-success">Selesai</span>
                       @endif
+                    </td>
                     <td>
                       @if ($dt->status == 'dipakai')
                       <form action="/peminjaman/selesai/{{ $dt->id }}" method="POST" class="form-selesai">

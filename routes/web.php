@@ -83,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->middleware("admin")->group(function () {
         Route::prefix('peminjaman')->group(function () {
             Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
-            Route::get("/rekap", [PeminjamanController::class, 'rekap']);
+            Route::get("/rekapitulasi", [PeminjamanController::class, 'rekap']);
         });
 
         Route::prefix('reimbursement')->group(function () {

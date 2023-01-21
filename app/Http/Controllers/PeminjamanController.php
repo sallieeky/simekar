@@ -193,4 +193,11 @@ class PeminjamanController extends Controller
 
         return redirect()->back()->with('success', 'Peminjaman berhasil di batalkan');
     }
+
+    public function rekap()
+    {
+        // get data peminjaman semua
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where("status", "selesai")->orderBy('created_at', 'asc')->get();
+        return view('peminjaman.admin.rekap', compact('data'));
+    }
 }
