@@ -16,7 +16,8 @@ class PeminjamanController extends Controller
         if (Auth::user()->role == 'user') {
             return view('peminjaman.user.pengajuan');
         } else {
-            // 
+            $data = Peminjaman::where('status', '!=', 'selesai')->whereDate('created_at', date('Y-m-d'))->get();
+            return view('peminjaman.admin.pengajuan', compact('data'));
         }
     }
 
