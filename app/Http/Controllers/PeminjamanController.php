@@ -126,6 +126,14 @@ class PeminjamanController extends Controller
         return view('peminjaman.user.riwayat', compact('data'));
     }
 
+    public function riwayatNota(Request $request)
+    {
+        $pdf = app('dompdf.wrapper');
+        $peminjaman = Peminjaman::where('id', $request->id)->get();
+        $pdf->loadView('tespdf', compact('peminjaman'));
+        return $pdf->stream();
+    }
+
     public function selesai(Peminjaman $peminjaman)
     {
         if (Auth::user()->role == "user") {

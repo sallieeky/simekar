@@ -58,9 +58,12 @@
                       @endif
                     <td>
                       @isset($dt->kendaraan)
-                      <a href="{{ $dt->nota }}" target="_blank">
-                        <i class="fas fa-file-pdf" style="font-size: 1.5em"></i>
-                      </a>
+                      <form action="/user/peminjaman/riwayat/nota" method="post">
+                        @csrf
+                        <button type="submit" target="_blank" value="{{ $dt->id }}" name="id">
+                          <i class="fas fa-file-pdf" style="font-size: 1.5em"></i>
+                        </button>
+                      </form>
                       @else
                       <span class="text-black-50">Belum tersedia</span>
                       @endisset

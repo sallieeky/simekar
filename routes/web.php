@@ -71,8 +71,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post("/pengajuan", [PeminjamanController::class, 'pengajuanPost']);
             Route::post("/pengajuan/cek", [PeminjamanController::class, 'pengajuanCek']);
 
-
             Route::get("/riwayat", [PeminjamanController::class, 'riwayat']);
+            Route::post("/riwayat/nota", [PeminjamanController::class, 'riwayatNota']);
         });
 
         Route::prefix('reimbursement')->group(function () {
@@ -190,4 +190,4 @@ Route::get("/tes", function () {
 //     return redirect()->back();
 // });
 
-Route::get('/export-pdf', [KendaraanController::class, "exportPdf"]);
+// Route::get('/export-pdf', [KendaraanController::class, "exportPdf"]);
