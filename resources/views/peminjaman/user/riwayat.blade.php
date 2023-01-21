@@ -58,12 +58,19 @@
                       @endif
                     <td>
                       @isset($dt->kendaraan)
-                      <form action="/user/peminjaman/riwayat/nota" method="post">
-                        @csrf
-                        <button type="submit" target="_blank" value="{{ $dt->id }}" name="id">
-                          <i class="fas fa-file-pdf" style="font-size: 1.5em"></i>
-                        </button>
-                      </form>
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-file-pdf" style="font-size: 1.5em"></i></button>
+                        <div class="dropdown-menu" style="">
+                          <form action="/user/peminjaman/riwayat/nota/lihat" method="post">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Lihat</button>
+                          </form>
+                          <form action="/user/peminjaman/riwayat/nota/unduh" method="post">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Unduh</button>
+                          </form>
+                        </div>
+                      </div>
                       @else
                       <span class="text-black-50">Belum tersedia</span>
                       @endisset

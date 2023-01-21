@@ -126,12 +126,19 @@ class PeminjamanController extends Controller
         return view('peminjaman.user.riwayat', compact('data'));
     }
 
-    public function riwayatNota(Request $request)
+    public function riwayatNota(Request $request, $aksi)
     {
         $pdf = app('dompdf.wrapper');
         $peminjaman = Peminjaman::where('id', $request->id)->get();
         $pdf->loadView('tespdf', compact('peminjaman'));
-        return $pdf->stream();
+
+        // cek aksi
+        if ($aksi == "unduh") {
+            $namaFile = "nota-peminjaman-" . date('Y-m-d') . ".pdf";
+            return $pdf->download($namaFile);
+        } else if ($aksi == "lihat") {
+            return $pdf->stream();
+        }
     }
 
     public function selesai(Peminjaman $peminjaman)
