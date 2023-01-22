@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use App\Models\TujuanPeminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class PeminjamanController extends Controller
 {
@@ -201,8 +202,48 @@ class PeminjamanController extends Controller
 
     public function rekap()
     {
-        // get data peminjaman semua
-        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where("status", "selesai")->orderBy('created_at', 'asc')->get();
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where("status", "selesai")->orderBy('waktu_peminjaman', 'asc')->get();
         return view('peminjaman.admin.rekap', compact('data'));
+    }
+
+    public function rekapExport(Request $request)
+    {
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')
+            ->whereDate('created_at', '>=', $request->tanggal_dari)
+            ->whereDate('created_at', '<=', $request->tanggal_sampai)
+            ->where("status", "selesai")
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        if ($data->count() == 0) {
+            return false;
+        }
+
+        $filename = "rekap-peminjaman-" . date('Y-m-d') . ".csv";
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
+        fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
+
+        fputcsv($handle, array('Nomor', 'Nomor Nota', 'Nama Karyawan', 'Nomor Telepon', 'Nomor Polisi', 'Merk Kendaraan', 'Tipe Kendaraan', 'Nama Driver', 'Tanggal Peminjaman', 'Waktu Peminjaman', 'Estimasi Selesai', 'Nama Tujuan', 'Alamat Tujuan', 'Keperluan'), ';');
+
+        $no = 1;
+        foreach ($data as $row) {
+            $nomor_peminjaman = $row->nomor_peminjaman;
+            if ($nomor_peminjaman < 10) {
+                $nomor_peminjaman = '00' . $nomor_peminjaman;
+            } elseif ($nomor_peminjaman < 100) {
+                $nomor_peminjaman = '0' . $nomor_peminjaman;
+            }
+            $ns = "UMUM/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
+            fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver->nama, $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan), ';');
+            $no++;
+        }
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, $filename, $headers)->deleteFileAfterSend(true);
     }
 }

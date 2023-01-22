@@ -17,30 +17,31 @@
         <h3 class="portlet-title">Filter Data</h3>
       </div>
       <div class="portlet-body">
+        <form action="/admin/peminjaman/pengajuan/rekapitulasi/export" method="GET" id="form_export">
         <div class="row">
           <div class="col-md-5">
             <div class="form-group">
               <label for="tanggal_dari">Tanggal Dari</label>
-              <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control">
+              <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control" value="{{ date('Y-m-d', strtotime('-1 month')) }}">
             </div>
           </div>
           <div class="col-md-5">
             <div class="form-group">
               <label for="tanggal_sampai">Tanggal Sampai</label>
-              <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control">
+              <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control" value="{{ date('Y-m-d') }}">
             </div>
           </div>
           <div class="col-md-2">
             <div class="form-group">
               <label for="tanggal_sampai"></label><br>
-              <button class="btn btn-primary btn-block w-100">
-                {{-- export --}}
+              <button class="btn btn-primary btn-block w-100" type="button" id="btn_export">
                 <i class="fas fa-file-excel"></i>
                 Export
               </button>
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   </div>
@@ -101,6 +102,40 @@
   $(document).ready(function () {
     $("#table-driver").DataTable({});
   });
+
+  $("#btn_export").click(function () {
+    let tanggal_dari = $("#tanggal_dari").val();
+    let tanggal_sampai = $("#tanggal_sampai").val();
+
+    if (tanggal_dari == "" || tanggal_sampai == "") {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Tanggal Dari dan Sampai harus diisi!",
+      });
+    } else {
+      $.ajax({
+        url: "/admin/peminjaman/pengajuan/rekapitulasi/export?tanggal_dari=" + tanggal_dari + "&tanggal_sampai=" + tanggal_sampai,
+        type: "GET",
+        data: {
+          tanggal_dari: tanggal_dari,
+          tanggal_sampai: tanggal_sampai,
+        },
+        success: function (response) {
+          if (response == false) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Data tidak ditemukan!",
+            });
+          } else {
+            $("#form_export").submit();
+          }
+        },
+      });
+    }
+  });
+
 </script>
 
 @if(session('success'))

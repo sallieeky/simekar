@@ -84,11 +84,13 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('peminjaman')->group(function () {
             Route::get("/pengajuan", [PeminjamanController::class, 'pengajuan']);
             Route::get("/rekapitulasi", [PeminjamanController::class, 'rekap']);
+
+            Route::get("/pengajuan/rekapitulasi/export", [PeminjamanController::class, 'rekapExport']);
         });
 
         Route::prefix('reimbursement')->group(function () {
             Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
-            Route::get("/rekap", [ReimbursementController::class, 'rekap']);
+            Route::get("/rekapitulasi", [ReimbursementController::class, 'rekap']);
         });
     });
 

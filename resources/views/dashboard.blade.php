@@ -95,7 +95,7 @@
       <div class="widget10 widget10-vertical-md">
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["kendaraan"] }}</h2>
             <span class="widget10-subtitle">Kendaraan Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -110,7 +110,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["driver"] }}</h2>
             <span class="widget10-subtitle">Driver Tersedia</span>
           </div>
           <div class="widget10-addon">
@@ -125,7 +125,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["kendaraan_terpakai"] }}</h2>
             <span class="widget10-subtitle">Kendaraan Terpakai</span>
           </div>
           <div class="widget10-addon">
@@ -140,7 +140,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["driver_terpakai"] }}</h2>
             <span class="widget10-subtitle">Driver Terpakai</span>
           </div>
           <div class="widget10-addon">
@@ -155,7 +155,7 @@
         </div>
         <div class="widget10-item">
           <div class="widget10-content">
-            <h2 class="widget10-title">5</h2>
+            <h2 class="widget10-title">{{ $data["konfirmasi_reimburse"] }}</h2>
             <span class="widget10-subtitle">Reimburse Perlu Konfirmasi</span>
           </div>
           <div class="widget10-addon">
@@ -261,7 +261,6 @@
           <div class="portlet mb-0">
             <div class="portlet-body">
               <div class="widget5">
-                {{-- text center --}}
                 <h4 class="widget5-title text-center mb-0">Tidak ada antrian</h4>
               </div>
             </div>
@@ -294,7 +293,10 @@
                   @if(Auth::user()->role == 'admin')
                   <div class="widget5-item">
                     <span class="widget5-info">Hapus</span>
-                    <button class="btn btn-danger w-50"><i class="fa-solid fa-trash"></i></button>
+                    <form action="/peminjaman/batal/{{ $dt->id }}" method="POST" class="form-admin-hapus">
+                      @csrf
+                      <button class="btn btn-danger w-50 btn-admin-hapus" type="button"><i class="fa-solid fa-trash"></i></button>
+                    </form>
                   </div>
                   @endif
                 </div>
@@ -358,6 +360,23 @@
         }
       });
     });
+
+    $(".btn-admin-hapus").click(function () {
+      Swal.fire({
+        title: "Apakah anda yakin ingin menghapus data ini?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $(this).parent().submit();
+        }
+      });
+    });
+    
   });
 </script>
 @endsection
