@@ -191,4 +191,4 @@ Route::get("/tes", function () {
 //     return redirect()->back();
 // });
 
-// Route::get('/export-pdf', [KendaraanController::class, "exportPdf"]);
+Route::get('/pdf', [KendaraanController::class, "pdf"]);

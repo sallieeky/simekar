@@ -20,6 +20,7 @@ class PeminjamanSeeder extends Seeder
             'driver_id' => 1,
             'kendaraan_id' => 1,
             'tujuan_peminjaman_id' => 1,
+            'nomor_peminjaman' => '001',
             'keperluan' => "awdawd",
             'status' => "dipakai",
             'waktu_peminjaman' => date('Y-m-d H:i:s'),
@@ -28,6 +29,7 @@ class PeminjamanSeeder extends Seeder
         Peminjaman::create([
             'user_id' => 3,
             'tujuan_peminjaman_id' => 1,
+            'nomor_peminjaman' => '002',
             'keperluan' => "awdawd",
             'status' => "menunggu",
             'waktu_peminjaman' => date('Y-m-d H:i:s'),
@@ -36,6 +38,7 @@ class PeminjamanSeeder extends Seeder
         Peminjaman::create([
             'user_id' => 4,
             'tujuan_peminjaman_id' => 1,
+            'nomor_peminjaman' => '003',
             'keperluan' => "awdawd",
             'status' => "menunggu",
             'waktu_peminjaman' => date('Y-m-d H:i:s'),

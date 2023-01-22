@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Kendaraan;
 use App\Models\Peminjaman;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -14,6 +15,14 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();
         return view('master-data.kendaraan', compact('kendaraan'));
+    }
+
+    public function pdf()
+    {
+        $kendaraan = Kendaraan::orderBy('isShow', 'asc')->orderBy('isReady', 'asc')->get();
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('tespdf', compact('kendaraan'));
+        return $pdf->stream();
     }
 
     public function get(Kendaraan $kendaraan)

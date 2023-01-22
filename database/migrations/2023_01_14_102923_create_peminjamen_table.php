@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
-            // $table->string('kode_peminjaman')->unique();
             $table->integer('user_id');
             $table->integer('kendaraan_id')->nullable();
             $table->integer('driver_id')->nullable();
             $table->integer('tujuan_peminjaman_id');
+            $table->integer('nomor_peminjaman');
             $table->text('keperluan');
             $table->string('status');
             $table->dateTime('waktu_peminjaman');
