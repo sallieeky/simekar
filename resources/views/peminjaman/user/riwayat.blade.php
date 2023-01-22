@@ -63,11 +63,11 @@
                         <div class="dropdown-menu" style="">
                           <form action="/user/peminjaman/riwayat/nota/lihat" method="post">
                             @csrf
-                            <button class="dropdown-item" type="submit">Lihat</button>
+                            <button class="dropdown-item" type="submit" name="id" value="{{ $dt->id }}">Lihat</button>
                           </form>
                           <form action="/user/peminjaman/riwayat/nota/unduh" method="post">
                             @csrf
-                            <button class="dropdown-item" type="submit">Unduh</button>
+                            <button class="dropdown-item" type="submit" name="id" value="{{ $dt->id }}">Unduh</button>
                           </form>
                         </div>
                       </div>

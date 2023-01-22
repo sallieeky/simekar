@@ -101,11 +101,15 @@ class PeminjamanController extends Controller
 
         $status = ($request->driver_id == null || $request->kendaraan_id == null) ? 'menunggu' : 'dipakai';
 
+        // cek nomor peminjaman hari ini
+        $nomorPeminjaman = Peminjaman::whereDate('created_at', date('Y-m-d'))->count() + 1;
+
         Peminjaman::create([
             'user_id' => Auth::user()->id,
             'driver_id' => $request->driver_id,
             'kendaraan_id' => $request->kendaraan_id,
             'tujuan_peminjaman_id' => $tujuanPeminjaman->id,
+            'nomor_peminjaman' => $nomorPeminjaman,
             'keperluan' => $request->keperluan,
             'status' => $status,
             'waktu_peminjaman' => $request->tanggal_peminjaman . ' ' . $request->waktu_peminjaman,
@@ -130,8 +134,9 @@ class PeminjamanController extends Controller
     public function riwayatNota(Request $request, $aksi)
     {
         $pdf = app('dompdf.wrapper');
-        $peminjaman = Peminjaman::where('id', $request->id)->get();
-        $pdf->loadView('tespdf', compact('peminjaman'));
+        $peminjaman = Peminjaman::where('id', $request->id)->first();
+
+        $pdf->loadView('pdf.nota-riwayat', compact('peminjaman'));
 
         // cek aksi
         if ($aksi == "unduh") {

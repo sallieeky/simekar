@@ -15,34 +15,34 @@ class PeminjamanSeeder extends Seeder
      */
     public function run()
     {
-        Peminjaman::create([
-            'user_id' => 2,
-            'driver_id' => 1,
-            'kendaraan_id' => 1,
-            'tujuan_peminjaman_id' => 1,
-            'nomor_peminjaman' => '001',
-            'keperluan' => "awdawd",
-            'status' => "dipakai",
-            'waktu_peminjaman' => date('Y-m-d H:i:s'),
-            'waktu_selesai' => date('Y-m-d H:i:s'),
-        ]);
-        Peminjaman::create([
-            'user_id' => 3,
-            'tujuan_peminjaman_id' => 1,
-            'nomor_peminjaman' => '002',
-            'keperluan' => "awdawd",
-            'status' => "menunggu",
-            'waktu_peminjaman' => date('Y-m-d H:i:s'),
-            'waktu_selesai' => date('Y-m-d H:i:s'),
-        ]);
-        Peminjaman::create([
-            'user_id' => 4,
-            'tujuan_peminjaman_id' => 1,
-            'nomor_peminjaman' => '003',
-            'keperluan' => "awdawd",
-            'status' => "menunggu",
-            'waktu_peminjaman' => date('Y-m-d H:i:s'),
-            'waktu_selesai' => date('Y-m-d H:i:s'),
-        ]);
+        // Peminjaman::create([
+        //     'user_id' => 2,
+        //     'driver_id' => 1,
+        //     'kendaraan_id' => 1,
+        //     'tujuan_peminjaman_id' => 1,
+        //     'nomor_peminjaman' => 1,
+        //     'keperluan' => "awdawd",
+        //     'status' => "dipakai",
+        //     'waktu_peminjaman' => date('Y-m-d H:i:s'),
+        //     'waktu_selesai' => date('Y-m-d H:i:s'),
+        // ]);
+        // Peminjaman::create([
+        //     'user_id' => 3,
+        //     'tujuan_peminjaman_id' => 1,
+        //     'nomor_peminjaman' => 2,
+        //     'keperluan' => "awdawd",
+        //     'status' => "menunggu",
+        //     'waktu_peminjaman' => date('Y-m-d H:i:s'),
+        //     'waktu_selesai' => date('Y-m-d H:i:s'),
+        // ]);
+        // Peminjaman::create([
+        //     'user_id' => 4,
+        //     'tujuan_peminjaman_id' => 1,
+        //     'nomor_peminjaman' => 3,
+        //     'keperluan' => "awdawd",
+        //     'status' => "menunggu",
+        //     'waktu_peminjaman' => date('Y-m-d H:i:s'),
+        //     'waktu_selesai' => date('Y-m-d H:i:s'),
+        // ]);
     }
 }
