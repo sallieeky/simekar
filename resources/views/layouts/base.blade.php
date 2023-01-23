@@ -418,7 +418,7 @@
 				confirmButtonColor: '#3085d6',
 				cancelButtonColor: '#d33',
 				confirmButtonText: 'Ya, keluar!',
-				cancleButtonText: 'Tidak',
+				cancelButtonText: 'Tidak',
 			}).then((result) => {
 				if (result.isConfirmed) {
 					window.location.href = "/logout";
