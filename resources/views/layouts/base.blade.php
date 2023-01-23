@@ -245,7 +245,7 @@
 											<!-- END Grid Nav -->
 										</div>
 										<div class="portlet-footer portlet-footer-bordered rounded-0">
-											<a href="/logout" class="btn btn-label-danger logout-trigger">Sign out</a>
+											<button type="button" class="btn btn-label-danger logout-trigger btn-logout">Keluar</button>
 										</div>
 									</div>
 									<!-- END Portlet -->
@@ -326,7 +326,7 @@
 												<!-- END Grid Nav -->
 											</div>
 											<div class="portlet-footer portlet-footer-bordered rounded-0">
-												<a href="/logout" class="btn btn-label-danger logout-trigger">Sign out</a>
+												<button type="button" class="btn btn-label-danger logout-trigger btn-logout">Keluar</button>
 											</div>
 										</div>
 									</div>
@@ -405,6 +405,28 @@
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/sweet-alert.js"></script>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&amp;libraries=places&amp;callback=initMap"></script>
+
+	<script>
+		// get class btn-logout and add event click and open sweet alert
+		$('.btn-logout').on('click', function(e) {
+			e.preventDefault();
+			Swal.fire({
+				title: 'Apakah anda yakin?',
+				text: "Anda akan keluar dari sistem",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, keluar!',
+				cancleButtonText: 'Tidak',
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = "/logout";
+				}
+			})
+		})
+		
+	</script>
 
 	<script>
 		toastr.options = {

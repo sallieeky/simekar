@@ -194,3 +194,57 @@ Route::get("/tes", function () {
 // });
 
 Route::get('/pdf', [KendaraanController::class, "pdf"]);
+
+Route::get('/wa', function () {
+    // $api_key   = 'd5a5c5eddbf6e9d9902547787c2ae4ca7572bb2a'; // API KEY Anda
+    // $id_device = '12345'; // ID DEVICE yang di SCAN (Sebagai pengirim)
+    // $url   = 'https://api.watsap.id/send-message'; // URL API
+    // $no_hp = '081243942304'; // No.HP yang dikirim (No.HP Penerima)
+    // $pesan = 'TES TES'; // Pesan yang dikirim
+
+    // $curl = curl_init();
+    // curl_setopt($curl, CURLOPT_URL, $url);
+    // curl_setopt($curl, CURLOPT_HEADER, 0);
+    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    // curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+    // curl_setopt($curl, CURLOPT_TIMEOUT, 0); // batas waktu response
+    // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    // curl_setopt($curl, CURLOPT_POST, 1);
+
+    // $data_post = [
+    //     'id_device' => $id_device,
+    //     'api-key' => $api_key,
+    //     'no_hp'   => $no_hp,
+    //     'pesan'   => $pesan
+    // ];
+    // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data_post));
+    // curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+    // $response = curl_exec($curl);
+    // curl_close($curl);
+    // echo $response;
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.waayo.id/inowa-core/v1/send_message',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+        "key":"96d52ec019974bc19b8d15218992e937-1619514439",
+        "phone_no":"081243942304",
+        "message":"Ini Adalah contoh message kirim via WA"
+    }',
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response . "wad";
+});

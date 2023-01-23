@@ -225,7 +225,7 @@ class PeminjamanController extends Controller
         fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
         fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
 
-        fputcsv($handle, array('Nomor', 'Nomor Nota', 'Nama Karyawan', 'Nomor Telepon', 'Nomor Polisi', 'Merk Kendaraan', 'Tipe Kendaraan', 'Nama Driver', 'Tanggal Peminjaman', 'Waktu Peminjaman', 'Estimasi Selesai', 'Nama Tujuan', 'Alamat Tujuan', 'Keperluan'), ';');
+        fputcsv($handle, array('Nomor', 'Nomor Nota', 'Nama Karyawan', 'Nomor Telepon', 'Nomor Polisi', 'Merk Kendaraan', 'Tipe Kendaraan', 'Nama Driver', 'Tanggal Peminjaman', 'Estimasi Selesai', 'Nama Tujuan', 'Alamat Tujuan', 'Keperluan'), ';');
 
         $no = 1;
         foreach ($data as $row) {
