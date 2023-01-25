@@ -77,7 +77,7 @@
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->no_polisi }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->merk }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
                     <td>@isset($dt->kendaraan) {{ $dt->kendaraan->tipe }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
-                    <td>@isset($dt->driver) {{ $dt->driver->nama }} @else <span class="text-black-50">Belum tersedia</span> @endisset</td>
+                    <td>@isset($dt->driver) {{ $dt->driver->nama }} @else @if($dt->driver_id==0) <span class="text-black-50">Tanpa Driver</span> @else <span class="text-black-50">Belum tersedia</span> @endif @endisset</td>
                     <td>{{ $dt->waktuPeminjamanFormated }}</td>
                     <td>{{ $dt->waktuSelesaiFormated }}</td>
                     <td>{{ $dt->tujuan_peminjaman->nama }}</td>

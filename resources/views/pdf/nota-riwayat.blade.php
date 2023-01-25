@@ -79,7 +79,7 @@
             <tr align="justify">
                 <td width="20%" valign="top">Driver</td>
                 <td width="1%" valign="top">:</td>
-                <td width="79%">{{$peminjaman->driver->nama}}</td>
+                <td width="79%">@isset($peminjaman->driver->nama) {{ $peminjaman->driver->nama }} @else Tanpa Driver @endisset</td>
             </tr>
             <tr align="justify">
                 <td width="20%" valign="top">Tanggal Pinjam</td>

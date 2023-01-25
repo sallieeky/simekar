@@ -47,8 +47,9 @@ class PeminjamanController extends Controller
                 ]);
             } else if (!$driver && $kendaraan) {
                 return response()->json([
-                    'status' => 'error',
+                    'status' => 'no_driver',
                     'message' => 'Driver tidak tersedia',
+                    'kendaraan' => $kendaraan,
                 ]);
             } else if ($driver && !$kendaraan) {
                 return response()->json([
@@ -90,13 +91,15 @@ class PeminjamanController extends Controller
         ]);
 
         if ($request->driver_id != null || $request->kendaraan_id != null) {
-            $driver = Driver::find($request->driver_id);
+            // cek apakah driver id == 0
+            if ($request->driver_id != 0) {
+                $driver = Driver::find($request->driver_id);
+                $driver->isReady = 0;
+                $driver->save();
+            }
             $kendaraan = Kendaraan::find($request->kendaraan_id);
-
-            $driver->isReady = 0;
             $kendaraan->isReady = 0;
 
-            $driver->save();
             $kendaraan->save();
         }
 
@@ -236,7 +239,7 @@ class PeminjamanController extends Controller
                 $nomor_peminjaman = '0' . $nomor_peminjaman;
             }
             $ns = "UMUM/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
-            fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver->nama, $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan), ';');
+            fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver_id != 0 ? $row->driver->nama : "Tanpa Driver", $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan), ';');
             $no++;
         }
         fclose($handle);

@@ -169,7 +169,28 @@
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Ok",
+            });
+          } else if(data.status == "no_driver") {
+            Swal.fire({
+              title: data.message,
+              text: "Apakah anda ingin melakukan peminjaman tanpa driver?",
+              icon: "error",
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Iya",
+              cancelButtonText: "Tidak",
+              showCancelButton: true,
             }).then(function (result) {
+              if (result.isConfirmed) {
+                $("#kendaraan_id").val(data.kendaraan.id);
+                $("#driver_id").val(0);
+                form.submit();
+              } else if(result.isCancelled) {
+                form.submit();
+              } else {
+                $("#btn-ajukan").attr("disabled", false);
+                $("#btn-ajukan").html("Ajukan");
+              }
             });
           } else {
             $("#btn-ajukan").attr("disabled", false);

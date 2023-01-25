@@ -8,9 +8,6 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
-use App\Models\Driver;
-use App\Models\Kendaraan;
-use App\Models\Peminjaman;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -195,56 +192,39 @@ Route::get("/tes", function () {
 
 Route::get('/pdf', [KendaraanController::class, "pdf"]);
 
-Route::get('/wa', function () {
-    // $api_key   = 'd5a5c5eddbf6e9d9902547787c2ae4ca7572bb2a'; // API KEY Anda
-    // $id_device = '12345'; // ID DEVICE yang di SCAN (Sebagai pengirim)
-    // $url   = 'https://api.watsap.id/send-message'; // URL API
-    // $no_hp = '081243942304'; // No.HP yang dikirim (No.HP Penerima)
-    // $pesan = 'TES TES'; // Pesan yang dikirim
+// Route::get('/wa', function () {
+//     $curl = curl_init();
 
-    // $curl = curl_init();
-    // curl_setopt($curl, CURLOPT_URL, $url);
-    // curl_setopt($curl, CURLOPT_HEADER, 0);
-    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    // curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
-    // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-    // curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
-    // curl_setopt($curl, CURLOPT_TIMEOUT, 0); // batas waktu response
-    // curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-    // curl_setopt($curl, CURLOPT_POST, 1);
+//     curl_setopt_array($curl, array(
+//         CURLOPT_URL => 'https://api.waayo.id/inowa-core/v1/send_message',
+//         CURLOPT_RETURNTRANSFER => true,
+//         CURLOPT_ENCODING => '',
+//         CURLOPT_MAXREDIRS => 10,
+//         CURLOPT_TIMEOUT => 0,
+//         CURLOPT_FOLLOWLOCATION => true,
+//         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//         CURLOPT_CUSTOMREQUEST => 'POST',
+//         CURLOPT_POSTFIELDS => '{
+//         "key":"96d52ec019974bc19b8d15218992e937-1619514439",
+//         "phone_no":"081243942304",
+//         "message":"Ini Adalah contoh message kirim via WA"
+//     }',
+//     ));
 
-    // $data_post = [
-    //     'id_device' => $id_device,
-    //     'api-key' => $api_key,
-    //     'no_hp'   => $no_hp,
-    //     'pesan'   => $pesan
-    // ];
-    // curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data_post));
-    // curl_setopt($curl, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    // $response = curl_exec($curl);
-    // curl_close($curl);
-    // echo $response;
+//     $response = curl_exec($curl);
 
-    $curl = curl_init();
+//     curl_close($curl);
+//     echo $response . "wad";
+// });
 
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://api.waayo.id/inowa-core/v1/send_message',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => '{
-        "key":"96d52ec019974bc19b8d15218992e937-1619514439",
-        "phone_no":"081243942304",
-        "message":"Ini Adalah contoh message kirim via WA"
-    }',
-    ));
-
-    $response = curl_exec($curl);
-
-    curl_close($curl);
-    echo $response . "wad";
-});
+// Route::get('/wa', function () {
+//         curl -X POST \
+//         -d '{
+//             "phone_no": "+6281243942304",
+//             "key": "db63f52c1a00d33cf143524083dd3ffd025d672e255cc688",
+//             "message": "DEMO AKUN WOOWA CURL. tes woowa api v3.0 mohon di abaikan"
+//         }' \
+//         -H "Content-Type: application/json" \
+//         -H "Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA==" \
+//     http://45.77.34.32:8000/demo/send_message
+// });
