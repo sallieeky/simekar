@@ -185,12 +185,9 @@
                 $("#kendaraan_id").val(data.kendaraan.id);
                 $("#driver_id").val(0);
                 form.submit();
-              } else if(result.isCancelled) {
-                form.submit();
               } else {
-                $("#btn-ajukan").attr("disabled", false);
-                $("#btn-ajukan").html("Ajukan");
-              }
+                form.submit();
+              } 
             });
           } else {
             $("#btn-ajukan").attr("disabled", false);
