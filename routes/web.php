@@ -8,6 +8,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
+use App\Models\Kendaraan;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -168,7 +169,8 @@ Route::get('/kirim', function () {
 });
 
 Route::get("/tes", function () {
-    return view("tes3");
+    $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
+    return $kendaraan;
 });
 
 // Route::get("/selesai/{peminjaman}", function (Peminjaman $peminjaman) {
