@@ -163,8 +163,8 @@ class PeminjamanController extends Controller
                 // cek peminjaman status menunggu
                 $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
                 if ($peminjamanMenunggu) {
-                    $peminjamanMenunggu->driver_id = $driver->id ? $driver->id : $peminjaman->driver->id;
-                    $peminjamanMenunggu->kendaraan_id = $kendaraan->id ? $kendaraan->id : $peminjaman->kendaraan->id;
+                    $peminjamanMenunggu->driver_id = $driver ? $driver->id : $peminjaman->driver->id;
+                    $peminjamanMenunggu->kendaraan_id = $kendaraan ? $kendaraan->id : $peminjaman->kendaraan->id;
                     $peminjamanMenunggu->status = "dipakai";
                     $peminjamanMenunggu->save();
                 } else {
@@ -181,8 +181,8 @@ class PeminjamanController extends Controller
             // cek peminjaman status menunggu
             $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
             if ($peminjamanMenunggu) {
-                $peminjamanMenunggu->driver_id = $driver->id ? $driver->id : $peminjaman->driver->id;
-                $peminjamanMenunggu->kendaraan_id = $kendaraan->id ? $kendaraan->id : $peminjaman->kendaraan->id;
+                $peminjamanMenunggu->driver_id = $driver ? $driver->id : $peminjaman->driver->id;
+                $peminjamanMenunggu->kendaraan_id = $kendaraan ? $kendaraan->id : $peminjaman->kendaraan->id;
                 $peminjamanMenunggu->status = "dipakai";
                 $peminjamanMenunggu->save();
             } else {
