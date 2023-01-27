@@ -219,6 +219,7 @@
                     confirmButtonText: "Ok",
                   });
                 } else {
+                  let pesan="";
                   if (value == 1) {
                     element.data("value", 0);
                     element.html('<i class="fas fa-eye-slash"></i>');
@@ -228,6 +229,8 @@
                     element.parent().parent().parent().parent().find(".status-badge").html("Tidak Tersedia");
                     element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-success");
                     element.parent().parent().parent().parent().find(".status-badge").addClass("badge-danger");
+
+                    pesan = "Berhasil menyembunyikan data driver";
                   } else {
                     element.data("value", 1);
                     element.html('<i class="fas fa-eye"></i>');
@@ -237,7 +240,17 @@
                     element.parent().parent().parent().parent().find(".status-badge").html("Tersedia");
                     element.parent().parent().parent().parent().find(".status-badge").removeClass("badge-danger");
                     element.parent().parent().parent().parent().find(".status-badge").addClass("badge-success");
+
+                    pesan = "Berhasil menampilkan data driver";
                   }
+
+                  swal.fire({
+                    title: "Berhasil!",
+                    text: pesan,
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Ok",
+                  });
                 }
               },
             });
