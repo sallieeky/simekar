@@ -260,14 +260,22 @@
 
 @if(session('success'))
 <script>
-  toastr.success("{{ session('success') }}")
+  Swal.fire({
+    icon: "success",
+    title: "Berhasil",
+    text: "{{ session('success') }}",
+  });
 </script>
 @endif
 
 {{-- error validate apapun --}}
 @if($errors->any())
 <script>
-  toastr.error("{{ $errors->first() }}")
+  Swal.fire({
+    icon: "error",
+    title: "Gagal",
+    text: "{{ $errors->first() }}",
+  });
 </script>
 @endif
 

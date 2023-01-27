@@ -18,7 +18,7 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required',
             'email' => 'required|email|unique:users,email',
-            'no_hp' => 'required|numeric',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:users,no_hp',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password'
         ], [
@@ -27,7 +27,10 @@ class UserController extends Controller
             'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
             'no_hp.required' => 'No HP tidak boleh kosong',
-            'no_hp.numeric' => 'No HP harus angka',
+            'no_hp.regex' => 'No HP harus berupa angka',
+            'no_hp.min' => 'No HP minimal 10 digit',
+            'no_hp.max' => 'No HP maximal 20 digit',
+            'no_hp.unique' => 'No HP sudah digunakan, coba nomor yang lain',
             'password.required' => 'Password tidak boleh kosong',
             'password.min' => 'Password minimal 8 karakter',
             'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong',
@@ -52,7 +55,7 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->id,
-            'no_hp' => 'required|numeric',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:users,no_hp,' . $request->id,
             'password' => 'nullable|min:8',
             'password_confirmation' => 'nullable|same:password'
         ], [
@@ -61,7 +64,10 @@ class UserController extends Controller
             'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah terdaftar',
             'no_hp.required' => 'No HP tidak boleh kosong',
-            'no_hp.numeric' => 'No HP harus angka',
+            'no_hp.regex' => 'No HP harus berupa angka',
+            'no_hp.min' => 'No HP minimal 10 digit',
+            'no_hp.max' => 'No HP maximal 20 digit',
+            'no_hp.unique' => 'No HP sudah digunakan, coba nomor yang lain',
             'password.min' => 'Password minimal 8 karakter',
             'password_confirmation.same' => 'Konfirmasi password tidak sama',
         ]);
