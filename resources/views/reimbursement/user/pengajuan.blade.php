@@ -115,7 +115,21 @@
 </script>
 @endif
 
-{{-- error validate apapun --}}
+{{-- session fail --}}
+@if (session('fail'))
+<script>
+  Swal.fire({
+    title: "Gagal!",
+    text: "{{ session('fail') }}",
+    icon: "error",
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Ok",
+  });
+</script>
+@endif
+
+
 @if($errors->any())
 <script>
   swal.fire({

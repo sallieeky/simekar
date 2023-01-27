@@ -153,7 +153,7 @@
 								</a>
 							</div>
 							<div class="menu-item">
-								<a @if(Auth::user()->role == 'admin') href="/admin/reimbursement/rekapitulasi" @else href="/admin/reimbursement/riwayat" @endif data-menu-path="#" class="menu-item-link">
+								<a @if(Auth::user()->role == 'admin') href="/admin/reimbursement/rekapitulasi" @else href="/user/reimbursement/riwayat" @endif data-menu-path="#" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">@if(Auth::user()->role == 'admin') Rekapitulasi @else Riwayat @endif</span>
 								</a>

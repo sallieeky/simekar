@@ -167,7 +167,7 @@ class PeminjamanController extends Controller
         $pdf = app('dompdf.wrapper');
         $peminjaman = Peminjaman::where('id', $request->id)->first();
 
-        $pdf->loadView('pdf.nota-riwayat', compact('peminjaman'));
+        $pdf->loadView('pdf.nota-riwayat-peminjaman', compact('peminjaman'));
 
         // cek aksi
         if ($aksi == "unduh") {

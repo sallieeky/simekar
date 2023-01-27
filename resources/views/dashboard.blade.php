@@ -66,7 +66,7 @@
           <div class="widget10-content">
             <h2 class="widget10-title">
               {{-- BELAKANGAN AJA --}}
-              KOSONG
+              {{ $data["status_reimburse"] ? $data["status_reimburse"]->status : "KOSONG" }}
             </h2>
             <span class="widget10-subtitle">Status Reimburse</span>
           </div>

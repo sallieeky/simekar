@@ -30,6 +30,12 @@ class ReimbursementController extends Controller
             'km_tempuh.numeric' => 'KM tempuh harus berupa angka',
         ]);
 
+        $reimbursement = Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Dalam proses pengajuan')->first();
+
+        if ($reimbursement) {
+            return back()->with('fail', "Anda sedang melakukan pengajuan reimbursement");
+        }
+
         Reimbursement::create([
             'user_id' => Auth::user()->id,
             'kendaraan_id' => $request->kendaraan_id,
@@ -37,5 +43,27 @@ class ReimbursementController extends Controller
         ]);
 
         return back()->with('success', 'Berhasil melakukan pengajuan reimbursement');
+    }
+
+    public function riwayat()
+    {
+        $reimbursement = Reimbursement::where('user_id', Auth::user()->id)->get();
+        return view('reimbursement.user.riwayat', compact('reimbursement'));
+    }
+
+    public function riwayatNota(Request $request, $aksi)
+    {
+        $pdf = app('dompdf.wrapper');
+        $peminjaman = Reimbursement::where('id', $request->id)->first();
+
+        $pdf->loadView('pdf.nota-riwayat', compact('peminjaman'));
+
+        // cek aksi
+        if ($aksi == "unduh") {
+            $namaFile = "nota-peminjaman-" . date('Y-m-d') . ".pdf";
+            return $pdf->download($namaFile);
+        } else if ($aksi == "lihat") {
+            return $pdf->stream();
+        }
     }
 }

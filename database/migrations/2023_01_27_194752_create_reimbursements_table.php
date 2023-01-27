@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer("kendaraan_id");
             $table->integer("km_tempuh");
             $table->string("status")->default('Dalam proses pengajuan');
+            $table->text("keterangan")->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
