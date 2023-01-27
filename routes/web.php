@@ -219,14 +219,43 @@ Route::get('/pdf', [KendaraanController::class, "pdf"]);
 //     echo $response . "wad";
 // });
 
-// Route::get('/wa', function () {
-//         curl -X POST \
-//         -d '{
-//             "phone_no": "+6281243942304",
-//             "key": "db63f52c1a00d33cf143524083dd3ffd025d672e255cc688",
-//             "message": "DEMO AKUN WOOWA CURL. tes woowa api v3.0 mohon di abaikan"
-//         }' \
-//         -H "Content-Type: application/json" \
-//         -H "Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA==" \
-//     http://45.77.34.32:8000/demo/send_message
-// });
+Route::get('/wa', function () {
+
+    $key_demo = 'db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
+    $url = 'http://45.77.34.32:8000/demo/send_message';
+    $data = array(
+        "phone_no" => '081243942304',
+        "key"     => $key_demo,
+        "message" => 'DEMO AKUN WOOWA. tes woowa api v3.0 mohon di abaikan'
+    );
+
+    $data_string = json_encode($data, 1);
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 360);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($data_string),
+        'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
+    ));
+    echo $res = curl_exec($ch);
+    curl_close($ch);
+
+
+    //     curl -X POST \
+    //     -d '{
+    //         "phone_no": "+6281243942304",
+    //         "key": "db63f52c1a00d33cf143524083dd3ffd025d672e255cc688",
+    //         "message": "DEMO AKUN WOOWA CURL. tes woowa api v3.0 mohon di abaikan"
+    //     }' \
+    //     -H "Content-Type: application/json" \
+    //     -H "Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA==" \
+    // http://45.77.34.32:8000/demo/send_message
+});

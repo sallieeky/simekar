@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             "email" => "10191059@student.itk.ac.id",
             "password" => bcrypt("yus12345"),
             'role' => 'user',
-            'no_hp' => '081234567890'
+            'no_hp' => '081717616711'
         ]);
 
         User::create([
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             "email" => "sallieeky@gmail.com",
             'password' => bcrypt('eky12345'),
             'role' => 'user',
-            'no_hp' => '081234567890'
+            'no_hp' => '081243942304'
         ]);
     }
 }

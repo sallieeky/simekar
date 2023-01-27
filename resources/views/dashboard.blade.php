@@ -188,7 +188,7 @@
             <div class="row align-items-center">
               <div class="col-md-4 ">
                 <h5 class="mb-0">Anda sedang memakai kendaraan <br><span class="h1">{{ $peminjaman->kendaraan->no_polisi }}</span></h5>
-                <h6 class="mb-0">({{ $peminjaman->driver->nama }})</h6>
+                <h6 class="mb-0">( @isset($peminjaman->driver->nama) {{ $peminjaman->driver->nama }} @else Tanpa Driver @endisset )</h6>
               </div>
               <div class="col-md-4 my-4">
                 <h5 class="mb-0">Estimasi Waktu Selesai <br><span class="h1">
