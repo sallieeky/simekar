@@ -25,6 +25,7 @@ return new class extends Migration
             $table->dateTime('waktu_peminjaman');
             $table->dateTime('waktu_selesai');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

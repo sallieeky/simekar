@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class UserController extends Controller
             'nama' => 'required',
             'email' => 'required|email|unique:users,email,' . $request->id,
             'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:users,no_hp,' . $request->id,
-            'password' => 'nullable|min:8',
+            'password' => 'nullable',
             'password_confirmation' => 'nullable|same:password'
         ], [
             'nama.required' => 'Nama tidak boleh kosong',
@@ -86,6 +87,14 @@ class UserController extends Controller
 
     public function delete(Request $request)
     {
+
+        // cek apakah user sedang melakukan peminjaman
+        $peminjaman = Peminjaman::where('user_id', $request->id)->where('status', 'dipakai')->first();
+
+        if ($peminjaman) {
+            return back()->with('fail', 'User sedang melakukan peminjaman tidak boleh dihapus!');
+        }
+
         $user = User::find($request->id);
         $user->delete();
 

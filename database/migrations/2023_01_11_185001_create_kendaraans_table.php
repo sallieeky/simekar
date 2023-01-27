@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('isShow')->default(1);
             $table->boolean('isReady')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

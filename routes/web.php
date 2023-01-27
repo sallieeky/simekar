@@ -75,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('reimbursement')->group(function () {
             Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
+            Route::post("/pengajuan", [ReimbursementController::class, 'pengajuanPost']);
             Route::get("/riwayat", [ReimbursementController::class, 'riwayat']);
         });
     });

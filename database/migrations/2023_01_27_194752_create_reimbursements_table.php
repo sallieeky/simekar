@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('reimbursements', function (Blueprint $table) {
             $table->id();
-            $table->string("nama");
-            $table->string('no_hp');
-            $table->boolean('isShow')->default(1);
-            $table->boolean('isReady')->default(1);
+            $table->integer("user_id");
+            $table->integer("kendaraan_id");
+            $table->integer("km_tempuh");
+            $table->string("status")->default('Dalam proses pengajuan');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('reimbursements');
     }
 };

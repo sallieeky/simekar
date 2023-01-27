@@ -234,7 +234,10 @@ class PeminjamanController extends Controller
 
     public function rekap()
     {
-        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')->where("status", "selesai")->orderBy('waktu_peminjaman', 'asc')->get();
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')
+            ->where("status", "selesai")
+            ->orderBy('waktu_peminjaman', 'asc')
+            ->get();
         return view('peminjaman.admin.rekap', compact('data'));
     }
 

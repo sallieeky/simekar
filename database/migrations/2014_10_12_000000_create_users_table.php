@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('no_hp')->unique();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

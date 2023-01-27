@@ -235,7 +235,13 @@
 {{-- error validate apapun --}}
 @if($errors->any())
 <script>
-  toastr.error("{{ $errors->first() }}")
+  swal.fire({
+    title: "Gagal!",
+    text: "{{ $errors->first() }}",
+    icon: "error",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Ok",
+  });
 </script>
 @endif
 

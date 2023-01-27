@@ -279,4 +279,15 @@
 </script>
 @endif
 
+{{-- if session fail --}}
+@if(session('fail'))
+<script>
+  Swal.fire({
+    icon: "error",
+    title: "Gagal",
+    text: "{{ session('fail') }}",
+  });
+</script>
+@endif
+
 @endsection

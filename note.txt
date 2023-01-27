@@ -1,6 +1,9 @@
 Peminjaman
 status = menunggu, dipakai, selesai
 
+Reimburse
+status = dalam proses pengajuan, pengajuan disetujui, pengajuan ditolak
+
 <script>
       //const center = {lat: -6.283948, lng: 106.725908};
       const center = {lat: -1.273819, lng:  116.873741};

@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text('nama');
             $table->text('alamat')->nullable();
-            // $table->string('latitude');
-            // $table->string('longitude');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
