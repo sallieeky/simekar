@@ -19,7 +19,7 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
-            <form action="/profile/ubah-password" method="POST">
+            <form action="/profile/ubah-password" method="POST" id="form-ubah-password">
               @csrf
               <div class="validation-container mb-4">
                 <div class="form-floating">
@@ -53,7 +53,7 @@
       </div>
       <div class="portlet-footer portlet-footer-bordered d-flex justify-content-between">
         <a href="/profile" class="btn btn-link">Kembali ke profile</a>
-        <button class="btn btn-primary" type="submit" id="ubah-data">Simpan</button>
+        <button class="btn btn-primary" type="button" id="btn-ubah-password">Simpan</button>
       </div>
       </form>
     </div>
@@ -65,14 +65,45 @@
 
 @section("script")
 
-@if(session('error'))
 <script>
-  toastr.error(`Password lama salah`, `Gagal mengubah`)
+  $("#btn-ubah-password").click(function() {
+    Swal.fire({
+      title: 'Konfirmasi',
+      text: "Apakah anda yakin ingin mengubah password?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, ubah password!',
+      cancelButtonText: 'Tidak'
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $("#form-ubah-password").submit()
+      }
+    })
+  })
+</script>
+
+@if(session('error'))
+{{-- menggunakan sweatalert --}}
+<script>
+  Swal.fire({
+    icon: 'error',
+    title: 'Gagal mengubah password',
+    text: 'Password lama salah',
+  })
 </script>
 @endif
+
 @if(session('success'))
+{{-- menggunakan sweatalert --}}
 <script>
-  toastr.success(`Berhasil mengubah password`)
+  Swal.fire({
+    icon: 'success',
+    title: 'Berhasil mengubah password',
+    text: 'Password berhasil diubah',
+  })
 </script>
 @endif
 

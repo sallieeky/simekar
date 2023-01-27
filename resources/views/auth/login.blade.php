@@ -115,5 +115,20 @@
 	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/tooltip-popover.js"></script>
 	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/dropdown-scrollbar.js"></script>
 	<script type="text/javascript" src="/dashboard_assets/assets/app/utilities/fullscreen-trigger.js"></script>
+	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/sweet-alert.js"></script>
+
+	{{-- cek apakah ada session ubah_password --}}
+	@if(session('ubah_password'))
+	<script>
+		swal.fire({
+			title: "Berhasil!",
+			text: "{{ session('ubah_password') }}",
+			icon: "success",
+			confirmButtonColor: "#3085d6",
+			confirmButtonText: "Ok",
+		});
+	</script>
+	@endif
+
 </body>
 </html>

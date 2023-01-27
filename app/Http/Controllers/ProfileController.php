@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -57,7 +58,9 @@ class ProfileController extends Controller
             User::where('id', auth()->user()->id)->update([
                 'password' => bcrypt($request->password_baru),
             ]);
-            return redirect()->back()->with('success', 'Password berhasil diubah');
+
+            Auth::logout();
+            return redirect('/login')->with('ubah_password', 'Berhasil mengubah password');
         } else {
             return redirect()->back()->with('error', 'Password lama tidak sesuai');
         }
