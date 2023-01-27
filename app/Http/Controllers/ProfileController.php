@@ -18,18 +18,20 @@ class ProfileController extends Controller
     {
 
         $request->validate([
-            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:20|unique:users,no_hp,' . Auth::user()->id,
         ], [
             'no_hp.required' => 'No HP tidak boleh kosong',
             'no_hp.regex' => 'No HP harus berupa angka',
             'no_hp.min' => 'No HP minimal 10 digit',
+            'no_hp.max' => 'No HP maximal 20 digit',
+            'no_hp.unique' => 'No HP sudah digunakan, coba nomor yang lain',
         ]);
 
         User::where('id', auth()->user()->id)->update([
             'no_hp' => $request->no_hp,
         ]);
 
-        return redirect()->back()->with('success', 'Data berhasil diubah');
+        return redirect()->back()->with('success', 'Berhasil mengubah data');
     }
 
     public function ubahPassword()

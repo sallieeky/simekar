@@ -16,7 +16,7 @@
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-2 d-flex align-items-center justify-content-center">
-            <img src="/image/user.png" alt="Foto User" class="img-fluid">
+            <img src="/image/user.png" alt="Foto User" class="img-fluid" id="form-ubah-data">
           </div>
           <div class="col-md-10">
             <form action="/profile/ubah-data" method="POST">
@@ -47,7 +47,7 @@
       </div>
       <div class="portlet-footer portlet-footer-bordered d-flex justify-content-between">
         <a href="/profile/ubah-password" class="btn btn-link">Ubah password</a>
-        <button class="btn btn-primary" type="submit" id="ubah-data">Simpan</button>
+        <button class="btn btn-primary" type="button" id="btn-ubah-data">Simpan</button>
       </div>
       </form>
     </div>
@@ -59,9 +59,35 @@
 
 @section("script")
 
-@if(session("success"))
 <script>
-  toastr.success(`Berhasil mengubah data`)
+  $(document).ready(function() {
+    $("#btn-ubah-data").click(function() {
+      Swal.fire({
+        title: 'Apakah anda yakin?',
+        text: "Data yang anda ubah akan tersimpan",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya, simpan!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $("form").submit();
+        }
+      })
+    })
+  })
+</script>
+
+@if(session("success"))
+{{-- menggunakan sweatalert --}}
+<script>
+  Swal.fire({
+    title: 'Berhasil',
+    text: '{{ session("success") }}',
+    icon: 'success',
+    confirmButtonText: 'OK'
+  })
 </script>
 @endif
 
