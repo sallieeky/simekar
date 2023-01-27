@@ -135,6 +135,13 @@ class KendaraanController extends Controller
 
     public function delete(Request $request)
     {
+        // cek apakah kendaraan sedang dipakai 
+        $peminjaman = Peminjaman::where('kendaraan_id', $request->id)->where('status', 'dipakai')->first();
+
+        if ($peminjaman) {
+            return back()->with('fail', 'Kendaraan yang sedang digunakan tidak boleh dihapus!');
+        }
+
         $kendaraan = Kendaraan::find($request->id);
         $kendaraan->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus data');

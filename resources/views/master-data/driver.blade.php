@@ -283,14 +283,39 @@
 
 @if(session('success'))
 <script>
-  toastr.success("{{ session('success') }}")
+  swal.fire({
+    title: "Berhasil!",
+    text: "{{ session('success') }}",
+    icon: "success",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Ok",
+  });
+</script>
+@endif
+
+{{-- if session fail show sweatallert --}}
+@if(session('fail'))
+<script>
+  swal.fire({
+    title: "Gagal!",
+    text: "{{ session('fail') }}",
+    icon: "error",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Ok",
+  });
 </script>
 @endif
 
 {{-- error validate apapun --}}
 @if($errors->any())
 <script>
-  toastr.error("{{ $errors->first() }}")
+  swal.fire({
+    title: "Gagal!",
+    text: "{{ $errors->first() }}",
+    icon: "error",
+    confirmButtonColor: "#3085d6",
+    confirmButtonText: "Ok",
+  });
 </script>
 @endif
 

@@ -115,6 +115,12 @@ class DriverController extends Controller
 
     public function delete(Request $request)
     {
+        $peminjaman = Peminjaman::where('driver_id', $request->id)->where('status', 'dipakai')->first();
+
+        if ($peminjaman) {
+            return back()->with('fail', 'Driver yang sedang digunakan tidak boleh dihapus!');
+        }
+
         Driver::find($request->id)->delete();
         return redirect()->back()->with('success', 'Berhasil menghapus driver');
     }
