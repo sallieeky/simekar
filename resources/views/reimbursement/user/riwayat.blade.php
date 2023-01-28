@@ -29,6 +29,7 @@
                     <th>Tanggal Pengajuan</th>
                     <th>Nomor Polisi</th>
                     <th>KM Tempuh</th>
+                    <th>Nominal</th>
                     <th>Status</th>
                     <th>Nota</th>
                   </tr>
@@ -42,6 +43,9 @@
                     <td>{{ $dt->created_at->format('d-m-Y') }}</td>
                     <td>{{ $dt->kendaraan->no_polisi }}</td>
                     <td>{{ $dt->km_tempuh }}</td>
+                    <td>
+                      Rp. {{ number_format($dt->nominal,2,',','.') }}
+                    </td>
                     <td>
                       @if ($dt->status == 'Dalam proses pengajuan')
                         <span class="badge bg-secondary">{{ $dt->status }}</span>
@@ -87,17 +91,5 @@
   });
 </script>
 
-@if(session('success'))
-<script>
-  toastr.success("{{ session('success') }}")
-</script>
-@endif
-
-{{-- error validate apapun --}}
-@if($errors->any())
-<script>
-  toastr.error("{{ $errors->first() }}")
-</script>
-@endif
 
 @endsection

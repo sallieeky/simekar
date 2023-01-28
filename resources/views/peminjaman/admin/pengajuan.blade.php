@@ -131,17 +131,6 @@
   });
 </script>
 
-@if(session('success'))
-<script>
-  toastr.success("{{ session('success') }}")
-</script>
-@endif
-
-{{-- error validate apapun --}}
-@if($errors->any())
-<script>
-  toastr.error("{{ $errors->first() }}")
-</script>
 @endif
 
 @endsection

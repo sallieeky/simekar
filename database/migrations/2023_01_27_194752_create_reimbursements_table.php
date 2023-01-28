@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer("km_tempuh");
             $table->string("status")->default('Dalam proses pengajuan');
             $table->text("keterangan")->nullable();
-
+            $table->string("nominal");
             $table->timestamps();
             $table->softDeletes();
         });

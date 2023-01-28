@@ -15,7 +15,8 @@ class ReimbursementController extends Controller
             $kendaraan = Kendaraan::all();
             return view('reimbursement.user.pengajuan', compact('kendaraan'));
         } else {
-            // return view('peminjaman.admin.pengajuan', compact('data'));
+            $reimbursement = Reimbursement::where('status', 'Dalam proses pengajuan')->orderBy('created_at', "ASC")->get();
+            return view('reimbursement.admin.pengajuan', compact('reimbursement'));
         }
     }
 
@@ -23,23 +24,21 @@ class ReimbursementController extends Controller
     {
         $request->validate([
             'kendaraan_id' => 'required',
-            'km_tempuh' => 'required|numeric'
+            'km_tempuh' => 'required|numeric',
+            'nominal' => 'required|numeric'
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',
             'km_tempuh.required' => 'KM tempuh tidak boleh kosong',
             'km_tempuh.numeric' => 'KM tempuh harus berupa angka',
+            'nominal.required' => 'Nominal tidak boleh kosong',
+            'nominal.numeric' => 'Nominal harus berupa angka',
         ]);
-
-        $reimbursement = Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Dalam proses pengajuan')->first();
-
-        if ($reimbursement) {
-            return back()->with('fail', "Anda sedang melakukan pengajuan reimbursement");
-        }
 
         Reimbursement::create([
             'user_id' => Auth::user()->id,
             'kendaraan_id' => $request->kendaraan_id,
             'km_tempuh' => $request->km_tempuh,
+            'nominal' => $request->nominal
         ]);
 
         return back()->with('success', 'Berhasil melakukan pengajuan reimbursement');
@@ -65,5 +64,21 @@ class ReimbursementController extends Controller
         } else if ($aksi == "lihat") {
             return $pdf->stream();
         }
+    }
+
+    public function rekap()
+    {
+        $data = Reimbursement::where('status', '!=', 'Dalam proses pengajuan')->get();
+        return view('reimbursement.admin.rekap', compact('data'));
+    }
+
+    public function pengajuanRespon(Request $request)
+    {
+        Reimbursement::find($request->id)
+            ->update([
+                "keterangan" => $request->keterangan,
+                "status" => $request->status == "setuju" ? "Pengajuan disetujui" : "Pengajuan ditolak",
+            ]);
+        return back()->with('success', "Berhasil merespon reimbursement");
     }
 }

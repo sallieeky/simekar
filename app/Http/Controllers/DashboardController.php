@@ -20,7 +20,7 @@ class DashboardController extends Controller
             "kendaraan" => Kendaraan::where("isShow", 1)->where("isReady", 1)->count(),
             "driver" => Driver::where("isShow", 1)->where("isReady", 1)->count(),
             "status_peminjaman" => Peminjaman::where("user_id", Auth::user()->id)->where("status", "!=", "selesai")->pluck("status")->first(),
-            "status_reimburse" => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Dalam proses pengajuan')->first(),
+            "status_reimburse" => Reimbursement::where('user_id', Auth::user()->id)->where('status', '!=', 'selesai')->first(),
 
             "kendaraan_terpakai" => Kendaraan::where("isShow", 1)->where("isReady", 0)->count(),
             "driver_terpakai" => Driver::where("isShow", 1)->where("isReady", 0)->count(),

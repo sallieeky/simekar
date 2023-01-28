@@ -91,7 +91,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('reimbursement')->group(function () {
             Route::get("/pengajuan", [ReimbursementController::class, 'pengajuan']);
+            Route::post("/pengajuan/respon", [ReimbursementController::class, 'pengajuanRespon']);
             Route::get("/rekapitulasi", [ReimbursementController::class, 'rekap']);
+
+            Route::get("/pengajuan/rekapitulasi/export", [PeminjamanController::class, 'rekapExport']);
         });
     });
 
@@ -197,68 +200,16 @@ Route::get("/tes", function () {
 
 Route::get('/pdf', [KendaraanController::class, "pdf"]);
 
+
+// WABLAST
 // Route::get('/wa', function () {
 //     $curl = curl_init();
-
-//     curl_setopt_array($curl, array(
-//         CURLOPT_URL => 'https://api.waayo.id/inowa-core/v1/send_message',
-//         CURLOPT_RETURNTRANSFER => true,
-//         CURLOPT_ENCODING => '',
-//         CURLOPT_MAXREDIRS => 10,
-//         CURLOPT_TIMEOUT => 0,
-//         CURLOPT_FOLLOWLOCATION => true,
-//         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//         CURLOPT_CUSTOMREQUEST => 'POST',
-//         CURLOPT_POSTFIELDS => '{
-//         "key":"96d52ec019974bc19b8d15218992e937-1619514439",
-//         "phone_no":"081243942304",
-//         "message":"Ini Adalah contoh message kirim via WA"
-//     }',
-//     ));
-
-//     $response = curl_exec($curl);
-
+//     $token = "zOdA9ubdLgHqxXg0vlaizydpr27MW7pPeyFAMq6CkufMYpfb2GZnUCkRouJdS4uW";
+//     $phone = "081243942304"; // nomor tujuan
+//     $message = "test" . "<br>" .  "driver : awdad" . "<br>" . "kendaraan : awdawd";
+//     curl_setopt($curl, CURLOPT_URL, "https://jogja.wablas.com/api/send-message?phone=$phone&message=$message&token=$token");
+//     $result = curl_exec($curl);
 //     curl_close($curl);
-//     echo $response . "wad";
+//     echo "<pre>";
+//     print_r($result);
 // });
-
-Route::get('/wa', function () {
-
-    $key_demo = 'db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
-    $url = 'http://45.77.34.32:8000/demo/send_message';
-    $data = array(
-        "phone_no" => '081243942304',
-        "key"     => $key_demo,
-        "message" => 'DEMO AKUN WOOWA. tes woowa api v3.0 mohon di abaikan'
-    );
-
-    $data_string = json_encode($data, 1);
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_VERBOSE, 0);
-    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 360);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'Content-Length: ' . strlen($data_string),
-        'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
-    ));
-    echo $res = curl_exec($ch);
-    curl_close($ch);
-
-
-    //     curl -X POST \
-    //     -d '{
-    //         "phone_no": "+6281243942304",
-    //         "key": "db63f52c1a00d33cf143524083dd3ffd025d672e255cc688",
-    //         "message": "DEMO AKUN WOOWA CURL. tes woowa api v3.0 mohon di abaikan"
-    //     }' \
-    //     -H "Content-Type: application/json" \
-    //     -H "Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA==" \
-    // http://45.77.34.32:8000/demo/send_message
-});

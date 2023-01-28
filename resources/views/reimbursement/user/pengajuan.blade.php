@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Formulir Pengajuan Reimbursement</h3>
+        <h3 class="portlet-title">Formulir Pengajuan Reimbursement ( {{ Carbon\Carbon::parse(date('d-m-Y'))->translatedFormat('l, d M Y') }} )</h3>
       </div>
       <div class="portlet-body">
         <div class="row">
@@ -44,7 +44,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="no_hp">Kendaraan</label>
                   <select class="form-select form-select-lg @error('kendaraan_id') is-invalid @enderror" name="kendaraan_id">
                     <option value="">Pilih Kendaraan</option>
@@ -56,12 +56,20 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="km_tempuh">KM pada kendaraan</label>
                   <input class="form-control form-control-lg @error('km_tempuh') is-invalid @enderror" type="number" id="km_tempuh" placeholder="KM tempuh" name="km_tempuh" value="{{ old('km_tempuh') }}">
                   @error('km_tempuh')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
+                </div>
+                {{-- input nominal with prefix Rp. --}}
+                <div class="col-md-4">
+                  <label for="nominal">Nominal pengajuan</label>
+                  <div class="input-group">
+                    <span class="input-group-text">Rp.</span>
+                    <input type="number" id="nominal" name="nominal" class="form-control form-control-lg" aria-label="Nominal rupiah" placeholder="Nominal (Rp)">
+                  </div>
                 </div>
               </div>
             </form>
