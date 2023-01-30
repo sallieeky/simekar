@@ -48,7 +48,7 @@
                     $nomor_peminjaman = '0' . $nomor_peminjaman;
                 }
             @endphp
-            <td width="80%">: UMUM/{{ $nomor_peminjaman }}/{{ date('m', strtotime($peminjaman->created_at)) }}/{{ date('Y', strtotime($peminjaman->created_at)) }}</td>
+            <td width="80%">: UMUM/PKR/{{ $nomor_peminjaman }}/{{ date('m', strtotime($peminjaman->created_at)) }}/{{ date('Y', strtotime($peminjaman->created_at)) }}</td>
         </tr>
         <tr align="justify">
             <td width="20%">Hal</td>
