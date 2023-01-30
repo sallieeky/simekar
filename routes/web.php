@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post("/pengajuan/respon", [ReimbursementController::class, 'pengajuanRespon']);
             Route::get("/rekapitulasi", [ReimbursementController::class, 'rekap']);
 
-            Route::get("/pengajuan/rekapitulasi/export", [PeminjamanController::class, 'rekapExport']);
+            Route::get("/pengajuan/rekapitulasi/export", [ReimbursementController::class, 'rekapExport']);
         });
     });
 

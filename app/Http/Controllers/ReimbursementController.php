@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use App\Models\Reimbursement;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 
 class ReimbursementController extends Controller
 {
@@ -80,5 +82,46 @@ class ReimbursementController extends Controller
                 "status" => $request->status == "setuju" ? "Pengajuan disetujui" : "Pengajuan ditolak",
             ]);
         return back()->with('success', "Berhasil merespon reimbursement");
+    }
+
+    public function rekapExport(Request $request)
+    {
+        $data = Reimbursement::with('kendaraan', 'user')
+            ->whereDate('created_at', '>=', $request->tanggal_dari)
+            ->whereDate('created_at', '<=', $request->tanggal_sampai)
+            ->where("status", "!=", "Dalam proses pengajuan")
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        if ($data->count() == 0) {
+            return false;
+        }
+
+        $filename = "rekap-reimbursement-" . date('Y-m-d') . ".csv";
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
+        fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
+
+        fputcsv($handle, array('Nomor', 'Nomor Surat', 'Tanggal Pengajuan', 'Nama Pegawai', 'Nomor Handphone', 'Nomor Polisi', 'KM Tempuh', 'Nominal', 'Keterangan'), ';');
+
+        $no = 1;
+        foreach ($data as $row) {
+            $nomor_peminjaman = $row->nomor_peminjaman;
+            if ($nomor_peminjaman < 10) {
+                $nomor_peminjaman = '00' . $nomor_peminjaman;
+            } elseif ($nomor_peminjaman < 100) {
+                $nomor_peminjaman = '0' . $nomor_peminjaman;
+            }
+            $ns = "UMUM/RBM/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
+            fputcsv($handle, array($no, $ns, Carbon::parse($row->created_at)->translatedFormat('l, d F Y H:i'), $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->km_tempuh, $row->nominal, $row->keterangan ? $row->keterangan : "Tanpa Keterangan"), ';');
+            $no++;
+        }
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, $filename, $headers)->deleteFileAfterSend(true);
     }
 }
