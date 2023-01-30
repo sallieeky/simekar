@@ -91,7 +91,6 @@ class PeminjamanController extends Controller
         ]);
 
         if ($request->driver_id != null || $request->kendaraan_id != null) {
-            // cek apakah driver id == 0
             if ($request->driver_id != 0) {
                 $driver = Driver::find($request->driver_id);
                 $driver->isReady = 0;
@@ -105,9 +104,7 @@ class PeminjamanController extends Controller
 
         $status = ($request->driver_id == null || $request->kendaraan_id == null) ? 'menunggu' : 'dipakai';
 
-        // cek nomor peminjaman hari ini
         $nomorPeminjaman = Peminjaman::whereDate('created_at', date('Y-m-d'))->count() + 1;
-
         $dtPeminjaman = Peminjaman::create([
             'user_id' => Auth::user()->id,
             'driver_id' => $request->driver_id,
@@ -270,7 +267,7 @@ class PeminjamanController extends Controller
             } elseif ($nomor_peminjaman < 100) {
                 $nomor_peminjaman = '0' . $nomor_peminjaman;
             }
-            $ns = "UMUM/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
+            $ns = "UMUM/PKR/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
             fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver_id != 0 ? $row->driver->nama : "Tanpa Driver", $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan), ';');
             $no++;
         }

@@ -29,9 +29,9 @@ class ReimbursementController extends Controller
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',
             'km_tempuh.required' => 'KM tempuh tidak boleh kosong',
-            'km_tempuh.numeric' => 'KM tempuh harus berupa angka',
+            'km_tempuh.regex' => 'KM tempuh harus berupa angka',
             'nominal.required' => 'Nominal tidak boleh kosong',
-            'nominal.numeric' => 'Nominal harus berupa angka',
+            'nominal.regex' => 'Nominal harus berupa angka',
         ]);
 
         Reimbursement::create([
@@ -53,13 +53,13 @@ class ReimbursementController extends Controller
     public function riwayatNota(Request $request, $aksi)
     {
         $pdf = app('dompdf.wrapper');
-        $peminjaman = Reimbursement::where('id', $request->id)->first();
+        $reimbursement = Reimbursement::where('id', $request->id)->first();
 
-        $pdf->loadView('pdf.nota-riwayat', compact('peminjaman'));
+        $pdf->loadView('pdf.nota-riwayat-reimbursement', compact('reimbursement'));
 
         // cek aksi
         if ($aksi == "unduh") {
-            $namaFile = "nota-peminjaman-" . date('Y-m-d') . ".pdf";
+            $namaFile = "nota-reimbursement-" . date('Y-m-d') . ".pdf";
             return $pdf->download($namaFile);
         } else if ($aksi == "lihat") {
             return $pdf->stream();
