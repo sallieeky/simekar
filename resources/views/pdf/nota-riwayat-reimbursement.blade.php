@@ -41,14 +41,14 @@
         <tr align="justify">
             <td width="20%">Nomor</td>
             @php
-                $nomor_peminjaman = $reimbursement->nomor_peminjaman;
-                if ($nomor_peminjaman < 10) {
-                    $nomor_peminjaman = '00' . $nomor_peminjaman;
-                } elseif ($nomor_peminjaman < 100) {
-                    $nomor_peminjaman = '0' . $nomor_peminjaman;
+                $nomorReimburse = $reimbursement->nomor_reimburse;
+                if ($nomorReimburse < 10) {
+                    $nomorReimburse = '00' . $nomorReimburse;
+                } elseif ($nomorReimburse < 100) {
+                    $nomorReimburse = '0' . $nomorReimburse;
                 }
             @endphp
-            <td width="80%">: UMUM/RBM/{{ $nomor_peminjaman }}/{{ date('m', strtotime($reimbursement->created_at)) }}/{{ date('Y', strtotime($reimbursement->created_at)) }}</td>
+            <td width="80%">: UMUM/RBM/{{ $nomorReimburse }}/{{ date('m', strtotime($reimbursement->created_at)) }}/{{ date('Y', strtotime($reimbursement->created_at)) }}</td>
         </tr>
         <tr align="justify">
             <td width="20%">Hal</td>

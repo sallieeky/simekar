@@ -6,6 +6,7 @@ use App\Models\Driver;
 use App\Models\Kendaraan;
 use App\Models\Peminjaman;
 use App\Models\TujuanPeminjaman;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
@@ -104,7 +105,7 @@ class PeminjamanController extends Controller
 
         $status = ($request->driver_id == null || $request->kendaraan_id == null) ? 'menunggu' : 'dipakai';
 
-        $nomorPeminjaman = Peminjaman::whereDate('created_at', date('Y-m-d'))->count() + 1;
+        $nomorPeminjaman = Peminjaman::whereMonth('created_at', Carbon::now()->month)->get()->count() + 1;
         $dtPeminjaman = Peminjaman::create([
             'user_id' => Auth::user()->id,
             'driver_id' => $request->driver_id,

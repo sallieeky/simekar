@@ -24,9 +24,15 @@ class DashboardController extends Controller
 
             "kendaraan_terpakai" => Kendaraan::where("isShow", 1)->where("isReady", 0)->count(),
             "driver_terpakai" => Driver::where("isShow", 1)->where("isReady", 0)->count(),
-            "konfirmasi_reimburse" => null,
+            "konfirmasi_reimburse" => Reimbursement::where('status', "Dalam proses pengajuan")->get()->count(),
         ];
 
-        return view("dashboard", compact('peminjaman', 'antrian', 'data'));
+        $reimburse = [
+            'total' => Reimbursement::where('user_id', Auth::user()->id)->get()->count(),
+            'diterima' => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Pengajuan disetujui')->get()->count(),
+            'ditolak' => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Pengajuan ditolak')->get()->count(),
+        ];
+
+        return view("dashboard", compact('peminjaman', 'antrian', 'data', 'reimburse'));
     }
 }

@@ -26,8 +26,8 @@ class ReimbursementController extends Controller
     {
         $request->validate([
             'kendaraan_id' => 'required',
-            'km_tempuh' => 'required|numeric',
-            'nominal' => 'required|numeric'
+            'km_tempuh' => 'required|regex:/^[0-9]+$/',
+            'nominal' => 'required|regex:/^[0-9]+$/',
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',
             'km_tempuh.required' => 'KM tempuh tidak boleh kosong',
@@ -36,12 +36,17 @@ class ReimbursementController extends Controller
             'nominal.regex' => 'Nominal harus berupa angka',
         ]);
 
+        // cek apakah sudah ada pengajuan di bulan ini, lalu tambahkan 1
+        $nomorReimburse = Reimbursement::whereMonth('created_at', Carbon::now()->month)->get()->count() + 1;
         Reimbursement::create([
             'user_id' => Auth::user()->id,
             'kendaraan_id' => $request->kendaraan_id,
             'km_tempuh' => $request->km_tempuh,
+            'nomor_reimburse' => $nomorReimburse,
             'nominal' => $request->nominal
         ]);
+
+
 
         return back()->with('success', 'Berhasil melakukan pengajuan reimbursement');
     }
@@ -107,13 +112,13 @@ class ReimbursementController extends Controller
 
         $no = 1;
         foreach ($data as $row) {
-            $nomor_peminjaman = $row->nomor_peminjaman;
-            if ($nomor_peminjaman < 10) {
-                $nomor_peminjaman = '00' . $nomor_peminjaman;
-            } elseif ($nomor_peminjaman < 100) {
-                $nomor_peminjaman = '0' . $nomor_peminjaman;
+            $nomorReimburse = $row->nomor_reimburse;
+            if ($nomorReimburse < 10) {
+                $nomorReimburse = '00' . $nomorReimburse;
+            } elseif ($nomorReimburse < 100) {
+                $nomorReimburse = '0' . $nomorReimburse;
             }
-            $ns = "UMUM/RBM/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
+            $ns = "UMUM/RBM/$nomorReimburse/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
             fputcsv($handle, array($no, $ns, Carbon::parse($row->created_at)->translatedFormat('l, d F Y H:i'), $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->km_tempuh, $row->nominal, $row->keterangan ? $row->keterangan : "Tanpa Keterangan"), ';');
             $no++;
         }

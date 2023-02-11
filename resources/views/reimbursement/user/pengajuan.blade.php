@@ -68,7 +68,10 @@
                   <label for="nominal">Nominal pengajuan</label>
                   <div class="input-group">
                     <span class="input-group-text">Rp.</span>
-                    <input type="number" id="nominal" name="nominal" class="form-control form-control-lg" aria-label="Nominal rupiah" placeholder="Nominal (Rp)">
+                    <input type="number" id="nominal" name="nominal" class="form-control form-control-lg @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" aria-label="Nominal rupiah" placeholder="Nominal (Rp)">
+                    @error('nominal')
+                      <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                   </div>
                 </div>
               </div>

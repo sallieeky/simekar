@@ -62,24 +62,6 @@
             <!-- END Avatar -->
           </div>
         </div>
-        <div class="widget10-item">
-          <div class="widget10-content">
-            <h2 class="widget10-title">
-              {{-- BELAKANGAN AJA --}}
-              {{ $data["status_reimburse"] ? $data["status_reimburse"]->status : "KOSONG" }}
-            </h2>
-            <span class="widget10-subtitle">Status Reimburse</span>
-          </div>
-          <div class="widget10-addon">
-            <!-- BEGIN Avatar -->
-            <div class="avatar avatar-label-danger avatar-circle widget8-avatar m-0">
-              <div class="avatar-display">
-                <i class="fa-solid fa-gas-pump"></i>
-              </div>
-            </div>
-            <!-- END Avatar -->
-          </div>
-        </div>
       </div>
       <!-- END Widget -->
     </div>
@@ -246,7 +228,7 @@
 @endif
 
 <div class="row">
-  <div class="col-md-6 col-xl-12">
+  <div class="col-md-6 @if(Auth::user()->role == 'user') col-xl-10 @else col-xl-12 @endif">
     <div class="portlet portlet-primary">
       <div class="portlet-header">
         <div class="portlet-icon">
@@ -309,6 +291,58 @@
       </div>
     </div>
   </div>
+
+  @if(Auth::user()->role == 'user')  
+  <div class="col-sm-2">
+    <!-- BEGIN Portlet -->
+    <div class="portlet">
+      <div class="portlet-header">
+        <h3 class="portlet-title">Total Reimburse</h3>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Widget -->
+        <div class="widget8">
+          <div class="widget8-content">
+            <h4 class="widget8-highlight widget8-highlight-lg text-primary">{{ $reimburse['total'] }}</h4>
+            <h6 class="widget8-title">Pengajuan</h6>
+          </div>
+        </div>
+        <!-- END Widget -->
+      </div>
+    </div>
+    <div class="portlet">
+      <div class="portlet-header">
+        <h3 class="portlet-title">Reimburse Diterima</h3>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Widget -->
+        <div class="widget8">
+          <div class="widget8-content">
+            <h4 class="widget8-highlight widget8-highlight-lg text-primary">{{ $reimburse["diterima"] }}</h4>
+            <h6 class="widget8-title">Pengajuan</h6>
+          </div>
+        </div>
+        <!-- END Widget -->
+      </div>
+    </div>
+    <div class="portlet">
+      <div class="portlet-header">
+        <h3 class="portlet-title">Reimburse Ditolak</h3>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Widget -->
+        <div class="widget8">
+          <div class="widget8-content">
+            <h4 class="widget8-highlight widget8-highlight-lg text-primary">{{ $reimburse["ditolak"] }}</h4>
+            <h6 class="widget8-title">Pengajuan</h6>
+          </div>
+        </div>
+        <!-- END Widget -->
+      </div>
+    </div>
+    <!-- END Portlet -->
+  </div>
+  @endif
 </div>
 
 @endsection
