@@ -12,4 +12,14 @@ class Kendaraan extends Model
     use SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function serviceKendaraans()
+    {
+        return $this->hasMany(ServiceKendaraan::class)->withTrashed();
+    }
+
+    public function asetKendaraan()
+    {
+        return $this->hasOne(AsetKendaraan::class)->withTrashed();
+    }
 }

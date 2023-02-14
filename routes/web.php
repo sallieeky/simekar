@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AsetServiceController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
@@ -61,6 +63,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/driver/tambah", [DriverController::class, 'tambah']);
         Route::post("/driver/edit", [DriverController::class, 'edit']);
         Route::delete("/driver/delete", [DriverController::class, 'delete']);
+
+        Route::get("/asset-service/data", [AsetServiceController::class, 'data']);
+        Route::get("/asset-service/rekap", [AsetServiceController::class, 'rekap']);
+
+        // Route::get("/service/data", [DriverController::class, 'index']);
+        // Route::get("/service/rekap", [DriverController::class, 'index']);
     });
 
     Route::prefix('user')->middleware("user")->group(function () {
@@ -178,25 +186,6 @@ Route::get("/tes", function () {
     $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
     return $kendaraan;
 });
-
-// Route::get("/selesai/{peminjaman}", function (Peminjaman $peminjaman) {
-//     $peminjaman->status = "selesai";
-//     $peminjaman->save();
-
-//     // cek peminjaman status menunggu
-//     $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
-//     if ($peminjamanMenunggu) {
-//         $peminjamanMenunggu->driver_id = $peminjaman->driver_id;
-//         $peminjamanMenunggu->kendaraan_id = $peminjaman->kendaraan_id;
-//         $peminjamanMenunggu->status = "dipakai";
-//         $peminjamanMenunggu->save();
-//     } else {
-//         // update isReady driver dan kendaraan menjadi true
-//         Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
-//         Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
-//     }
-//     return redirect()->back();
-// });
 
 Route::get('/pdf', [KendaraanController::class, "pdf"]);
 

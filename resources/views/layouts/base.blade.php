@@ -56,8 +56,6 @@
 						<h2 class="menu-section-text">Halaman</h2>
 					</div>
 					<!-- END Menu Section -->
-
-					{{-- INI UNTUK ADMIN AJA --}}
 					@if(Auth::user()->role == "admin")
 					<div class="menu-item">
 						<button class="menu-item-link menu-item-toggle">
@@ -84,17 +82,55 @@
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="/master-data/asset" data-menu-path="/master-data/asset" class="menu-item-link">
+								<button class="menu-item-link menu-item-toggle">
 									<i class="menu-item-bullet"></i>
-									<span class="menu-item-text">Asset</span>
-								</a>
+									<span class="menu-item-text">Asset dan Service</span>
+									<div class="menu-item-addon">
+										<i class="menu-item-caret caret"></i>
+									</div>
+								</button>
+								<!-- BEGIN Menu Submenu -->
+								<div class="menu-submenu">
+									<div class="menu-item">
+										<a href="/master-data/asset-service/data" data-menu-path="/master-data/asset-service/data" class="menu-item-link">
+											<i class="menu-item-bullet"></i>
+											<span class="menu-item-text">Data Asset dan Service</span>
+										</a>
+									</div>
+									<div class="menu-item">
+										<a href="/master-data/asset-service/rekap" data-menu-path="/master-data/asset-service/rekap" class="menu-item-link">
+											<i class="menu-item-bullet"></i>
+											<span class="menu-item-text">Rekap Asset dan Service</span>
+										</a>
+									</div>
+								</div>
+								<!-- END Menu Submenu -->
 							</div>
-							<div class="menu-item">
-								<a href="/master-data/service" data-menu-path="/master-data/service" class="menu-item-link">
+							{{-- <div class="menu-item">
+								<button class="menu-item-link menu-item-toggle">
 									<i class="menu-item-bullet"></i>
 									<span class="menu-item-text">Service</span>
-								</a>
-							</div>
+									<div class="menu-item-addon">
+										<i class="menu-item-caret caret"></i>
+									</div>
+								</button>
+								<!-- BEGIN Menu Submenu -->
+								<div class="menu-submenu">
+									<div class="menu-item">
+										<a href="/master-data/service/data" data-menu-path="/master-data/service/data" class="menu-item-link">
+											<i class="menu-item-bullet"></i>
+											<span class="menu-item-text">Data Service</span>
+										</a>
+									</div>
+									<div class="menu-item">
+										<a href="/master-data/service/rekap" data-menu-path="/master-data/service/rekap" class="menu-item-link">
+											<i class="menu-item-bullet"></i>
+											<span class="menu-item-text">Rekap Service</span>
+										</a>
+									</div>
+								</div>
+								<!-- END Menu Submenu -->
+							</div> --}}
 							<div class="menu-item">
 								<a href="/master-data/user" data-menu-path="/master-data/user" class="menu-item-link">
 									<i class="menu-item-bullet"></i>
@@ -104,9 +140,7 @@
 						</div>
 						<!-- END Menu Submenu -->
 					</div>
-					{{-- SAMPAI SINI AJA YANG UNTUK ADMIN --}}
 					@endif
-
 					<div class="menu-item">
 						<button class="menu-item-link menu-item-toggle">
 							<div class="menu-item-icon">
