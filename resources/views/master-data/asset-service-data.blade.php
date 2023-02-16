@@ -19,6 +19,206 @@
 @section("content")
 
 <div class="row">
+  <div class="col-md-12">
+    <div class="portlet">
+      <div class="portlet-header portlet-header-bordered">
+        <div class="portlet-icon">
+          {{-- icon document --}}
+          <i class="fa fa-file-text"></i>
+        </div>
+        <h3 class="portlet-title">Tambah Data</h3>
+        <div class="portlet-addon">
+          <!-- BEGIN Nav -->
+          <div class="nav nav-pills portlet-nav" id="portlet6-tab">
+            <a class="nav-item nav-link active" id="portlet6-home-tab" data-bs-toggle="tab" href="#tab-aset">Aset</a>
+            <a class="nav-item nav-link" id="portlet6-profile-tab" data-bs-toggle="tab" href="#tab-service">Service</a>
+          </div>
+          <!-- END Nav -->
+        </div>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Tab -->
+        <div class="tab-content">
+          <div class="tab-pane fade active show" id="tab-aset">
+            <form action="/master-data/asset-service/data/aset" method="post" id="form-tambah-aset">
+              @csrf
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <label for="kendaraan_id">Kendaraan</label>
+                  <select class="form-select @error('kendaraan_id') is-invalid @enderror" name="kendaraan_id" id="kendaraan_id">
+                    <option value="">Pilih Kendaraan</option>
+                    @foreach ($kendaraan as $dt)
+                      <option value="{{ $dt->id }}" @if (old('kendaraan_id') == $dt->id) selected @endif>{{ $dt->no_polisi }} - {{ $dt->merk }} ({{ $dt->tipe }})</option>
+                    @endforeach
+                  </select>
+                  @error('kendaraan_id')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="no_aset">Nomor Aset</label>
+                  <input type="text" class="form-control @error('no_aset') is-invalid @enderror" name="no_aset" id="no_aset" placeholder="Nomor Aset" value="{{ old('no_aset') }}">
+                  @error('no_aset')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="no_polis">Nomor Polis</label>
+                  <input type="text" class="form-control @error('no_polis') is-invalid @enderror" name="no_polis" id="no_polis" placeholder="Nomor Polis" value="{{ old('no_polis') }}">
+                  @error('no_polis')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="no_rangka">Nomor Rangka</label>
+                  <input type="text" class="form-control @error('no_rangka') is-invalid @enderror" name="no_rangka" id="no_rangka" placeholder="Nomor Rangka" value="{{ old('no_rangka') }}">
+                  @error('no_rangka')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="no_mesin">Nomor Mesin</label>
+                  <input type="text" class="form-control @error('no_mesin') is-invalid @enderror" name="no_mesin" id="no_mesin" placeholder="Nomor Mesin" value="{{ old('no_mesin') }}">
+                  @error('no_mesin')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="masa_pajak">Masa Pajak</label>
+                  <input type="date" class="form-control @error('masa_pajak') is-invalid @enderror" name="masa_pajak" id="masa_pajak" placeholder="Masa Pajak" value="{{ old('masa_pajak') }}">
+                  @error('masa_pajak')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="masa_stnk">Masa STNK</label>
+                  <input type="date" class="form-control @error('masa_stnk') is-invalid @enderror" name="masa_stnk" id="masa_stnk" placeholder="Masa STNK" value="{{ old('masa_stnk') }}">
+                  @error('masa_stnk')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="masa_asuransi">Masa Asuransi</label>
+                  <input type="date" class="form-control @error('masa_asuransi') is-invalid @enderror" name="masa_asuransi" id="masa_asuransi" placeholder="Masa Asuransi" value="{{ old('masa_asuransi') }}">
+                  @error('masa_asuransi')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-3 mb-3">
+                  <label for="tgl_service_rutin">Tanggal Service Rutin</label>
+                  <input type="date" class="form-control @error('tgl_service_rutin') is-invalid @enderror" name="tgl_service_rutin" id="tgl_service_rutin" placeholder="Tanggal Service Rutin" value="{{ old('tgl_service_rutin') }}">
+                  @error('tgl_service_rutin')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                {{-- year tahun_pembuatan, tahun_pengadaan --}}
+                <div class="col-md-6 mb-3">
+                  <label for="tahun_pembuatan">Tahun Pembuatan</label>
+                  {{-- input number min 1700 max this year --}}
+                  <input type="number" class="form-control @error('tahun_pembuatan') is-invalid @enderror" name="tahun_pembuatan" id="tahun_pembuatan" placeholder="Tahun Pembuatan" value="{{ old('tahun_pembuatan') }}" min="1700" max="{{ date('Y') }}">
+                  @error('tahun_pembuatan')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="tahun_pengadaan">Tahun Pengadaan</label>
+                  <input type="number" class="form-control @error('tahun_pengadaan') is-invalid @enderror" name="tahun_pengadaan" id="tahun_pengadaan" placeholder="Tahun Pengadaan" value="{{ old('tahun_pengadaan') }}" min="1700" max="{{ date('Y') }}">
+                  @error('tahun_pengadaan')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-primary" type="submit" id="btn-tambah-aset">Tambah</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="tab-pane fade" id="tab-service">
+            <form action="/master-data/asset-service/data/service" method="post" id="form-tambah-service">
+              @csrf
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <label for="kendaraan_id">Kendaraan</label>
+                  <select class="form-select @error('kendaraan_id') is-invalid @enderror" name="kendaraan_id" id="kendaraan_id">
+                    <option value="">Pilih Kendaraan</option>
+                    @foreach ($kendaraanService as $dt)
+                      <option value="{{ $dt->id }}" @if (old('kendaraan_id') == $dt->id) selected @endif>{{ $dt->no_polisi }} - {{ $dt->merk }} ({{ $dt->tipe }})</option>
+                    @endforeach
+                  </select>
+                  @error('kendaraan_id')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="kode">Kode Service</label>
+                  <select class="form-select @error('kode') is-invalid @enderror" name="kode" id="kode">
+                    <option value="">Pilih Kode Service</option>
+                    @foreach ($kodeService as $dt)
+                      <option value="{{ $dt['code'] }}" @if (old('kode') == $dt['code']) selected @endif>{{ $dt['code'] }} - {{ $dt['keterangan'] }}</option>
+                    @endforeach
+                  </select>
+                  @error('kode')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="tgl_service">Tanggal Service</label>
+                  <input type="date" class="form-control @error('tgl_service') is-invalid @enderror" name="tgl_service" id="tgl_service" placeholder="Tanggal Service" value="{{ old('tgl_service') }}">
+                  @error('tgl_service')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label for="uraian">Uraian</label>
+                  <textarea class="form-control @error('uraian') is-invalid @enderror" name="uraian" id="uraian" rows="3">{{ old('uraian') }}</textarea>
+                  @error('uraian')
+                    <div class="invalid-feedback">
+                      {{ $message }}
+                    </div>
+                  @enderror
+                </div>
+                <div class="col-md-12">
+                  <button class="btn btn-primary" type="submit" id="btn-tambah-service">Tambah</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- END Tab -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-12 mb-3">
     <div class="card">
       <div class="card-body">
@@ -59,169 +259,6 @@
   </div>
 </div>
 
-{{-- Make modal tambah user --}}
-<div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="/master-data/user/tambah" method="POST">
-        @csrf
-        <div class="modal-body">
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-{{-- make edit user modal with ajax --}}
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Edit User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="/master-data/user/edit" method="POST">
-        @csrf
-        <input type="hidden" name="id" id="edit_id">
-        <div class="modal-body modal-edit-body">
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="edit_nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="edit_email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="edit_no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="edit_password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="edit_password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-{{-- make delete user modal --}}
-<div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Hapus User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Apakah anda yakin ingin menghapus user ini?</p>
-      </div>
-      <div class="modal-footer">
-        <form action="/master-data/user/delete" method="POST">
-          @csrf
-          @method("DELETE")
-          <input type="hidden" name="id" id="hapus_id">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 @endsection
 
 @section("script")
@@ -240,27 +277,36 @@
   $(document).ready(function () {
     $("#table-user").DataTable();
 
-    // make ajax for edit user
-    $(".btn-edit").click(function () {
-      let id = $(this).data("id");
-      $.ajax({
-        url: "/master-data/user/get/" + id,
-        type: "GET",
-        success: function (data) {
-          $("#edit_id").val(data.id);
-          $("#edit_nama").val(data.nama);
-          $("#edit_email").val(data.email);
-          $("#edit_no_hp").val(data.no_hp);
-          $("#edit-modal").modal("show");
-        },
+    $("#btn-tambah-aset").click(function (e) {
+      e.preventDefault();
+      Swal.fire({
+        title: "Tambah Aset",
+        text: "Apakah anda yakin ingin menambahkan aset ini?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $("#form-tambah-aset").submit();
+        }
       });
     });
 
-    // make ajax for delete user
-    $(".btn-hapus").click(function () {
-      let id = $(this).data("id");
-      $("#hapus_id").val(id);
-      $("#hapus-modal").modal("show");
+    $("#btn-tambah-service").click(function (e) {
+      e.preventDefault();
+      Swal.fire({
+        title: "Tambah Service",
+        text: "Apakah anda yakin ingin menambahkan service ini?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $("#form-tambah-service").submit();
+        }
+      });
     });
   });
 </script>

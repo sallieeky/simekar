@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('kendaraan_id');
             $table->string('kode');
-            $table->string('uraian');
+            $table->text('uraian');
             $table->date('tgl_service');
             $table->timestamps();
             $table->softDeletes();

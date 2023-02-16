@@ -63,7 +63,7 @@
 										<div class="validation-container">
 											<!-- BEGIN Form Floating -->
 											<div class="form-floating">
-												<input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="password" name="password" placeholder="Please insert your password">
+												<input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="password" name="password" placeholder="Please insert your password" value="@if(session('password')){{ session('password') }}@endif">
 												<label for="password">Password</label>
 												@error('password')
 													<div class="invalid-feedback">{{ $message }}</div>

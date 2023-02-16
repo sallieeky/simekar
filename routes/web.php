@@ -65,10 +65,10 @@ Route::middleware(['auth'])->group(function () {
         Route::delete("/driver/delete", [DriverController::class, 'delete']);
 
         Route::get("/asset-service/data", [AsetServiceController::class, 'data']);
-        Route::get("/asset-service/rekap", [AsetServiceController::class, 'rekap']);
+        Route::post("/asset-service/data/aset", [AsetServiceController::class, 'tambahAset']);
+        Route::post("/asset-service/data/service", [AsetServiceController::class, 'tambahService']);
 
-        // Route::get("/service/data", [DriverController::class, 'index']);
-        // Route::get("/service/rekap", [DriverController::class, 'index']);
+        Route::get("/asset-service/rekap", [AsetServiceController::class, 'rekap']);
     });
 
     Route::prefix('user')->middleware("user")->group(function () {

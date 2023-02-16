@@ -14,13 +14,6 @@ class AuthController extends Controller
 
     public function loginPost(Request $request)
     {
-        // store email in session if remember me is checked
-        if ($request->remember_me) {
-            $request->session()->put('email', $request->email);
-        } else {
-            $request->session()->forget('email');
-        }
-
         $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:8'
@@ -33,6 +26,13 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            // store email in session if remember me is checked
+            if ($request->remember_me) {
+                $request->session()->put('email', $request->email);
+                $request->session()->put('password', $request->password);
+            } else {
+                $request->session()->forget('email');
+            }
             return redirect("/");
         } else {
             return back()->with('error', 'Email atau password salah!');
