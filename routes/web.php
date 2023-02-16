@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AsetServiceController;
-use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
@@ -69,6 +68,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/asset-service/data/service", [AsetServiceController::class, 'tambahService']);
 
         Route::get("/asset-service/rekap", [AsetServiceController::class, 'rekap']);
+
+        Route::get("/asset-service/rekap/aset/get/{aset}", [AsetServiceController::class, 'getAset']);
+        Route::post("/asset-service/rekap/aset/edit", [AsetServiceController::class, 'editAset']);
+        Route::delete("/asset-service/rekap/aset/delete", [AsetServiceController::class, 'deleteAset']);
+
+        Route::post("/asset-service/rekap/service/edit", [AsetServiceController::class, 'editService']);
+        Route::delete("/asset-service/rekap/service/delete", [AsetServiceController::class, 'deleteService']);
     });
 
     Route::prefix('user')->middleware("user")->group(function () {

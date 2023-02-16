@@ -57,8 +57,12 @@
                       <td>{{ $dt->tahun_pembuatan }}</td>
                       <td>{{ $dt->tahun_pengadaan }}</td>
                       <td>
-                        <a href="/master-data/asset-service/edit/{{ $dt->id }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="/master-data/asset-service/delete/{{ $dt->id }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                        <button type="button" class="btn btn-sm btn-primary btn-edit-aset" data-id="{{ $dt->id }}">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger btn-hapus-aset" data-id="{{ $dt->id }}">
+                          <i class="fa fa-trash"></i>
+                        </button>
                       </td>
                     </tr>
                   @endforeach
@@ -100,8 +104,12 @@
                       <td>{{ $dt->uraian }}</td>
                       <td>{{ date('d-m-Y', strtotime($dt->tgl_service)) }}</td>
                       <td>
-                        <a href="/master-data/asset-service/edit/{{ $dt->id }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="/master-data/asset-service/delete/{{ $dt->id }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                        <button type="button" class="btn btn-sm btn-primary btn-edit-service" data-id="{{ $dt->id }}">
+                          <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger btn-hapus-service" data-id="{{ $dt->id }}">
+                          <i class="fa fa-trash"></i>
+                        </button>
                       </td>
                     </tr>
                   @endforeach
@@ -115,70 +123,98 @@
   </div>
 </div>
 
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+<div class="modal fade" id="edit-modal-aset" tabindex="-1" role="dialog" aria-labelledby="modal-edit-aset" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit User</h5>
+        <h5 class="modal-title">Edit Aset</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/master-data/user/edit" method="POST">
+      <form action="/master-data/asset-service/rekap/aset/edit" method="POST">
         @csrf
-        <input type="hidden" name="id" id="edit_id">
-        <div class="modal-body modal-edit-body">
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="edit_nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="edit_email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="edit_no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="edit_password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="edit_password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
+        <div class="modal-body modal-edit-body-aset">
+          {{--  --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
           <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="edit-modal-service" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/master-data/asset-service/rekap/service/edit" method="POST">
+        @csrf
+        <div class="modal-body modal-edit-body-service">
+          {{--  --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="hapus-modal-aset" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hapus Aset</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menghapus aset ini?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="/master-data/asset-service/rekap/aset/delete" method="POST">
+          @csrf
+          @method("DELETE")
+          <input type="hidden" name="id" id="hapus_id_aset">
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="hapus-modal-service" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hapus Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Apakah anda yakin ingin menghapus service ini?</p>
+      </div>
+      <div class="modal-footer">
+        <form action="/master-data/asset-service/rekap/service/delete" method="POST">
+          @csrf
+          @method("DELETE")
+          <input type="hidden" name="id" id="hapus_id_service">
+          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -196,21 +232,26 @@
 
     });
 
-    // make ajax for edit user
-    $(".btn-edit").click(function () {
+    // make ajax for edit
+    $("#table-aset").on('click', 'tbody tr td .btn-edit-aset', function () {
       let id = $(this).data("id");
       $.ajax({
-        url: "/master-data/user/get/" + id,
+        url: "/master-data/asset-service/rekap/aset/get/" + id,
         type: "GET",
         success: function (data) {
-          $("#edit_id").val(data.id);
-          $("#edit_nama").val(data.nama);
-          $("#edit_email").val(data.email);
-          $("#edit_no_hp").val(data.no_hp);
-          $("#edit-modal").modal("show");
+          $(".modal-edit-body-aset").html(data);
+          $("#edit-modal-aset").modal("show");
         },
       });
     });
+
+    // make ajax for delete
+    $("#table-aset").on('click', 'tbody tr td .btn-hapus-aset',function () {
+      let id = $(this).data("id");
+      $("#hapus_id_aset").val(id);
+      $("#hapus-modal-aset").modal("show");
+    });
+
   });
 </script>
 
