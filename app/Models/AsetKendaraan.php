@@ -15,6 +15,6 @@ class AsetKendaraan extends Model
 
     public function kendaraan()
     {
-        return $this->hasOne(Kendaraan::class)->withTrashed();
+        return $this->belongsTo(Kendaraan::class)->withTrashed();
     }
 }

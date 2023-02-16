@@ -18,28 +18,93 @@
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
         <h3 class="portlet-title">Rekap Data Aset Kendaraan</h3>
-        <div class="portlet-tools">
-          <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#tambah-modal">
-            <i class="fa fa-plus"></i>
-            Tambah User
-          </button>
-        </div>
       </div>
       <div class="portlet-body">
         <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
-              <table class="table table-striped table-bordered table-hover" id="table-user">
+              <table class="table table-striped table-bordered table-hover" id="table-aset">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Nomor Handphone</th>
+                    <th>Kendaraan</th>
+                    <th>No. Aset</th>
+                    <th>No. Polis</th>
+                    <th>No. Rangka</th>
+                    <th>No. Mesin</th>
+                    <th>Masa Pajak</th>
+                    <th>Masa STNK</th>
+                    <th>Masa Asuransi</th>
+                    <th>Tgl Service Rutin</th>
+                    <th>Tahun Pembuatan</th>
+                    <th>Tahun Pengadaan</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach ($aset as $dt)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $dt->kendaraan->no_polisi }}</td>
+                      <td>{{ $dt->no_aset }}</td>
+                      <td>{{ $dt->no_polis }}</td>
+                      <td>{{ $dt->no_rangka }}</td>
+                      <td>{{ $dt->no_mesin }}</td>
+                      <td>{{ date('d-m-Y', strtotime($dt->masa_pajak)) }}</td>
+                      <td>{{ date('d-m-Y', strtotime($dt->masa_stnk)) }}</td>
+                      <td>{{ date('d-m-Y', strtotime($dt->masa_asuransi)) }}</td>
+                      <td>{{ date('d-m-Y', strtotime($dt->tgl_service_rutin)) }}</td>
+                      <td>{{ $dt->tahun_pembuatan }}</td>
+                      <td>{{ $dt->tahun_pengadaan }}</td>
+                      <td>
+                        <a href="/master-data/asset-service/edit/{{ $dt->id }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="/master-data/asset-service/delete/{{ $dt->id }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="portlet">
+      <div class="portlet-header d-flex justify-content-between">
+        <h3 class="portlet-title">Rekap Data Service Kendaraan</h3>
+      </div>
+      <div class="portlet-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover" id="table-service">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Kendaraan</th>
+                    <th>Kode</th>
+                    <th>Uraian</th>
+                    <th>Tgl Service</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($service as $dt)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $dt->kendaraan->no_polisi }}</td>
+                      <td>{{ $dt->kode }}</td>
+                      <td>{{ $dt->uraian }}</td>
+                      <td>{{ date('d-m-Y', strtotime($dt->tgl_service)) }}</td>
+                      <td>
+                        <a href="/master-data/asset-service/edit/{{ $dt->id }}" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="/master-data/asset-service/delete/{{ $dt->id }}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -50,75 +115,6 @@
   </div>
 </div>
 
-{{-- Make modal tambah user --}}
-<div class="modal fade" id="tambah-modal" tabindex="-1" role="dialog" aria-labelledby="modal-tambah-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Tambah User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="/master-data/user/tambah" method="POST">
-        @csrf
-        <div class="modal-body">
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('nama') is-invalid @enderror" type="text" id="nama" placeholder="Nama" name="nama">
-              <label for="nama">Nama</label>
-              @error('nama')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('email') is-invalid @enderror" type="email" id="email" placeholder="Email" name="email">
-              <label for="email">Email</label>
-              @error('email')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('no_hp') is-invalid @enderror" type="text" id="no_hp" placeholder="Nomor Handphone" name="no_hp">
-              <label for="no_hp">Nomor Handphone</label>
-              @error('no_hp')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password') is-invalid @enderror" type="password" id="password" placeholder="Password" name="password">
-              <label for="password">Password</label>
-              @error('password')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-          <div class="validation-container mb-4">
-            <div class="form-floating">
-              <input class="form-control form-control-lg @error('password_confirmation') is-invalid @enderror" type="password" id="password_confirmation" placeholder="Konfirmasi Password" name="password_confirmation">
-              <label for="password_confirmation">Konfirmasi Password</label>
-              @error('password_confirmation')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-{{-- make edit user modal with ajax --}}
 <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="modal-edit-user" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -187,38 +183,18 @@
   </div>
 </div>
 
-{{-- make delete user modal --}}
-<div class="modal fade" id="hapus-modal" tabindex="-1" role="dialog" aria-labelledby="modal-hapus-user" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Hapus User</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Apakah anda yakin ingin menghapus user ini?</p>
-      </div>
-      <div class="modal-footer">
-        <form action="/master-data/user/delete" method="POST">
-          @csrf
-          @method("DELETE")
-          <input type="hidden" name="id" id="hapus_id">
-          <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 @endsection
 
 @section("script")
 <script>
   $(document).ready(function () {
-    $("#table-user").DataTable();
+    $("#table-aset").DataTable({
+      scrollX: true,
+    });
+    $("#table-service").DataTable({
+      scrollX: true,
+
+    });
 
     // make ajax for edit user
     $(".btn-edit").click(function () {
@@ -234,13 +210,6 @@
           $("#edit-modal").modal("show");
         },
       });
-    });
-
-    // make ajax for delete user
-    $(".btn-hapus").click(function () {
-      let id = $(this).data("id");
-      $("#hapus_id").val(id);
-      $("#hapus-modal").modal("show");
     });
   });
 </script>

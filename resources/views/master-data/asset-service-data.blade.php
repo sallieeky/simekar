@@ -178,7 +178,7 @@
                   <select class="form-select @error('kode') is-invalid @enderror" name="kode" id="kode">
                     <option value="">Pilih Kode Service</option>
                     @foreach ($kodeService as $dt)
-                      <option value="{{ $dt['code'] }}" @if (old('kode') == $dt['code']) selected @endif>{{ $dt['code'] }} - {{ $dt['keterangan'] }}</option>
+                      <option value="{{ $dt['code'] }} - {{ $dt['keterangan'] }}" @if (old('kode') == $dt['code'] . '-' . $dt['keterangan']) selected @endif>{{ $dt['code'] }} - {{ $dt['keterangan'] }}</option>
                     @endforeach
                   </select>
                   @error('kode')

@@ -7,6 +7,9 @@ status = Dalam proses pengajuan, Pengajuan disetujui, Pengajuan ditolak, Selesai
 Service Keterangan
 code - keterangan = SR - Service Rutin, SB - Service Berat, SPB - Sparepart Biasa, SPM - Sparepart Mesin, ACC - Aksesoris
 
+TODO
+kalau hapus kendaraan, asetnya juga hilang
+
 <script>
       //const center = {lat: -6.283948, lng: 106.725908};
       const center = {lat: -1.273819, lng:  116.873741};

@@ -105,6 +105,8 @@ class AsetServiceController extends Controller
 
     public function rekap()
     {
-        return view('master-data.asset-service-rekap');
+        $aset = AsetKendaraan::all();
+        $service = ServiceKendaraan::all();
+        return view('master-data.asset-service-rekap', compact('aset', 'service'));
     }
 }
