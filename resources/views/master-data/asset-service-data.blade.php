@@ -160,14 +160,14 @@
               @csrf
               <div class="row">
                 <div class="col-md-4 mb-3">
-                  <label for="kendaraan_id">Kendaraan</label>
-                  <select class="form-select @error('kendaraan_id') is-invalid @enderror" name="kendaraan_id" id="kendaraan_id">
+                  <label for="kendaraan_id_service">Kendaraan</label>
+                  <select class="form-select @error('kendaraan_id_service') is-invalid @enderror" name="kendaraan_id_service" id="kendaraan_id_service">
                     <option value="">Pilih Kendaraan</option>
                     @foreach ($kendaraanService as $dt)
-                      <option value="{{ $dt->id }}" @if (old('kendaraan_id') == $dt->id) selected @endif>{{ $dt->no_polisi }} - {{ $dt->merk }} ({{ $dt->tipe }})</option>
+                      <option value="{{ $dt->id }}" @if (old('kendaraan_id_service') == $dt->id) selected @endif>{{ $dt->no_polisi }} - {{ $dt->merk }} ({{ $dt->tipe }})</option>
                     @endforeach
                   </select>
-                  @error('kendaraan_id')
+                  @error('kendaraan_id_service')
                     <div class="invalid-feedback">
                       {{ $message }}
                     </div>

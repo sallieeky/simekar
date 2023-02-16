@@ -82,12 +82,12 @@ class AsetServiceController extends Controller
     public function tambahService(Request $request)
     {
         $request->validate([
-            'kendaraan_id' => 'required',
+            'kendaraan_id_service' => 'required',
             'kode' => 'required',
             'uraian' => 'required',
             'tgl_service' => 'required|date|before_or_equal:' . date('Y-m-d'),
         ], [
-            'kendaraan_id.required' => 'Kendaraan harus dipilih',
+            'kendaraan_id_service.required' => 'Kendaraan harus dipilih',
             'kode.required' => 'Kode harus dipilih',
             'uraian.required' => 'Uraian harus diisi',
             'tgl_service.required' => 'Tanggal Service harus diisi',
@@ -95,6 +95,9 @@ class AsetServiceController extends Controller
             'tgl_service.before_or_equal' => 'Tanggal Service tidak valid',
         ]);
 
+        $request->merge([
+            'kendaraan_id' => $request->kendaraan_id_service
+        ]);
         ServiceKendaraan::create($request->all());
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan');
