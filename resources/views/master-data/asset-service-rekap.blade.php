@@ -57,10 +57,11 @@
                       <td>{{ $dt->tahun_pembuatan }}</td>
                       <td>{{ $dt->tahun_pengadaan }}</td>
                       <td>
-                        <button type="button" class="btn btn-sm btn-primary btn-edit-aset" data-id="{{ $dt->id }}">
+                        <button type="button" class="btn btn-sm btn-primary btn-edit-aset mb-1 w-100" data-id="{{ $dt->id }}">
                           <i class="fa fa-edit"></i>
                         </button>
-                        <button type="button" class="btn btn-sm btn-danger btn-hapus-aset" data-id="{{ $dt->id }}">
+                        <br>
+                        <button type="button" class="btn btn-sm btn-danger btn-hapus-aset w-100" data-id="{{ $dt->id }}">
                           <i class="fa fa-trash"></i>
                         </button>
                       </td>
@@ -147,7 +148,7 @@
 </div>
 
 <div class="modal fade" id="edit-modal-service" tabindex="-1" role="dialog" aria-labelledby="modal-edit" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Edit Service</h5>
@@ -224,13 +225,8 @@
 @section("script")
 <script>
   $(document).ready(function () {
-    $("#table-aset").DataTable({
-      scrollX: true,
-    });
-    $("#table-service").DataTable({
-      scrollX: true,
-
-    });
+    $("#table-aset").DataTable({});
+    $("#table-service").DataTable({});
 
     // make ajax for edit
     $("#table-aset").on('click', 'tbody tr td .btn-edit-aset', function () {
@@ -245,11 +241,31 @@
       });
     });
 
+    // make ajax for edit service
+    $("#table-service").on('click', 'tbody tr td .btn-edit-service', function () {
+      let id = $(this).data("id");
+      $.ajax({
+        url: "/master-data/asset-service/rekap/service/get/" + id,
+        type: "GET",
+        success: function (data) {
+          $(".modal-edit-body-service").html(data);
+          $("#edit-modal-service").modal("show");
+        },
+      });
+    });
+
     // make ajax for delete
     $("#table-aset").on('click', 'tbody tr td .btn-hapus-aset',function () {
       let id = $(this).data("id");
       $("#hapus_id_aset").val(id);
       $("#hapus-modal-aset").modal("show");
+    });
+
+    // make ajax for delete service
+    $("#table-service").on('click', 'tbody tr td .btn-hapus-service',function () {
+      let id = $(this).data("id");
+      $("#hapus_id_service").val(id);
+      $("#hapus-modal-service").modal("show");
     });
 
   });
