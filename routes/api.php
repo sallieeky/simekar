@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AsetKendaraan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::post("/simpan", function (Request $request) {
-//     Suhu::create([
-//         "value"
-//     ]);
-// });
+Route::get("/calendar", function (Request $request) {
+    $timestart = date("Y-m-d", $request->timestart / 1000);
+    $timeend = date("Y-m-d", $request->timeend / 1000);
+
+    $aset = AsetKendaraan::with("kendaraan")->whereBetween($request->category, [$timestart, $timeend])->get();
+    return response()->json($aset);
+});

@@ -7,6 +7,7 @@ var CalendarList = [];
 function CalendarInfo() {
     this.id = null;
     this.name = null;
+    this.category = null;
     this.checked = true;
     this.color = null;
     this.bgColor = null;
@@ -49,6 +50,7 @@ function hexToRGBA(hex) {
     id += 1;
     calendar.id = String(id);
     calendar.name = "Masa Berlaku Pajak";
+    calendar.category = "masa_pajak";
     calendar.color = "#ffffff";
     calendar.bgColor = "#24695c";
     calendar.dragBgColor = "#24695c";
@@ -59,6 +61,7 @@ function hexToRGBA(hex) {
     id += 1;
     calendar.id = String(id);
     calendar.name = "Masa Berlaku STNK";
+    calendar.category = "masa_stnk";
     calendar.color = "#ffffff";
     calendar.bgColor = "#ba895d";
     calendar.dragBgColor = "#ba895d";
@@ -69,6 +72,7 @@ function hexToRGBA(hex) {
     id += 1;
     calendar.id = String(id);
     calendar.name = "Masa Berlaku Asuransi";
+    calendar.category = "masa_asuransi";
     calendar.color = "#ffffff";
     calendar.bgColor = "#ff5583";
     calendar.dragBgColor = "#ff5583";

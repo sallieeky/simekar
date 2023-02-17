@@ -94,60 +94,82 @@ function generateNames() {
     return names;
 }
 
-function generateRandomSchedule(calendar, renderStart, renderEnd) {
-    var schedule = new ScheduleInfo();
+function generateRandomSchedule(calendar, renderStart, renderEnd, jsonData) {
+    jsonData.forEach((item) => {
+        var schedule = new ScheduleInfo();
+        var time = new Date(item.masa_pajak);
+        time.setHours(0, 0, 0, 0);
 
-    schedule.id = chance.guid();
-    schedule.calendarId = calendar.id;
+        schedule.isAllday = true;
+        schedule.category = "allday";
+        schedule.start = time;
+        schedule.end = schedule.start;
 
-    schedule.title = "Test Schedule";
-    // schedule.body = chance.bool({ likelihood: 20 })
-    //     ? chance.sentence({ words: 10 })
-    //     : "";
-    schedule.isReadOnly = true;
-    generateTime(schedule, renderStart, renderEnd);
+        schedule.id = chance.guid();
+        schedule.calendarId = calendar.id;
 
-    schedule.isPrivate = false;
-    schedule.location = "Kantor Jasa Raharja";
-    schedule.attendees = ["Admin"];
-    // schedule.recurrenceRule = chance.bool({ likelihood: 20 })
-    //     ? "repeated events"
-    //     : "";
-    schedule.state = "Busy";
-    schedule.color = calendar.color;
-    schedule.bgColor = calendar.bgColor;
-    schedule.dragBgColor = calendar.dragBgColor;
-    schedule.borderColor = calendar.borderColor;
+        schedule.title =
+            item.kendaraan.no_polisi +
+            " - " +
+            item.kendaraan.merk +
+            " (" +
+            item.kendaraan.tipe +
+            ")";
+        schedule.isReadOnly = true;
+        schedule.isPrivate = false;
+        schedule.color = calendar.color;
+        schedule.bgColor = calendar.bgColor;
+        schedule.dragBgColor = calendar.dragBgColor;
+        schedule.borderColor = calendar.borderColor;
 
-    // schedule.raw.memo = chance.sentence();
-    // schedule.raw.creator.name = chance.name();
-    // schedule.raw.creator.avatar = chance.avatar();
-    // schedule.raw.creator.company = chance.company();
-    // schedule.raw.creator.email = chance.email();
-    // schedule.raw.creator.phone = chance.phone();
+        schedule.location = "Kantor Jasa Raharja";
+        schedule.attendees = ["Admin"];
+        schedule.state = "Busy";
 
-    // if (chance.bool({ likelihood: 20 })) {
-    //     var travelTime = chance.minute();
-    //     schedule.goingDuration = travelTime;
-    //     schedule.comingDuration = travelTime;
-    // }
+        ScheduleList.push(schedule);
+    });
 
-    ScheduleList.push(schedule);
+    // var time = new Date(json[0].masa_pajak);
+    // time.setHours(0, 0, 0, 0);
+
+    // schedule.isAllday = true;
+    // schedule.category = "allday";
+    // schedule.start = time;
+    // schedule.end = schedule.start;
+    // schedule.id = chance.guid();
+    // schedule.calendarId = calendar.id;
+    // schedule.title = "Test Schedule";
+    // schedule.isReadOnly = true;
+    // schedule.isPrivate = false;
+    // schedule.location = "Kantor Jasa Raharja";
+    // schedule.attendees = ["Admin"];
+    // schedule.state = "Busy";
+    // schedule.color = calendar.color;
+    // schedule.bgColor = calendar.bgColor;
+    // schedule.dragBgColor = calendar.dragBgColor;
+    // schedule.borderColor = calendar.borderColor;
+
+    // ScheduleList.push(schedule);
 }
 
-function generateSchedule(viewName, renderStart, renderEnd) {
+async function generateSchedule(viewName, renderStart, renderEnd) {
     ScheduleList = [];
-    CalendarList.forEach(function (calendar) {
-        console.log(calendar);
-        var i = 0,
-            length = 10;
-        if (viewName === "month") {
-            length = 3;
-        } else if (viewName === "day") {
-            length = 4;
-        }
-        for (; i < length; i += 1) {
-            generateRandomSchedule(calendar, renderStart, renderEnd);
+    console.log("render start : " + renderStart);
+    console.log("render end : " + renderEnd);
+
+    await CalendarList.forEach(async function (calendar) {
+        var data = await fetch(
+            "http://localhost:8000/api/calendar?timestart=" +
+                renderStart +
+                "&timeend=" +
+                renderEnd +
+                "&category=" +
+                calendar.category
+        );
+        var jsonData = await data.json();
+        generateRandomSchedule(calendar, renderStart, renderEnd, jsonData);
+        if (CalendarList.indexOf(calendar) === CalendarList.length - 1) {
+            cal.createSchedules(ScheduleList);
         }
     });
 }

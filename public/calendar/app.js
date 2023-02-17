@@ -11,6 +11,14 @@
     var useDetailPopup = true;
     var datePicker, selectedCalendar;
 
+    // asynchroneously load the data
+
+    // setTimeout(function () {
+    //     cal.createSchedules(ScheduleList);
+    // }, 5000);
+
+    // clear timeout when the data is loaded
+
     cal = new Calendar("#calendar", {
         defaultView: "month",
         isReadOnly: true,
@@ -449,7 +457,7 @@
         renderRange.innerHTML = html.join("");
     }
 
-    function setSchedules() {
+    async function setSchedules() {
         cal.clear();
         generateSchedule(
             cal.getViewName(),
