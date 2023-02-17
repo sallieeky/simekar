@@ -97,7 +97,8 @@ function generateNames() {
 function generateRandomSchedule(calendar, renderStart, renderEnd, jsonData) {
     jsonData.forEach((item) => {
         var schedule = new ScheduleInfo();
-        var time = new Date(item.masa_pajak);
+        var categorySchedule = calendar.category;
+        var time = new Date(item[categorySchedule]);
         time.setHours(0, 0, 0, 0);
 
         schedule.isAllday = true;
