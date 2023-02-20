@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("kendaraan_id");
             $table->integer("nomor_reimburse");
-            $table->integer("km_tempuh");
+            $table->string("km_tempuh");
             $table->string("status")->default('Dalam proses pengajuan');
             $table->text("keterangan")->nullable();
             $table->string("nominal");

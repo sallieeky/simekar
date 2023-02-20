@@ -26,7 +26,7 @@ class ReimbursementController extends Controller
     {
         $request->validate([
             'kendaraan_id' => 'required',
-            'km_tempuh' => 'required|regex:/^[0-9]+$/',
+            'km_tempuh' => 'required|regex:/^[0-9.]+$/',
             'nominal' => 'required|regex:/^[0-9]+$/',
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',

@@ -79,11 +79,12 @@ class DriverController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'no_hp' => 'required|numeric',
+            'no_hp' => 'required|numeric|unique:drivers,no_hp',
         ], [
             'nama.required' => 'Nama harus diisi',
             'no_hp.required' => 'No HP harus diisi',
             'no_hp.numeric' => 'No HP harus berupa angka',
+            'no_hp.unique' => 'No HP sudah terdaftar',
         ]);
 
         Driver::create([
@@ -98,11 +99,12 @@ class DriverController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'no_hp' => 'required|numeric',
+            'no_hp' => 'required|numeric|unique:drivers,no_hp,' . $request->id,
         ], [
             'nama.required' => 'Nama harus diisi',
             'no_hp.required' => 'No HP harus diisi',
             'no_hp.numeric' => 'No HP harus berupa angka',
+            'no_hp.unique' => 'No HP sudah terdaftar',
         ]);
 
         Driver::find($request->id)->update([

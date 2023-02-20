@@ -67,19 +67,6 @@ function generateTime(schedule, renderStart, renderEnd) {
         endDate.add(chance.integer({ min: 0, max: 3 }), "days");
     }
     schedule.end = schedule.start;
-
-    // schedule.end = endDate
-    //     .add(chance.integer({ min: 1, max: 4 }), "hour")
-    //     .toDate();
-
-    // if (!schedule.isAllday && chance.bool({ likelihood: 20 })) {
-    //     schedule.goingDuration = chance.integer({ min: 30, max: 120 });
-    //     schedule.comingDuration = chance.integer({ min: 30, max: 120 });
-
-    //     if (chance.bool({ likelihood: 50 })) {
-    //         schedule.end = schedule.start;
-    //     }
-    // }
 }
 
 function generateNames() {
@@ -129,28 +116,6 @@ function generateRandomSchedule(calendar, renderStart, renderEnd, jsonData) {
 
         ScheduleList.push(schedule);
     });
-
-    // var time = new Date(json[0].masa_pajak);
-    // time.setHours(0, 0, 0, 0);
-
-    // schedule.isAllday = true;
-    // schedule.category = "allday";
-    // schedule.start = time;
-    // schedule.end = schedule.start;
-    // schedule.id = chance.guid();
-    // schedule.calendarId = calendar.id;
-    // schedule.title = "Test Schedule";
-    // schedule.isReadOnly = true;
-    // schedule.isPrivate = false;
-    // schedule.location = "Kantor Jasa Raharja";
-    // schedule.attendees = ["Admin"];
-    // schedule.state = "Busy";
-    // schedule.color = calendar.color;
-    // schedule.bgColor = calendar.bgColor;
-    // schedule.dragBgColor = calendar.dragBgColor;
-    // schedule.borderColor = calendar.borderColor;
-
-    // ScheduleList.push(schedule);
 }
 
 async function generateSchedule(viewName, renderStart, renderEnd) {
