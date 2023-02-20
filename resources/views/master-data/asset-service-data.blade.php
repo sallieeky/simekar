@@ -263,6 +263,10 @@
 
 @section("script")
 
+<script>
+  var urlCalendarApi = "{{ env('URL_CALENDAR_API') }}";
+</script>
+
 <script src="/calendar/tui-code-snippet.min.js"></script>
 <script src="/calendar/tui-time-picker.min.js"></script>
 <script src="/calendar/tui-date-picker.min.js"></script>

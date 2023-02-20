@@ -125,7 +125,8 @@ async function generateSchedule(viewName, renderStart, renderEnd) {
 
     await CalendarList.forEach(async function (calendar) {
         var data = await fetch(
-            "http://localhost:8000/api/calendar?timestart=" +
+            urlCalendarApi +
+                "?timestart=" +
                 renderStart +
                 "&timeend=" +
                 renderEnd +
