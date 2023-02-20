@@ -278,6 +278,12 @@ class AsetServiceController extends Controller
             'tgl_service.before_or_equal' => 'Tanggal Service tidak valid',
         ]);
 
+        if ($request->kode == "SR - Service Rutin") {
+            AsetKendaraan::where("kendaraan_id", $request->kendaraan_id_service)->update([
+                "tgl_service_rutin" => date('Y-m-d', strtotime("+6 month", strtotime($request->tgl_service)))
+            ]);
+        }
+
         $request->merge([
             'kendaraan_id' => $request->kendaraan_id_service
         ]);
