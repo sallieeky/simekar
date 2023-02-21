@@ -17,6 +17,50 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
+        <h3 class="portlet-title">Filter Data</h3>
+      </div>
+      <div class="portlet-body">
+        <form action="/master-data/asset-service/rekap/export" method="GET" id="form_export">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="tanggal_dari">Tanggal Dari</label>
+              <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control" value="{{ date('Y-m-d', strtotime('-1 month')) }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="tanggal_sampai">Tanggal Sampai</label>
+              <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control" value="{{ date('Y-m-d') }}">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="kategori">Pilih Kategori</label>
+              <select name="kategori" id="kategori" class="form-control">
+                <option value="aset">Aset</option>
+                <option value="service">Service</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="tanggal_sampai"></label><br>
+              <button class="btn btn-primary btn-block w-100" type="button" id="btn_export">
+                <i class="fas fa-file-excel"></i>
+                Export
+              </button>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="portlet">
+      <div class="portlet-header d-flex justify-content-between">
         <h3 class="portlet-title">Rekap Data Aset Kendaraan</h3>
       </div>
       <div class="portlet-body">
@@ -268,7 +312,42 @@
       $("#hapus-modal-service").modal("show");
     });
 
+    $("#btn_export").click(function () {
+      let tanggal_dari = $("#tanggal_dari").val();
+      let tanggal_sampai = $("#tanggal_sampai").val();
+      let kategori = $("#kategori").val();
+
+      if (tanggal_dari == "" || tanggal_sampai == "" || kategori == "") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Tanggal Dari, Sampai, dan Kategori harus diisi!",
+        });
+      } else {
+        $.ajax({
+          url: "/master-data/asset-service/rekap/export?tanggal_dari=" + tanggal_dari + "&tanggal_sampai=" + tanggal_sampai + "&kategori=" + kategori,
+          type: "GET",
+          data: {
+            tanggal_dari: tanggal_dari,
+            tanggal_sampai: tanggal_sampai,
+            kategori: kategori,
+          },
+          success: function (response) {
+            if (response == false) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Data tidak ditemukan!",
+              });
+            } else {
+              $("#form_export").submit();
+            }
+          },
+        });
+      }
+    });
   });
+
 </script>
 
 @if(session('success'))

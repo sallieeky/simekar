@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get("/asset-service/rekap/service/get/{service}", [AsetServiceController::class, 'getService']);
         Route::post("/asset-service/rekap/service/edit", [AsetServiceController::class, 'editService']);
         Route::delete("/asset-service/rekap/service/delete", [AsetServiceController::class, 'deleteService']);
+        Route::get("/asset-service/rekap/export", [AsetServiceController::class, 'rekapExport']);
     });
 
     Route::prefix('user')->middleware("user")->group(function () {

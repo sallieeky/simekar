@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AsetKendaraan;
 use App\Models\Kendaraan;
 use App\Models\ServiceKendaraan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AsetServiceController extends Controller
 {
@@ -330,5 +332,56 @@ class AsetServiceController extends Controller
         $aset = AsetKendaraan::all();
         $service = ServiceKendaraan::all();
         return view('master-data.asset-service-rekap', compact('aset', 'service'));
+    }
+
+    public function rekapExport(Request $request)
+    {
+        if ($request->kategori == "aset") {
+            $data = AsetKendaraan::with('kendaraan')
+                ->whereDate('created_at', '>=', $request->tanggal_dari)
+                ->whereDate('created_at', '<=', $request->tanggal_sampai)
+                ->orderBy('created_at', 'asc')
+                ->get();
+        } else {
+            $data = ServiceKendaraan::with('kendaraan')
+                ->whereDate('created_at', '>=', $request->tanggal_dari)
+                ->whereDate('created_at', '<=', $request->tanggal_sampai)
+                ->orderBy('created_at', 'asc')
+                ->get();
+        }
+
+        if ($data->count() == 0) {
+            return false;
+        }
+
+        $filename = "rekap-" . $request->kategori . "-" . date('Y-m-d') . ".csv";
+        $handle = fopen($filename, 'w+');
+
+        fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
+        fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
+
+        if ($request->kategori == "aset") {
+            fputcsv($handle, array('Nomor', 'Nomor Polisi', 'Nomor Aset', 'Nomor Polis', 'Nomor Rangka', 'Nomor Mesin', 'Masa Pajak', 'Masa STNK', 'Masa Asuransi', "Tanggal Service Rutin", "Tahun Pembuatan"), "Tahun Pengadaan", ';');
+            $no = 1;
+            foreach ($data as $row) {
+                fputcsv($handle, array($no, $row->kendaraan->no_polisi, $row->no_aset, $row->no_polis, $row->no_rangka, $row->no_mesin, Carbon::parse($row->masa_pajak)->translatedFormat('l, d F Y'), Carbon::parse($row->masa_stnk)->translatedFormat('l, d F Y'), Carbon::parse($row->masa_asuransi)->translatedFormat('l, d F Y'), Carbon::parse($row->tgl_service_rutin)->translatedFormat('l, d F Y'), $row->tahun_pembuatan, $row->tahun_pengadaan), ';');
+                $no++;
+            }
+        } else {
+            fputcsv($handle, array('Nomor', 'Nomor Polisi', 'Tanggal Service', 'Kode', 'Uraian'), ';');
+            $no = 1;
+            foreach ($data as $row) {
+                fputcsv($handle, array($no, $row->kendaraan->no_polisi, Carbon::parse($row->tgl_service)->translatedFormat('l, d F Y'), $row->kode, $row->uraian), ';');
+                $no++;
+            }
+        }
+
+
+        fclose($handle);
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download($filename, $filename, $headers)->deleteFileAfterSend(true);
     }
 }
