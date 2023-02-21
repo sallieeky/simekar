@@ -361,7 +361,7 @@ class AsetServiceController extends Controller
         fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
 
         if ($request->kategori == "aset") {
-            fputcsv($handle, array('Nomor', 'Nomor Polisi', 'Nomor Aset', 'Nomor Polis', 'Nomor Rangka', 'Nomor Mesin', 'Masa Pajak', 'Masa STNK', 'Masa Asuransi', "Tanggal Service Rutin", "Tahun Pembuatan"), "Tahun Pengadaan", ';');
+            fputcsv($handle, array('Nomor', 'Nomor Polisi', 'Nomor Aset', 'Nomor Polis', 'Nomor Rangka', 'Nomor Mesin', 'Masa Pajak', 'Masa STNK', 'Masa Asuransi', "Tanggal Service Rutin", "Tahun Pembuatan", "Tahun Pengadaan"), ';');
             $no = 1;
             foreach ($data as $row) {
                 fputcsv($handle, array($no, $row->kendaraan->no_polisi, $row->no_aset, $row->no_polis, $row->no_rangka, $row->no_mesin, Carbon::parse($row->masa_pajak)->translatedFormat('l, d F Y'), Carbon::parse($row->masa_stnk)->translatedFormat('l, d F Y'), Carbon::parse($row->masa_asuransi)->translatedFormat('l, d F Y'), Carbon::parse($row->tgl_service_rutin)->translatedFormat('l, d F Y'), $row->tahun_pembuatan, $row->tahun_pengadaan), ';');
