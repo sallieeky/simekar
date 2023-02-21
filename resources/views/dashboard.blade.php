@@ -227,6 +227,61 @@
 @endif
 @endif
 
+@if(Auth::user()->role == 'admin')
+<div class="row">
+  <div class="col-md-8">
+    <div class="portlet">
+      <div class="portlet-header portlet-header-bordered">
+        <div class="portlet-icon">
+          <i class="fa fa-clipboard-list"></i>
+        </div>
+        <h3 class="portlet-title">Pengingat Bulan Ini</h3>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Timeline -->
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl 7</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-warning"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+            </div>
+          </div>
+        </div>
+        <!-- END Timeline -->
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="portlet">
+      <div class="portlet-header portlet-header-bordered">
+        <div class="portlet-icon">
+          <i class="fa fa-clipboard-list"></i>
+        </div>
+        <h3 class="portlet-title">Pengingat Bulan Depan</h3>
+      </div>
+      <div class="portlet-body">
+        <!-- BEGIN Timeline -->
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl 29</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-warning"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+            </div>
+          </div>
+        </div>
+        <!-- END Timeline -->
+      </div>
+    </div>
+  </div>
+</div>
+@endif
+
 <div class="row">
   <div class="col-md-6 @if(Auth::user()->role == 'user') col-xl-10 @else col-xl-12 @endif">
     <div class="portlet portlet-primary">

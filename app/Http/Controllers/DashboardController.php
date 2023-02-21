@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AsetKendaraan;
 use App\Models\Driver;
 use App\Models\Kendaraan;
 use App\Models\Peminjaman;
@@ -15,6 +16,12 @@ class DashboardController extends Controller
     {
         $peminjaman = Peminjaman::where('user_id', Auth::user()->id)->where('status', '!=', 'selesai')->first();
         $antrian = Peminjaman::where('status', 'menunggu')->orderBy('created_at', 'asc')->get();
+        $notifikasi = [
+            // 
+        ];
+
+
+
 
         $data = [
             "kendaraan" => Kendaraan::where("isShow", 1)->where("isReady", 1)->count(),
@@ -33,6 +40,6 @@ class DashboardController extends Controller
             'ditolak' => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Pengajuan ditolak')->get()->count(),
         ];
 
-        return view("dashboard", compact('peminjaman', 'antrian', 'data', 'reimburse'));
+        return view("dashboard", compact('peminjaman', 'antrian', 'data', 'reimburse', 'notifikasi'));
     }
 }
