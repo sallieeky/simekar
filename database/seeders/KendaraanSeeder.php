@@ -16,6 +16,7 @@ class KendaraanSeeder extends Seeder
     public function run()
     {
         $file = fopen(public_path('kendaraan.csv'), 'r');
+        $i = 1;
         while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
             $data = explode(";", $row[0]);
             Kendaraan::create([
@@ -23,6 +24,8 @@ class KendaraanSeeder extends Seeder
                 'merk' => $data[1],
                 'tipe' => $data[2],
             ]);
+            $i++;
+            if ($i == 11) break;
         }
         fclose($file);
     }
