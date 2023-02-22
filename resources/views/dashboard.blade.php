@@ -238,11 +238,10 @@
         <h3 class="portlet-title">Pengingat Bulan Ini</h3>
       </div>
       <div class="portlet-body">
-        {{-- cek apakah semua notifikasi bulan ini tidak ada --}}
         @if (count($notifikasi["bulan_ini"]["masa_pajak"]) == 0 && count($notifikasi["bulan_ini"]["masa_stnk"]) == 0 && count($notifikasi["bulan_ini"]["masa_asuransi"]) == 0 && count($notifikasi["bulan_ini"]["tgl_service_rutin"]) == 0)
         <div class="timeline timeline-timed">
           <div class="timeline-item">
-            <span class="timeline-time"></span>
+            <span class="timeline-time"> - </span>
             <div class="timeline-content">
               <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Tidak ada pengingat di bulan ini</span></p>
             </div>
@@ -356,6 +355,16 @@
       </div>
       <div class="portlet-body">
         <!-- BEGIN Timeline -->
+        @if (count($notifikasi["bulan_depan"]["masa_pajak"]) == 0 && count($notifikasi["bulan_depan"]["masa_stnk"]) == 0 && count($notifikasi["bulan_depan"]["masa_asuransi"]) == 0 && count($notifikasi["bulan_depan"]["tgl_service_rutin"]) == 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"> - </span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Tidak ada pengingat di bulan depan</span></p>
+            </div>
+          </div>
+        </div>
+        @endif
         @if (count($notifikasi["bulan_depan"]["masa_pajak"]) > 0)
         <div class="timeline timeline-timed">
           <div class="timeline-item">
