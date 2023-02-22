@@ -239,7 +239,7 @@
       </div>
       <div class="portlet-body">
         {{-- cek apakah semua notifikasi bulan ini tidak ada --}}
-        @if (count($notifikasi["bulan_ini"]["masa_pajak"]) == 0 && count($notifikasi["bulan_ini"]["pajak"]) == 0 && count($notifikasi["bulan_ini"]["kir"]) == 0 && count($notifikasi["bulan_ini"]["stnk"]) == 0 && count($notifikasi["bulan_ini"]["service"]) == 0)
+        @if (count($notifikasi["bulan_ini"]["masa_pajak"]) == 0 && count($notifikasi["bulan_ini"]["masa_stnk"]) == 0 && count($notifikasi["bulan_ini"]["masa_asuransi"]) == 0 && count($notifikasi["bulan_ini"]["tgl_service_rutin"]) == 0)
         <div class="timeline timeline-timed">
           <div class="timeline-item">
             <span class="timeline-time"></span>
