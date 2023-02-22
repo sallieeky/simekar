@@ -238,18 +238,110 @@
         <h3 class="portlet-title">Pengingat Bulan Ini</h3>
       </div>
       <div class="portlet-body">
-        <!-- BEGIN Timeline -->
+        {{-- cek apakah semua notifikasi bulan ini tidak ada --}}
+        @if (count($notifikasi["bulan_ini"]["masa_pajak"]) == 0 && count($notifikasi["bulan_ini"]["pajak"]) == 0 && count($notifikasi["bulan_ini"]["kir"]) == 0 && count($notifikasi["bulan_ini"]["stnk"]) == 0 && count($notifikasi["bulan_ini"]["service"]) == 0)
         <div class="timeline timeline-timed">
           <div class="timeline-item">
-            <span class="timeline-time">Tgl 7</span>
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Tidak ada pengingat di bulan ini</span></p>
+            </div>
+          </div>
+        </div>
+        @endif
+        <!-- BEGIN Timeline -->
+        @if (count($notifikasi["bulan_ini"]["masa_pajak"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa Pajak</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_ini"]["masa_pajak"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_pajak)->translatedFormat('d') }}</span>
             <div class="timeline-pin">
               <i class="marker marker-circle text-warning"></i>
             </div>
             <div class="timeline-content">
-              <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+              <p class="mb-0">Perpanjangan masa pajak kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
             </div>
           </div>
         </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_ini"]["masa_stnk"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa STNK</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_ini"]["masa_stnk"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_stnk)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-info"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Perpanjangan masa STNK kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_ini"]["masa_asuransi"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa Asuransi</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_ini"]["masa_asuransi"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_asuransi)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-danger"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Perpanjangan masa asuransi kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_ini"]["tgl_service_rutin"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Servis Rutin</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_ini"]["tgl_service_rutin"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->tgl_service_rutin)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-secondary"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Melakukan servis rutin kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
         <!-- END Timeline -->
       </div>
     </div>
@@ -264,17 +356,98 @@
       </div>
       <div class="portlet-body">
         <!-- BEGIN Timeline -->
+        @if (count($notifikasi["bulan_depan"]["masa_pajak"]) > 0)
         <div class="timeline timeline-timed">
           <div class="timeline-item">
-            <span class="timeline-time">Tgl 29</span>
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa Pajak</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_depan"]["masa_pajak"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_pajak)->translatedFormat('d') }}</span>
             <div class="timeline-pin">
               <i class="marker marker-circle text-warning"></i>
             </div>
             <div class="timeline-content">
-              <p class="mb-0">Lorem ipsum dolor sit amit,consectetur eiusmdd tempor incididunt ut labore et dolore magna elit enim at minim veniam quis nostrud</p>
+              <p class="mb-0">Perpanjangan masa pajak kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
             </div>
           </div>
         </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_depan"]["masa_stnk"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa STNK</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_depan"]["masa_stnk"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_stnk)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-info"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Perpanjangan masa STNK kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_depan"]["masa_asuransi"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Masa Asuransi</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_depan"]["masa_asuransi"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->masa_asuransi)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-danger"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Perpanjangan masa asuransi kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
+        @if (count($notifikasi["bulan_depan"]["tgl_service_rutin"]) > 0)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time"></span>
+            <div class="timeline-content">
+              <p class="mb-0"><span style="font-size: 1.3em; font-weight:bold">Servis Rutin</span></p>
+            </div>
+          </div>
+        </div>
+        @foreach ($notifikasi["bulan_depan"]["tgl_service_rutin"] as $data)
+        <div class="timeline timeline-timed">
+          <div class="timeline-item">
+            <span class="timeline-time">Tgl {{ Carbon\Carbon::parse($data->tgl_service_rutin)->translatedFormat('d') }}</span>
+            <div class="timeline-pin">
+              <i class="marker marker-circle text-secondary"></i>
+            </div>
+            <div class="timeline-content">
+              <p class="mb-0">Melakukan servis rutin kendaraan<br>{{ $data->kendaraan->no_polisi }} - {{ $data->kendaraan->merk }} ({{ $data->kendaraan->tipe }})</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+        @endif
         <!-- END Timeline -->
       </div>
     </div>

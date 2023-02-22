@@ -17,11 +17,21 @@ class DashboardController extends Controller
         $peminjaman = Peminjaman::where('user_id', Auth::user()->id)->where('status', '!=', 'selesai')->first();
         $antrian = Peminjaman::where('status', 'menunggu')->orderBy('created_at', 'asc')->get();
         $notifikasi = [
-            // 
+            // get aset kendaraan where masa_pajak, masa_stnk, masa_asuransi, tgl_service_rutin in this month and sort by each column descending
+            "bulan_ini" => [
+                "masa_pajak" => AsetKendaraan::with("kendaraan")->whereMonth('masa_pajak', date('m'))->orderBy('masa_pajak', 'desc')->get(),
+                "masa_stnk" => AsetKendaraan::with("kendaraan")->whereMonth('masa_stnk', date('m'))->orderBy('masa_stnk', 'desc')->get(),
+                "masa_asuransi" => AsetKendaraan::with("kendaraan")->whereMonth('masa_asuransi', date('m'))->orderBy('masa_asuransi', 'desc')->get(),
+                "tgl_service_rutin" => AsetKendaraan::with("kendaraan")->whereMonth('tgl_service_rutin', date('m'))->orderBy('tgl_service_rutin', 'desc')->get(),
+            ],
+            // get aset kendaraan where masa_pajak, masa_stnk, masa_asuransi, tgl_service_rutin in next month and sort by each column descending
+            "bulan_depan" => [
+                "masa_pajak" => AsetKendaraan::with("kendaraan")->whereMonth('masa_pajak', date('m', strtotime('+1 month')))->orderBy('masa_pajak', 'desc')->get(),
+                "masa_stnk" => AsetKendaraan::with("kendaraan")->whereMonth('masa_stnk', date('m', strtotime('+1 month')))->orderBy('masa_stnk', 'desc')->get(),
+                "masa_asuransi" => AsetKendaraan::with("kendaraan")->whereMonth('masa_asuransi', date('m', strtotime('+1 month')))->orderBy('masa_asuransi', 'desc')->get(),
+                "tgl_service_rutin" => AsetKendaraan::with("kendaraan")->whereMonth('tgl_service_rutin', date('m', strtotime('+1 month')))->orderBy('tgl_service_rutin', 'desc')->get(),
+            ],
         ];
-
-
-
 
         $data = [
             "kendaraan" => Kendaraan::where("isShow", 1)->where("isReady", 1)->count(),

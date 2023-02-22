@@ -8503,7 +8503,7 @@ body.preload-hide .preload {
   position: absolute;
   font-size: 1.25rem;
   font-weight: 600;
-  width: 4rem;
+  width: 5rem;
   color: var(--bs-text-level-1);
   padding: 0.25rem;
   left: -7rem;
