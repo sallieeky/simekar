@@ -70,9 +70,13 @@
                           </form>
                         </div>
                       </div>
+                      @elseif($dt->status == 'Pengajuan ditolak')
+                      <div class="badge badge-danger">
+                        Pengajuan ditolak
+                      </div>
                       @else
-                      <div class="badge badge-info">
-                        Menunggu pengajuan
+                      <div class="badge badge-secondary">
+                        Pengajuan dalam proses
                       </div>
                       @endif
                     </td>
