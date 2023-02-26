@@ -76,7 +76,7 @@
                       </div>
                       @else
                       <div class="badge badge-secondary">
-                        Pengajuan dalam proses
+                        Menunggu
                       </div>
                       @endif
                     </td>
