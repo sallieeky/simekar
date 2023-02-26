@@ -67,7 +67,7 @@
                   <label for="nominal">Nominal pengajuan</label>
                   <div class="input-group">
                     <span class="input-group-text">Rp.</span>
-                    <input type="number" id="nominal" name="nominal" class="form-control form-control-lg @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" aria-label="Nominal rupiah" placeholder="Nominal (Rp)">
+                    <input type="text" id="nominal" name="nominal" class="form-control form-control-lg @error('nominal') is-invalid @enderror" value="{{ old('nominal') }}" aria-label="Nominal rupiah" placeholder="Nominal (Rp)">
                     @error('nominal')
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -107,10 +107,22 @@
       });
     });
 
-    // format nominal input rupiah on keyup event listener menambahkan titik setiap 3 digit angka
-    // $("#nominal").on('keyup', function () {
-    //   var nominal = $(this).val();
-    // });
+    $("#nominal").on('keypress', function (e) {
+      var charCode = (e.which) ? e.which : e.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+      }
+      return true;
+    });
+
+    $("#nominal").on('keyup', function (e) {
+      var nominal = $(this).val();
+      if(nominal.length===0) return;
+      nominal = parseInt(nominal.replace(/[^0-9]/g, ''));
+      var format = nominal.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+      $(this).val(format);
+      
+    });
 
   });
 </script>

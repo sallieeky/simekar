@@ -22,18 +22,6 @@
       <div class="portlet-body">
         <form action="/master-data/asset-service/rekap/export" method="GET" id="form_export">
         <div class="row">
-          {{-- <div class="col-md-3">
-            <div class="form-group">
-              <label for="tanggal_dari">Tanggal Dari</label>
-              <input type="date" name="tanggal_dari" id="tanggal_dari" class="form-control" value="{{ date('Y-m-d', strtotime('-1 month')) }}">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="tanggal_sampai">Tanggal Sampai</label>
-              <input type="date" name="tanggal_sampai" id="tanggal_sampai" class="form-control" value="{{ date('Y-m-d') }}">
-            </div>
-          </div> --}}
           <div class="col-md-10">
             <div class="form-group">
               <label for="kategori">Pilih Kategori</label>
