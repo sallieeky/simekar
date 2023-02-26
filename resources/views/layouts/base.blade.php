@@ -438,10 +438,7 @@
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/toastr.js"></script>
 	<script type="text/javascript" src="/dashboard_assets/assets/app/pages/elements/sweet-alert.js"></script>
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAhTc3UDPSZeKoxGUDYPuoyhud69LB-co&amp;libraries=places&amp;callback=initMap"></script>
-
 	<script>
-		// get class btn-logout and add event click and open sweet alert
 		$('.btn-logout').on('click', function(e) {
 			e.preventDefault();
 			Swal.fire({

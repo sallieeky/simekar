@@ -45,9 +45,9 @@ class DashboardController extends Controller
         ];
 
         $reimburse = [
-            'total' => Reimbursement::where('user_id', Auth::user()->id)->get()->count(),
-            'diterima' => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Pengajuan disetujui')->get()->count(),
-            'ditolak' => Reimbursement::where('user_id', Auth::user()->id)->where('status', 'Pengajuan ditolak')->get()->count(),
+            'total' => Reimbursement::where('user_id', Auth::user()->id)->whereMonth("created_at", date("m"))->get()->count(),
+            'diterima' => Reimbursement::where('user_id', Auth::user()->id)->whereMonth("created_at", date("m"))->where('status', 'Pengajuan disetujui')->get()->count(),
+            'ditolak' => Reimbursement::where('user_id', Auth::user()->id)->whereMonth("created_at", date("m"))->where('status', 'Pengajuan ditolak')->get()->count(),
         ];
 
         return view("dashboard", compact('peminjaman', 'antrian', 'data', 'reimburse', 'notifikasi'));

@@ -56,6 +56,7 @@
                       @endif
                     </td>
                     <td>
+                      @if($dt->status == 'Pengajuan disetujui')
                       <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-file-pdf" style="font-size: 1.5em"></i></button>
                         <div class="dropdown-menu" style="">
@@ -69,6 +70,11 @@
                           </form>
                         </div>
                       </div>
+                      @else
+                      <div class="badge badge-info">
+                        Menunggu pengajuan
+                      </div>
+                      @endif
                     </td>
                   </tr>
                   @endforeach

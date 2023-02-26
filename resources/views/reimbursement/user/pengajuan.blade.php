@@ -63,7 +63,6 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
-                {{-- input nominal with prefix Rp. --}}
                 <div class="col-md-4">
                   <label for="nominal">Nominal pengajuan</label>
                   <div class="input-group">
@@ -107,6 +106,12 @@
         }
       });
     });
+
+    // format nominal input rupiah on keyup event listener menambahkan titik setiap 3 digit angka
+    // $("#nominal").on('keyup', function () {
+    //   var nominal = $(this).val();
+    // });
+
   });
 </script>
 
