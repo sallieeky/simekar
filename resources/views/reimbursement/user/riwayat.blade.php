@@ -1,5 +1,5 @@
 @extends("layouts.base")
-@section("title", "Riwayat Peminjaman")
+@section("title", "Riwayat Reimbursement")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
   <span class="breadcrumb-text">Reimbursement</span>
