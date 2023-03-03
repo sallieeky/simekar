@@ -26,7 +26,6 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // store email in session if remember me is checked
             if ($request->remember_me) {
                 $request->session()->put('email', $request->email);
                 $request->session()->put('password', $request->password);

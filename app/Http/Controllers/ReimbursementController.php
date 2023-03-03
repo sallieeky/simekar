@@ -27,7 +27,6 @@ class ReimbursementController extends Controller
         $request->validate([
             'kendaraan_id' => 'required',
             'km_tempuh' => 'required|regex:/^[0-9.]+$/',
-            // nominal only 0-9 and dot
             'nominal' => 'required|regex:/^[0-9.,]+$/',
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',
@@ -66,7 +65,6 @@ class ReimbursementController extends Controller
 
         $pdf->loadView('pdf.nota-riwayat-reimbursement', compact('reimbursement'));
 
-        // cek aksi
         if ($aksi == "unduh") {
             $namaFile = "nota-reimbursement-" . date('Y-m-d') . ".pdf";
             return $pdf->download($namaFile);

@@ -17,7 +17,6 @@ class DriverController extends Controller
 
     public function tampilkan(Request $request, Driver $driver)
     {
-        // cek apakah driver sedang dipakai
         $cek = Peminjaman::where('driver_id', $driver->id)->where('status', 'dipakai')->first();
         if ($cek) {
             return false;
@@ -28,10 +27,8 @@ class DriverController extends Controller
         ]);
 
         if ($driver->isShow == 1) {
-            // cek apakah ada kendaraan yang tersedia pilih random
             $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
             if ($kendaraan) {
-                // cek user yang sedang dalam antrian
                 $cek = Peminjaman::where('status', 'menunggu')->orderBy('created_at', 'asc')->first();
                 if ($cek) {
                     $cek->update([
@@ -50,7 +47,6 @@ class DriverController extends Controller
                 }
             }
         }
-
 
         return true;
     }
@@ -86,7 +82,6 @@ class DriverController extends Controller
             'no_hp.numeric' => 'No HP harus berupa angka',
             'no_hp.unique' => 'No HP sudah terdaftar',
         ]);
-
         Driver::create([
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,

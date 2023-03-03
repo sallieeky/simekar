@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Driver;
 use App\Models\Kendaraan;
 use App\Models\Peminjaman;
-use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
 class KendaraanController extends Controller
@@ -63,10 +62,8 @@ class KendaraanController extends Controller
         ]);
 
         if ($kendaraan->isShow == 1) {
-            // cek apakah ada driver yang tersedia pilih random
             $driver = Driver::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
             if ($driver) {
-                // cek user yang sedang dalam antrian
                 $cek = Peminjaman::where('status', 'menunggu')->orderBy('created_at', 'asc')->first();
                 if ($cek) {
                     $cek->update([
@@ -135,7 +132,6 @@ class KendaraanController extends Controller
 
     public function delete(Request $request)
     {
-        // cek apakah kendaraan sedang dipakai 
         $peminjaman = Peminjaman::where('kendaraan_id', $request->id)->where('status', 'dipakai')->first();
 
         if ($peminjaman) {

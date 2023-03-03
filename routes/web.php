@@ -9,6 +9,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhatsApp;
 use App\Models\Kendaraan;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
@@ -191,8 +192,7 @@ Route::get('/kirim', function () {
 });
 
 Route::get("/tes", function () {
-    $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
-    return $kendaraan;
+    return view("tes");
 });
 
 Route::get('/pdf', [KendaraanController::class, "pdf"]);
@@ -201,7 +201,7 @@ Route::get('/pdf', [KendaraanController::class, "pdf"]);
 // WABLAST
 // Route::get('/wa', function () {
 //     $curl = curl_init();
-//     $token = "zOdA9ubdLgHqxXg0vlaizydpr27MW7pPeyFAMq6CkufMYpfb2GZnUCkRouJdS4uW";
+//     $token = "E0XeGSEW5Q1sHDWnhK5ZtJb7VjpZHl1ipb6rduhh4Ctk5PsasTUggR4LWNkVPfq5";
 //     $phone = "081243942304"; // nomor tujuan
 //     $message = "test" . "<br>" .  "driver : awdad" . "<br>" . "kendaraan : awdawd";
 //     curl_setopt($curl, CURLOPT_URL, "https://jogja.wablas.com/api/send-message?phone=$phone&message=$message&token=$token");

@@ -44,7 +44,7 @@
                     <td>{{ $dt->kendaraan->no_polisi }}</td>
                     <td>{{ $dt->km_tempuh }}</td>
                     <td>
-                      Rp. {{ number_format($dt->nominal,2,',','.') }}
+                      Rp. {{ number_format((int) $dt->nominal,2,',','.') }}
                     </td>
                     <td>
                       @if ($dt->status == 'Dalam proses pengajuan')

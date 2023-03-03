@@ -42,7 +42,6 @@ class ProfileController extends Controller
 
     public function ubahPasswordPost(Request $request)
     {
-        // validasi password_lama, password_baru, konfirmasi_password_baru
         $request->validate([
             'password_lama' => 'required|min:8',
             'password_baru' => 'required|min:8',

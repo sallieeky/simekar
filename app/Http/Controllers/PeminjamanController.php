@@ -25,14 +25,10 @@ class PeminjamanController extends Controller
 
     public function pengajuanCek(Request $request)
     {
-        // cek apakah ada driver dan kendaraan yang tersedia dan pilih satu secara random
         $driver = Driver::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
         $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
-
-        // cek apakah user sudah pernah melakukan peminjaman where status dipakai dan menunggu
         $peminjaman = Peminjaman::where('user_id', Auth::user()->id)->where('status', '!=', 'selesai')->first();
 
-        // jika user sudah pernah melakukan peminjaman
         if ($peminjaman) {
             return response()->json([
                 'status' => 'exist',
@@ -71,9 +67,9 @@ class PeminjamanController extends Controller
         $request->validate([
             'nama_tujuan' => 'required',
             'keperluan' => 'required',
-            // 'tanggal_peminjaman' => 'required',
-            // 'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i', strtotime('-5 minutes')) . '|before:17:00',
-            // 'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
+            'tanggal_peminjaman' => 'required',
+            'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i', strtotime('-5 minutes')) . '|before:17:00',
+            'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
         ], [
             'nama_tujuan.required' => 'Nama tujuan tidak boleh kosong',
             'keperluan.required' => 'Keperluan tidak boleh kosong',
@@ -124,32 +120,29 @@ class PeminjamanController extends Controller
             $pesan = "Peminjaman berhasil";
         }
 
-        // $key_demo = 'db63f52c1a00d33cf143524083dd3ffd025d672e255cc688';
-        // $url = 'http://45.77.34.32:8000/demo/send_message';
-        // $data = array(
-        //     "phone_no" => Auth::user()->no_hp,
-        //     "key"     => $key_demo,
-        //     "message" => 'Peminjaman anda berhasil. Nama driver:' . $dtPeminjaman->driver->nama . 'dan kendaraan:' . $dtPeminjaman->kendaraan->no_polisi
-        // );
+        $data = [
+            "nama_pegawai" => $dtPeminjaman->user->nama,
+            "nohp_pegawai" => $dtPeminjaman->user->no_hp,
+            "nama_driver" => $dtPeminjaman->driver->nama ?? null,
+            "nohp_driver" => $dtPeminjaman->driver->no_hp ?? null,
+            "no_polisi" => $dtPeminjaman->kendaraan->no_polisi ?? null,
+            "merk" => $dtPeminjaman->kendaraan->merk ?? null,
+            "tipe" => $dtPeminjaman->kendaraan->tipe ?? null,
+            "waktu_peminjaman" => $dtPeminjaman->waktu_peminjaman,
+            "waktu_selesai" => $dtPeminjaman->waktu_selesai,
+            "tujuan" => $dtPeminjaman->tujuan_peminjaman->nama,
+            "alamat" => $dtPeminjaman->tujuan_peminjaman->alamat,
+            "keperluan" => $dtPeminjaman->keperluan,
+        ];
 
-        // $data_string = json_encode($data, 1);
-
-        // $ch = curl_init($url);
-        // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_VERBOSE, 0);
-        // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
-        // curl_setopt($ch, CURLOPT_TIMEOUT, 360);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        //     'Content-Type: application/json',
-        //     'Content-Length: ' . strlen($data_string),
-        //     'Authorization: Basic dXNtYW5ydWJpYW50b3JvcW9kcnFvZHJiZWV3b293YToyNjM3NmVkeXV3OWUwcmkzNDl1ZA=='
-        // ));
-        // echo $res = curl_exec($ch);
-        // curl_close($ch);
+        if (isset($dtPeminjaman->driver->nama)) {
+            WhatsApp::peminjamanBerhasilKendaraanDriver_Admin($data);
+            WhatsApp::peminjamanBerhasilKendaraanDriver_Driver($data);
+            WhatsApp::peminjamanBerhasilKendaraanDriver_User($data);
+        } else {
+            WhatsApp::peminjamanBerhasilKendaraan_Admin($data);
+            WhatsApp::peminjamanBerhasilKendaraan_User($data);
+        }
 
         return back()->with('success', $pesan);
     }
@@ -167,7 +160,6 @@ class PeminjamanController extends Controller
 
         $pdf->loadView('pdf.nota-riwayat-peminjaman', compact('peminjaman'));
 
-        // cek aksi
         if ($aksi == "unduh") {
             $namaFile = "nota-peminjaman-" . date('Y-m-d') . ".pdf";
             return $pdf->download($namaFile);
@@ -185,7 +177,6 @@ class PeminjamanController extends Controller
                 $peminjaman->status = "selesai";
                 $peminjaman->save();
 
-                // cek peminjaman status menunggu
                 $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
                 if ($peminjamanMenunggu) {
                     $peminjamanMenunggu->driver_id = $driver ? $driver->id : $peminjaman->driver->id;
@@ -193,7 +184,6 @@ class PeminjamanController extends Controller
                     $peminjamanMenunggu->status = "dipakai";
                     $peminjamanMenunggu->save();
                 } else {
-                    // update isReady driver dan kendaraan menjadi true
                     Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
                     Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
                 }
@@ -203,7 +193,6 @@ class PeminjamanController extends Controller
             $peminjaman->status = "selesai";
             $peminjaman->save();
 
-            // cek peminjaman status menunggu
             $peminjamanMenunggu = Peminjaman::where("status", "menunggu")->orderBy('waktu_peminjaman', 'asc')->first();
             if ($peminjamanMenunggu) {
                 $peminjamanMenunggu->driver_id = $driver ? $driver->id : $peminjaman->driver->id;
@@ -211,7 +200,6 @@ class PeminjamanController extends Controller
                 $peminjamanMenunggu->status = "dipakai";
                 $peminjamanMenunggu->save();
             } else {
-                // update isReady driver dan kendaraan menjadi true
                 Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
                 Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
             }

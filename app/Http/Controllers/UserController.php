@@ -38,12 +38,15 @@ class UserController extends Controller
             'password_confirmation.same' => 'Konfirmasi password tidak sama',
         ]);
 
-        $user = new User;
-        $user->nama = $request->nama;
-        $user->email = $request->email;
-        $user->no_hp = $request->no_hp;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        // $user = new User;
+        // $user->nama = $request->nama;
+        // $user->email = $request->email;
+        // $user->no_hp = $request->no_hp;
+        // $user->password = bcrypt($request->password);
+        // $user->save();
+
+        $request['password'] = bcrypt($request['password']);
+        User::create($request->all());
 
         return redirect()->back()->with('success', 'Berhasil menambah data');
     }

@@ -25,7 +25,7 @@ class KendaraanSeeder extends Seeder
                 'tipe' => $data[2],
             ]);
             $i++;
-            if ($i == 11) break;
+            if ($i == 6) break;
         }
         fclose($file);
     }

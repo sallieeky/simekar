@@ -353,8 +353,6 @@ class AsetServiceController extends Controller
         $filename = "rekap-" . $request->kategori . "-" . date('Y-m-d') . ".csv";
         $handle = fopen($filename, 'w+');
 
-        fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
-        fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
 
         if ($request->kategori == "aset") {
             fputcsv($handle, array('Nomor', 'Nomor Polisi', 'Merk', 'Tipe', 'Nomor Aset', 'Nomor Polis', 'Nomor Rangka', 'Nomor Mesin', 'Masa Pajak', 'Masa STNK', 'Masa Asuransi', "Tanggal Service Rutin", "Tahun Pembuatan", "Tahun Pengadaan"), ';');
@@ -371,7 +369,6 @@ class AsetServiceController extends Controller
                 $no++;
             }
         }
-
 
         fclose($handle);
         $headers = array(
