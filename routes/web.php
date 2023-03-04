@@ -180,33 +180,24 @@ Route::post('/reset-password', function (Request $request) {
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
-
-
-Route::get('/kirim', function () {
-    Mail::send('mail.tes', [], function ($message) {
-        $message->from('info@simekar.foundid.my.id', 'SIMEKAR');
-        $message->to('sallieeky@gmail.com', 'Sallie Eky');
-        $message->subject("Tes Kirim Dari SIMEKAR");
-    });
-    return "BERHASIL";
+Route::prefix('cron')->middleware("admin")->group(function () {
+    // 
 });
 
-Route::get("/tes", function () {
-    return view("tes");
-});
-
-Route::get('/pdf', [KendaraanController::class, "pdf"]);
 
 
-// WABLAST
-// Route::get('/wa', function () {
-//     $curl = curl_init();
-//     $token = "E0XeGSEW5Q1sHDWnhK5ZtJb7VjpZHl1ipb6rduhh4Ctk5PsasTUggR4LWNkVPfq5";
-//     $phone = "081243942304"; // nomor tujuan
-//     $message = "test" . "<br>" .  "driver : awdad" . "<br>" . "kendaraan : awdawd";
-//     curl_setopt($curl, CURLOPT_URL, "https://jogja.wablas.com/api/send-message?phone=$phone&message=$message&token=$token");
-//     $result = curl_exec($curl);
-//     curl_close($curl);
-//     echo "<pre>";
-//     print_r($result);
+// Route::get('/kirim', function () {
+//     Mail::send('mail.tes', [], function ($message) {
+//         $message->from('info@simekar.foundid.my.id', 'SIMEKAR');
+//         $message->to('sallieeky@gmail.com', 'Sallie Eky');
+//         $message->subject("Tes Kirim Dari SIMEKAR");
+//     });
+//     return "BERHASIL";
 // });
+
+
+// Route::get("/tes", function () {
+//     return view("tes");
+// });
+
+// Route::get('/pdf', [KendaraanController::class, "pdf"]);

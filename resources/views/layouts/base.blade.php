@@ -11,6 +11,22 @@
 	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
 	<title>@yield("title") | SIMEKAR</title>
 
+	{{-- style scrollbar --}}
+	<style>
+		::-webkit-scrollbar {
+			width: 10px;
+		}
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+		::-webkit-scrollbar-thumb {
+			background: #00BCD4;
+		}
+		::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+	</style>
+
 	@yield('css')
 </head>
 
