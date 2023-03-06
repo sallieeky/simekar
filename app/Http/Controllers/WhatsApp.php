@@ -598,9 +598,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku Pajak: [Masa Berlaku STNK]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku STNK: $data[masa_pajak]
       
       Terima kasih telah memperhatikan pesan ini. Jangan lupa untuk membayar pajak STNK kendaraan sebelum tanggal jatuh tempo dan melakukan Update Tanggal Masa Berlaku pada sistem.
     ";
@@ -623,9 +623,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku Asuransi: [Masa Berlaku STNK]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku Asuransi: $data[masa_pajak]
       
       Terima kasih telah memperhatikan pesan ini. Jangan lupa untuk membayar Asuransi kendaraan dan melakukan Update Tanggal Masa Berlaku pada sistem.
     ";
@@ -646,9 +646,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku Pajak: [Masa Berlaku Pajak]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku Pajak: $data[masa_pajak]
       
       Apabila Telah melakukan pembayaran Pajak Kendaraan harap  melakukan Update Tanggal Masa Berlaku Pajak Kendaraan pada sistem.    
     ";
@@ -669,9 +669,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku STNK: [Masa Berlaku Pajak]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku STNK: $data[masa_pajak]
       
       Apabila Telah melakukan pembayaran Pajak STNK Kendaraan harap melakukan Update Tanggal Masa Berlaku Pajak STNK Kendaraan pada sistem.
     ";
@@ -692,9 +692,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku Asuransi: [Masa Berlaku Asuransi]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku Asuransi: $data[masa_pajak]
       
       Apabila Telah melakukan pembayaran Asuransi Kendaraan harap melakukan Update Tanggal Masa Berlaku Asuransi Kendaraan pada sistem.
     ";
@@ -715,9 +715,9 @@ class WhatsApp
       
       Informasi Detail :
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Tanggal Service Terakhir: [Tanggal Service Rutin]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Tanggal Service Terakhir: $data[tgl_service_terakhir]
       
       Terima kasih telah memperhatikan pesan ini. Jangan lupa untuk melakukan service rutin kendaraan dan melakukan Update jadwal service rutin pada sistem.
     ";
