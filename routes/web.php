@@ -196,12 +196,14 @@ Route::post('/reset-password', function (Request $request) {
 // });
 
 
-Route::get("/tes", function () {
-    $kendaraan = Kendaraan::whereHas('asetKendaraan', function ($query) {
-        $query->whereDate('masa_pajak', Carbon::now()->addDays(14));
-    })->get();
-    // $kendaraan = Kendaraan::with("asetKendaraan")->get();
-    return $kendaraan;
-});
+// Route::get("/tes", function () {
+//     $kendaraan = Kendaraan::whereHas('asetKendaraan', function ($query) {
+//         $query->whereDate('masa_pajak', Carbon::now()->addDays(14));
+//     })->get();
+//     $kendaraan = Kendaraan::with("asetKendaraan")->get();
+//     return $kendaraan;
+// });
+
+Route::get("/tes", [CronController::class, "daily"]);
 
 // Route::get('/pdf', [KendaraanController::class, "pdf"]);

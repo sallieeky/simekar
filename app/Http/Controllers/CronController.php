@@ -19,13 +19,16 @@ class CronController extends Controller
             $query->whereDate('masa_pajak', Carbon::now()->addDays(14));
         })->get();
 
-        foreach ($kendaraan as $k) {
-            $dataWa = [
-                "merk" => $k->merk,
-                "no_polis" => $k->no_polis,
-                "masa_pajak" => Carbon::parse($k->asetKendaraan->masa_pajak)->translatedFormat('l, d F Y'),
-            ];
-            WhatsApp::reminderPajakKendaraan_Hmin14_Admin($dataWa);
+        if ($kendaraan->count() > 0) {
+            foreach ($kendaraan as $k) {
+                $dataWa = [
+                    "merk" => $k->merk,
+                    "tipe" => $k->tipe,
+                    "no_polisi" => $k->no_polisi,
+                    "masa_pajak" => Carbon::parse($k->asetKendaraan->masa_pajak)->translatedFormat('l, d F Y'),
+                ];
+                WhatsApp::reminderPajakKendaraan_Hmin14_Admin($dataWa);
+            }
         }
     }
 }
