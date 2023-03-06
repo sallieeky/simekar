@@ -120,7 +120,7 @@ class PeminjamanController extends Controller
             $pesan = "Peminjaman berhasil";
         }
 
-        $data = [
+        $dataWA = [
             "nama_pegawai" => $dtPeminjaman->user->nama,
             "nohp_pegawai" => $dtPeminjaman->user->no_hp,
             "nama_driver" => $dtPeminjaman->driver->nama ?? null,
@@ -136,12 +136,15 @@ class PeminjamanController extends Controller
         ];
 
         if (isset($dtPeminjaman->driver->nama)) {
-            WhatsApp::peminjamanBerhasilKendaraanDriver_Admin($data);
-            WhatsApp::peminjamanBerhasilKendaraanDriver_Driver($data);
-            WhatsApp::peminjamanBerhasilKendaraanDriver_User($data);
+            WhatsApp::peminjamanBerhasilKendaraanDriver_Admin($dataWA);
+            WhatsApp::peminjamanBerhasilKendaraanDriver_Driver($dataWA);
+            WhatsApp::peminjamanBerhasilKendaraanDriver_User($dataWA);
+        } else if (isset($dtPeminjaman->kendaraan->no_polisi) && !isset($dtPeminjaman->driver->nama)) {
+            WhatsApp::peminjamanBerhasilKendaraan_Admin($dataWA);
+            WhatsApp::peminjamanBerhasilKendaraan_User($dataWA);
         } else {
-            WhatsApp::peminjamanBerhasilKendaraan_Admin($data);
-            WhatsApp::peminjamanBerhasilKendaraan_User($data);
+            WhatsApp::masukAntrianKendaraan_Admin($dataWA);
+            WhatsApp::masukAntrianKendaraan_User($dataWA);
         }
 
         return back()->with('success', $pesan);
@@ -183,9 +186,47 @@ class PeminjamanController extends Controller
                     $peminjamanMenunggu->kendaraan_id = $kendaraan ? $kendaraan->id : $peminjaman->kendaraan->id;
                     $peminjamanMenunggu->status = "dipakai";
                     $peminjamanMenunggu->save();
+
+                    $dataWA = [
+                        "nama_pegawai" => $peminjamanMenunggu->user->nama,
+                        "nohp_pegawai" => $peminjamanMenunggu->user->no_hp,
+                        "nama_driver" => $peminjamanMenunggu->driver->nama ?? null,
+                        "nohp_driver" => $peminjamanMenunggu->driver->no_hp ?? null,
+                        "no_polisi" => $peminjamanMenunggu->kendaraan->no_polisi ?? null,
+                        "merk" => $peminjamanMenunggu->kendaraan->merk ?? null,
+                        "tipe" => $peminjamanMenunggu->kendaraan->tipe ?? null,
+                        "waktu_peminjaman" => $peminjamanMenunggu->waktu_peminjaman,
+                        "waktu_selesai" => $peminjamanMenunggu->waktu_selesai,
+                        "tujuan" => $peminjamanMenunggu->tujuan_peminjaman->nama,
+                        "alamat" => $peminjamanMenunggu->tujuan_peminjaman->alamat,
+                        "keperluan" => $peminjamanMenunggu->keperluan,
+                    ];
+
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($dataWA);
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($dataWA);
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_User($dataWA);
                 } else {
                     Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
                     Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
+
+
+                    $dataWA = [
+                        "nama_pegawai" => $peminjaman->user->nama,
+                        "nohp_pegawai" => $peminjaman->user->no_hp,
+                        "nama_driver" => $peminjaman->driver->nama ?? null,
+                        "nohp_driver" => $peminjaman->driver->no_hp ?? null,
+                        "no_polisi" => $peminjaman->kendaraan->no_polisi ?? null,
+                        "merk" => $peminjaman->kendaraan->merk ?? null,
+                        "tipe" => $peminjaman->kendaraan->tipe ?? null,
+                        "waktu_peminjaman" => $peminjaman->waktu_peminjaman,
+                        "waktu_selesai" => $peminjaman->waktu_selesai,
+                        "tujuan" => $peminjaman->tujuan_peminjaman->nama,
+                        "alamat" => $peminjaman->tujuan_peminjaman->alamat,
+                        "keperluan" => $peminjaman->keperluan,
+                    ];
+                    WhatsApp::melakukanKonfirmasiSelesaiPeminjaman_Admin($dataWA);
+                    WhatsApp::melakukanKonfirmasiSelesaiPeminjaman_Driver($dataWA);
+                    WhatsApp::melakukanKonfirmasiSelesaiPeminjaman_User($dataWA);
                 }
                 return redirect()->back()->with('success', 'Peminjaman berhasil di selesaikan');
             }
@@ -198,10 +239,47 @@ class PeminjamanController extends Controller
                 $peminjamanMenunggu->driver_id = $driver ? $driver->id : $peminjaman->driver->id;
                 $peminjamanMenunggu->kendaraan_id = $kendaraan ? $kendaraan->id : $peminjaman->kendaraan->id;
                 $peminjamanMenunggu->status = "dipakai";
-                $peminjamanMenunggu->save();
+                $peminjamanMenunggu = $peminjamanMenunggu->save();
+
+                $dataWA = [
+                    "nama_pegawai" => $peminjamanMenunggu->user->nama,
+                    "nohp_pegawai" => $peminjamanMenunggu->user->no_hp,
+                    "nama_driver" => $peminjamanMenunggu->driver->nama ?? null,
+                    "nohp_driver" => $peminjamanMenunggu->driver->no_hp ?? null,
+                    "no_polisi" => $peminjamanMenunggu->kendaraan->no_polisi ?? null,
+                    "merk" => $peminjamanMenunggu->kendaraan->merk ?? null,
+                    "tipe" => $peminjamanMenunggu->kendaraan->tipe ?? null,
+                    "waktu_peminjaman" => $peminjamanMenunggu->waktu_peminjaman,
+                    "waktu_selesai" => $peminjamanMenunggu->waktu_selesai,
+                    "tujuan" => $peminjamanMenunggu->tujuan_peminjaman->nama,
+                    "alamat" => $peminjamanMenunggu->tujuan_peminjaman->alamat,
+                    "keperluan" => $peminjamanMenunggu->keperluan,
+                ];
+
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($dataWA);
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($dataWA);
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_User($dataWA);
             } else {
                 Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
                 Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
+
+                $dataWA = [
+                    "nama_pegawai" => $peminjaman->user->nama,
+                    "nohp_pegawai" => $peminjaman->user->no_hp,
+                    "nama_driver" => $peminjaman->driver->nama ?? null,
+                    "nohp_driver" => $peminjaman->driver->no_hp ?? null,
+                    "no_polisi" => $peminjaman->kendaraan->no_polisi ?? null,
+                    "merk" => $peminjaman->kendaraan->merk ?? null,
+                    "tipe" => $peminjaman->kendaraan->tipe ?? null,
+                    "waktu_peminjaman" => $peminjaman->waktu_peminjaman,
+                    "waktu_selesai" => $peminjaman->waktu_selesai,
+                    "tujuan" => $peminjaman->tujuan_peminjaman->nama,
+                    "alamat" => $peminjaman->tujuan_peminjaman->alamat,
+                    "keperluan" => $peminjaman->keperluan,
+                ];
+                WhatsApp::melakukanKonfirmasiSelesaiPeminjamanAdmin_Admin($dataWA);
+                WhatsApp::melakukanKonfirmasiSelesaiPeminjamanAdmin_Driver($dataWA);
+                WhatsApp::melakukanKonfirmasiSelesaiPeminjamanAdmin_User($dataWA);
             }
             return redirect()->back()->with('success', 'Peminjaman berhasil di selesaikan');
         }

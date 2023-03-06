@@ -79,6 +79,25 @@ class KendaraanController extends Controller
                     $kendaraan->update([
                         'isReady' => 0,
                     ]);
+
+                    $dataWA = [
+                        "nama_pegawai" => $cek->user->nama,
+                        "nohp_pegawai" => $cek->user->no_hp,
+                        "nama_driver" => $cek->driver->nama ?? null,
+                        "nohp_driver" => $cek->driver->no_hp ?? null,
+                        "no_polisi" => $cek->kendaraan->no_polisi ?? null,
+                        "merk" => $cek->kendaraan->merk ?? null,
+                        "tipe" => $cek->kendaraan->tipe ?? null,
+                        "waktu_peminjaman" => $cek->waktu_peminjaman,
+                        "waktu_selesai" => $cek->waktu_selesai,
+                        "tujuan" => $cek->tujuan_peminjaman->nama,
+                        "alamat" => $cek->tujuan_peminjaman->alamat,
+                        "keperluan" => $cek->keperluan,
+                    ];
+
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($dataWA);
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($dataWA);
+                    WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_User($dataWA);
                 }
             }
         }

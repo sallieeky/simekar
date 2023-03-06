@@ -98,6 +98,8 @@ class ReimbursementController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        return $data;
+
         if ($data->count() == 0) {
             return false;
         }

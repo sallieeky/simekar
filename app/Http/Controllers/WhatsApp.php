@@ -181,7 +181,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahukan bahwa [Nama Pegawai] sedang dalam antrian peminjaman kendaraan dan sedang menunggu ketersediaan driver.
+      Kami ingin memberitahukan bahwa $data[nama_pegawai] sedang dalam antrian peminjaman kendaraan dan sedang menunggu ketersediaan driver.
       
       Terima kasih atas perhatiannya.
     ";
@@ -196,7 +196,7 @@ class WhatsApp
 
   public static function masukAntrianKendaraan_User($data)
   {
-    $pesan = "Halo [nama user],
+    $pesan = "Halo $data[nama_pegawai],
 
       Terima kasih telah menggunakan layanan peminjaman kendaraan kami.
       Kami ingin memberitahu bahwa status anda sedang dalam antrian untuk melakukan peminjaman kendaraan dan saat ini kami sedang mencari driver yang tersedia untuk melayani Anda.
@@ -210,23 +210,23 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($data)
   {
     $pesan = "Halo Admin,
 
-      Ini adalah pemberitahuan bahwa [Nama Pegawai] telah mendapatkan ketersediaan driver setelah menunggu pada antrian kendaraan. Berikut adalah detail peminjaman kendaraan:
+      Ini adalah pemberitahuan bahwa $data[nama_pegawai] telah mendapatkan ketersediaan driver setelah menunggu pada antrian kendaraan. Berikut adalah detail peminjaman kendaraan:
       
-      Nama Pegawai: [Nama Pegawai]
-      Nama Driver: [Nama Driver]
-      No Polisi Kendaraan : [KT 8118 ]
-      Kendaraan yang Dipinjam: [Merek dan Tipe Kendaraan]
-      Waktu Peminjaman: [Waktu Mulai] hingga [ESTIMASI Waktu Selesai]
-      Tujuan: [Tujuan]
-      Alamat Tujuan: [Alamat]
-      Keperluan : [Keperluan]
+      Nama Pegawai: $data[nama_pegawai]
+      Nama Driver: $data[nama_driver]
+      No Polisi Kendaraan : $data[no_polisi]
+      Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
+      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Tujuan: $data[tujuan]
+      Alamat Tujuan: $data[alamat]
+      Keperluan : $data[keperluan]
       
       Sekian dari informasi peminjaman yang dapat kami berikan
       
@@ -243,17 +243,17 @@ class WhatsApp
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($data)
   {
-    $pesan = "Dear [Nama Driver],
+    $pesan = "Dear $data[nama_driver],
 
-      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar [Nama Pegawai] dalam keperluan kantor. Berikut adalah detail peminjaman kendaraan:
+      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar $data[nama_pegawai] dalam keperluan kantor. Berikut adalah detail peminjaman kendaraan:
       
-      Nama Pegawai: [Nama Pegawai]
-      No Polisi Kendaraan : [KT 8118 ]
-      Kendaraan yang Dipinjam: [Merek dan Tipe Kendaraan]
-      Waktu Peminjaman: [Waktu Mulai] hingga [ESTIMASI Waktu Selesai]
-      Tujuan: [Tujuan]
-      Alamat Tujuan: [Alamat]
-      Keperluan : [Keperluan]
+      Nama Pegawai: $data[nama_pegawai]
+      No Polisi Kendaraan : $data[no_polisi]
+      Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
+      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Tujuan: $data[tujuan]
+      Alamat Tujuan: $data[alamat]
+      Keperluan : $data[keperluan]
       
       Silakan menghubungi pegawai untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut    
     ";
@@ -263,23 +263,23 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_driver"], $pesan);
   }
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_User($data)
   {
-    $pesan = "Halo [Nama Pegawai],
+    $pesan = "Halo $data[nama_pegawai],
 
       Kami ingin memberitahukan bahwa peminjaman  Anda telah berhasil dilakukan setelah menunggu pada antrian kendaraan.
       Berikut adalah detail peminjaman kendaraan Anda:
       
-      Nama Driver: [Nama Driver]
-      No Polisi Kendaraan : [KT 8118 ]
-      Kendaraan yang Dipinjam: [Merek dan Tipe Kendaraan]
-      Waktu Peminjaman: [Waktu Mulai] hingga [ESTIMASI Waktu Selesai]
-      Tujuan: [Tujuan]
-      Alamat Tujuan: [Alamat]
-      Keperluan : [Keperluan]
+      Nama Driver: $data[nama_driver]
+      No Polisi Kendaraan : $data[no_polisi]
+      Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
+      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Tujuan: $data[tujuan]
+      Alamat Tujuan: $data[alamat]
+      Keperluan : $data[keperluan]
       
       Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai peminjaman pada sistem
       
@@ -291,14 +291,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_Admin($data)
   {
     $pesan = "Halo Admin
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama [Nama Pegawai] dengan menggunakan kendaraan [Nomor Polisi] dan ditemani [Nama Driver] telah selesai dilakukan.
+      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_driver] telah selesai dilakukan.
       
       Terima kasih .
     ";
@@ -313,9 +313,9 @@ class WhatsApp
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_Driver($data)
   {
-    $pesan = "Halo [Nama Driver]
+    $pesan = "Halo $data[nama_driver]
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama [Nama Pegawai] dengan menggunakan kendaraan [Nomor Polisi] dan ditemani driver yang ditugaskan adalah Anda telah selesai dilakukan.
+      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda telah selesai dilakukan.
       
       Terima kasih .
     ";
@@ -325,14 +325,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_driver"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_User($data)
   {
-    $pesan = "Halo [nama pegawai],
+    $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan [Nomor Polisi] telah selesai dilakukan.
+      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan $data[no_polisi] telah selesai dilakukan.
       
       Terima kasih telah menggunakan layanan kami.
     ";
@@ -342,14 +342,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_Admin($data)
   {
     $pesan = "Halo Admin
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama [Nama Pegawai] dengan menggunakan kendaraan [Nomor Polisi] dan ditemani [Nama Driver] status peminjamannya telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_pegawai] status peminjamannya telah diselesaikan oleh Admin.
       
       Terima kasih .    
     ";
@@ -364,9 +364,9 @@ class WhatsApp
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_Driver($data)
   {
-    $pesan = "Halo [Nama Driver]
+    $pesan = "Halo $data[nama_driver]
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama [Nama Pegawai] dengan menggunakan kendaraan [Nomor Polisi] dan ditemani driver yang ditugaskan adalah Anda  bahwa status peminjaman telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda  bahwa status peminjaman telah diselesaikan oleh Admin.
       
       Terima kasih .
     ";
@@ -376,14 +376,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_driver"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_User($data)
   {
-    $pesan = "Halo [nama pegawai],
+    $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan [Nomor Polisi] status peminjaman telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan $data[no_polisi] status peminjaman telah diselesaikan oleh Admin.
       
       Terima kasih telah menggunakan layanan kami.
     ";
@@ -393,14 +393,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraan_Admin($data)
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam anntrian telah dibatalkan lewat sistem.
+      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
       Terima kasih.
     ";
@@ -417,7 +417,7 @@ class WhatsApp
   {
     $pesan = "Halo [Nama User],
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam anntrian telah dibatalkan lewat sistem.
+      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
       Silakan hubungi Admin jika Anda memiliki pertanyaan atau ingin membahas opsi lain untuk mendapatkan kendaraan yang Anda butuhkan.
       
@@ -436,7 +436,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam anntrian telah dibatalkan oleh anda.
+      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam antrian telah dibatalkan oleh anda.
       
       Terima kasih.
     ";
