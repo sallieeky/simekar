@@ -10,11 +10,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WhatsApp;
-use App\Models\Kendaraan;
-use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -185,25 +181,3 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-
-// Route::get('/kirim', function () {
-//     Mail::send('mail.tes', [], function ($message) {
-//         $message->from('info@simekar.foundid.my.id', 'SIMEKAR');
-//         $message->to('sallieeky@gmail.com', 'Sallie Eky');
-//         $message->subject("Tes Kirim Dari SIMEKAR");
-//     });
-//     return "BERHASIL";
-// });
-
-
-// Route::get("/tes", function () {
-//     $kendaraan = Kendaraan::whereHas('asetKendaraan', function ($query) {
-//         $query->whereDate('masa_pajak', Carbon::now()->addDays(14));
-//     })->get();
-//     $kendaraan = Kendaraan::with("asetKendaraan")->get();
-//     return $kendaraan;
-// });
-
-Route::get("/tes", [CronController::class, "daily"]);
-
-// Route::get('/pdf', [KendaraanController::class, "pdf"]);
