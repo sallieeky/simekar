@@ -23,7 +23,7 @@ class CronController extends Controller
             $dataWa = [
                 "merk" => $k->merk,
                 "no_polis" => $k->no_polis,
-                "masa_pajak" => Carbon::parse($k->aset_kendaraan->masa_pajak)->translatedFormat('l, d F Y'),
+                "masa_pajak" => Carbon::parse($k->asetKendaraan->masa_pajak)->translatedFormat('l, d F Y'),
             ];
             WhatsApp::reminderPajakKendaraan_Hmin14_Admin($dataWa);
         }
