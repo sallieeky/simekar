@@ -120,8 +120,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/peminjaman/batal/{peminjaman}", [PeminjamanController::class, 'batal']);
 });
 
-Route::prefix('cron')->middleware("admin")->group(function () {
-    Route::post("/tes", [CronController::class, "tes"]);
+Route::prefix('cron')->group(function () {
+    Route::get("/tes", [CronController::class, "tes"]);
 });
 
 // FORGET PASSWORD
