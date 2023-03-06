@@ -573,9 +573,9 @@ class WhatsApp
       
       Informasi Detail:
       
-      Kendaraan: [Merk] [Tipe
-      Nomor Polisi: [nomor polisi kendaraan]
-      Masa Berlaku Pajak: [Masa Berlaku Pajak]
+      Kendaraan: $data[merk] $data[tipe]
+      Nomor Polisi: $data[no_polisi]
+      Masa Berlaku Pajak: $data[masa_pajak]
       
       Terima kasih telah memperhatikan pesan ini. Jangan lupa untuk membayar pajak kendaraan sebelum tanggal jatuh tempo dan melakukan Update Tanggal Masa Berlaku pada sistem.
     ";

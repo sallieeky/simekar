@@ -12,6 +12,7 @@ use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsApp;
 use App\Models\Kendaraan;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
@@ -121,7 +122,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('cron')->group(function () {
-    Route::get("/tes", [CronController::class, "tes"]);
+    Route::get("/daily", [CronController::class, "daily"]);
 });
 
 // FORGET PASSWORD
@@ -195,8 +196,12 @@ Route::post('/reset-password', function (Request $request) {
 // });
 
 
-// Route::get("/tes", function () {
-//     return view("tes");
-// });
+Route::get("/tes", function () {
+    $kendaraan = Kendaraan::whereHas('asetKendaraan', function ($query) {
+        $query->whereDate('masa_pajak', Carbon::now()->addDays(14));
+    })->get();
+    // $kendaraan = Kendaraan::with("asetKendaraan")->get();
+    return $kendaraan;
+});
 
 // Route::get('/pdf', [KendaraanController::class, "pdf"]);
