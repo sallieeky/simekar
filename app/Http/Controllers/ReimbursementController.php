@@ -39,7 +39,7 @@ class ReimbursementController extends Controller
         $nominal = str_replace(',', '', $request->nominal);
 
         $nomorReimburse = Reimbursement::whereMonth('created_at', Carbon::now()->month)->get()->count() + 1;
-        Reimbursement::create([
+        $reimbursement = Reimbursement::create([
             'user_id' => Auth::user()->id,
             'kendaraan_id' => $request->kendaraan_id,
             'km_tempuh' => $request->km_tempuh,
@@ -47,7 +47,17 @@ class ReimbursementController extends Controller
             'nominal' => $nominal,
         ]);
 
+        $dataWA = [
+            "nama_pegawai" => $reimbursement->user->nama,
+            "nohp_pegawai" => $reimbursement->user->no_hp,
+            "no_polisi" => $reimbursement->kendaraan->no_polisi,
+            "km_tempuh" => $reimbursement->km_tempuh,
+            "nominal" => $reimbursement->nominal,
+            "tgl_pengajuan" => Carbon::parse($reimbursement->created_at)->translatedFormat('l, d F Y H:i'),
+        ];
 
+        WhatsApp::pengajuanReimburseMasukDiproses_Admin($dataWA);
+        WhatsApp::pengajuanReimburseMasukDiproses_User($dataWA);
 
         return back()->with('success', 'Berhasil melakukan pengajuan reimbursement');
     }
@@ -81,11 +91,27 @@ class ReimbursementController extends Controller
 
     public function pengajuanRespon(Request $request)
     {
-        Reimbursement::find($request->id)
-            ->update([
-                "keterangan" => $request->keterangan,
-                "status" => $request->status == "setuju" ? "Pengajuan disetujui" : "Pengajuan ditolak",
-            ]);
+        $reimbursement = Reimbursement::find($request->id);
+        $dataWA = [
+            "nama_pegawai" => $reimbursement->user->nama,
+            "nohp_pegawai" => $reimbursement->user->no_hp,
+            "no_polisi" => $reimbursement->kendaraan->no_polisi,
+            "km_tempuh" => $reimbursement->km_tempuh,
+            "nominal" => $reimbursement->nominal,
+            "tgl_pengajuan" => Carbon::parse($reimbursement->created_at)->translatedFormat('l, d F Y H:i'),
+            "keterangan" => $request->keterangan,
+        ];
+
+        if ($request->status == "setuju") {
+            WhatsApp::reimburseDisetujui_User($dataWA);
+        } else {
+            WhatsApp::reimburseDitolak_User($dataWA);
+        }
+        $reimbursement->update([
+            "keterangan" => $request->keterangan,
+            "status" => $request->status == "setuju" ? "Pengajuan disetujui" : "Pengajuan ditolak",
+        ]);
+
         return back()->with('success', "Berhasil merespon reimbursement");
     }
 

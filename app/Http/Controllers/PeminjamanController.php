@@ -287,9 +287,17 @@ class PeminjamanController extends Controller
 
     public function batal(Peminjaman $peminjaman)
     {
+        $dataWA = [
+            "nama_pegawai" => $peminjaman->user->nama,
+            "nohp_pegawai" => $peminjaman->user->no_hp,
+        ];
         if (Auth::user()->role == "user" && $peminjaman->user_id == Auth::user()->id) {
+            WhatsApp::melakukanPembatalanPeminjamanDiAntrianKendaraan_Admin($dataWA);
+            WhatsApp::melakukanPembatalanPeminjamanDiAntrianKendaraan_User($dataWA);
             $peminjaman->delete();
         } else if (Auth::user()->role == "admin") {
+            WhatsApp::melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_Admin($dataWA);
+            WhatsApp::melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_User($dataWA);
             $peminjaman->delete();
         }
 

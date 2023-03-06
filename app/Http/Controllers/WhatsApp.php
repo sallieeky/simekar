@@ -400,7 +400,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
+      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
       Terima kasih.
     ";
@@ -415,7 +415,7 @@ class WhatsApp
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraan_User($data)
   {
-    $pesan = "Halo [Nama User],
+    $pesan = "Halo $data[nama_pegawai],
 
       Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
@@ -429,14 +429,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_Admin($data)
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan [Nama Pegawai] yang statusnya sedang dalam antrian telah dibatalkan oleh anda.
+      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan oleh anda.
       
       Terima kasih.
     ";
@@ -451,7 +451,7 @@ class WhatsApp
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_User($data)
   {
-    $pesan = "Halo [Nama User],
+    $pesan = "Halo $data[nama_pegawai],
 
       Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam anntrian telah dibatalkan oleh admin.
       
@@ -465,21 +465,21 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function pengajuanReimburseMasukDiproses_Admin($data)
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu bahwa sistem telah menerima pengajuan biaya reimburse BBM yang dilakukan [nama pegawai] telah berhasil diajukan.
+      Kami ingin memberitahu bahwa sistem telah menerima pengajuan biaya reimburse BBM yang dilakukan $data[nama_pegawai] telah berhasil diajukan.
       Berikut adalah detail pengajuan tersebut:
       
-      Nama Pegawai : [Nama Pegawai
-      Tanggal Pengajuan : [Tanggal Pengajuan]
-      Kendaraan : [No Polisi Kendaraan]
-      Km Tempuh : [Km Tempuh]
-      Nominal Pengajuan : [Nominal]
+      Nama Pegawai : $data[nama_pegawai]
+      Tanggal Pengajuan : $data[tgl_pengajuan]
+      Kendaraan : $data[no_polisi]
+      Km Tempuh : $data[km_tempuh]
+      Nominal Pengajuan : $data[nominal]
       
       Mohon untuk segera memproses pengajuan ini dengan mengkonfirmasi lewat sistem.
       
@@ -496,14 +496,14 @@ class WhatsApp
 
   public static function pengajuanReimburseMasukDiproses_User($data)
   {
-    $pesan = "Halo [Nama User],
+    $pesan = "Halo $data[nama_pegawai],
 
       Kami ingin memberitahu bahwa pengajuan biaya reimburse BBM Anda telah berhasil diajukan dan akan segera diproses oleh Sub Bagian Umum.  Berikut detail Pengajuan reimburse BBM:
       
-      Tanggal Pengajuan : [Tanggal Pengajuan]
-      Kendaraan : [No Polisi Kendaraan]
-      Km Tempuh : [Km Tempuh]
-      Nominal Pengajuan : [Nominal]
+      Tanggal Pengajuan : $data[tgl_pengajuan]
+      Kendaraan : $data[no_polisi]
+      Km Tempuh : $data[km_tempuh]
+      Nominal Pengajuan : $data[nominal]
       
       Kami akan memberikan informasi lebih lanjut mengenai status pengajuan Anda apabila telah dikonfirmasi oleh Sub Bagian Umum.
       
@@ -515,21 +515,21 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reimburseDisetujui_User($data)
   {
-    $pesan = "Halo [Nama Pegawai],
+    $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahukan bahwa pengajuan biaya reimburse BBM Anda pada tanggal [Tanggal Pengajuan] telah DISETUJUI.
+      Kami ingin memberitahukan bahwa pengajuan biaya reimburse BBM Anda pada tanggal $data[tgl_pengajuan] telah DISETUJUI.
       Berikut detail Pengajuan reimburse BBM:
       
-      Tanggal Pengajuan : [Tanggal Pengajuan]
-      Kendaraan : [No Polisi Kendaraan]
-      Km Tempuh : [Km Tempuh]
-      Nominal Pengajuan : [Nominal]
-      Keterangan : [Keterangan]
+      Tanggal Pengajuan : $data[tgl_pengajuan]
+      Kendaraan : $data[no_polisi]
+      Km Tempuh : $data[km_tempuh]
+      Nominal Pengajuan : $data[nominal]
+      Keterangan : $data[keterangan]
       
       Harap Menyimpan Nota Asli pembelian BBM dan menyerahkan kepada pihak Sub Bagian Umum.
       
@@ -541,14 +541,14 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reimburseDitolak_User($data)
   {
-    $pesan = "Halo [Nama Pegawai],
+    $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahukan bahwa pengajuan biaya reimburse BBM Anda pada tanggal [Tanggal Pengajuan] telah ditinjau dan DITOLAK dengan alasan [Keterangan].
+      Kami ingin memberitahukan bahwa pengajuan biaya reimburse BBM Anda pada tanggal $data[tgl_pengajuan] telah ditinjau dan DITOLAK dengan alasan $data[keterangan].
       
       Apabila pegawai memiliki pertanyaan atau keberatan terkait penolakan ini, silakan menghubungi Sub Bagian Umum untuk konsultasi lebih lanjut.
       
@@ -560,7 +560,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    return self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reminderPajakKendaraan_Hmin14_Admin($data)
