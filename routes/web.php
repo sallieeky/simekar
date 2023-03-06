@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsetServiceController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CronController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KendaraanController;
@@ -119,6 +120,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/peminjaman/batal/{peminjaman}", [PeminjamanController::class, 'batal']);
 });
 
+Route::prefix('cron')->middleware("admin")->group(function () {
+    Route::post("/tes", [CronController::class, "tes"]);
+});
+
 // FORGET PASSWORD
 Route::get('/lupa-password', function () {
     return view('auth.lupa-password');
@@ -179,12 +184,6 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-
-Route::prefix('cron')->middleware("admin")->group(function () {
-    // 
-});
-
-
 
 // Route::get('/kirim', function () {
 //     Mail::send('mail.tes', [], function ($message) {
