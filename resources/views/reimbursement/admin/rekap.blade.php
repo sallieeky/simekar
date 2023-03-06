@@ -121,7 +121,7 @@
       });
     } else {
       $.ajax({
-        url: "/admin/peminjaman/pengajuan/rekapitulasi/export?tanggal_dari=" + tanggal_dari + "&tanggal_sampai=" + tanggal_sampai,
+        url: "/admin/reimbursement/pengajuan/rekapitulasi/export?tanggal_dari=" + tanggal_dari + "&tanggal_sampai=" + tanggal_sampai,
         type: "GET",
         data: {
           tanggal_dari: tanggal_dari,
