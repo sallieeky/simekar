@@ -26,14 +26,16 @@ class ReimbursementController extends Controller
     {
         $request->validate([
             'kendaraan_id' => 'required',
-            'km_tempuh' => 'required|regex:/^[0-9.]+$/',
-            'nominal' => 'required|regex:/^[0-9.,]+$/',
+            'km_tempuh' => 'required|regex:/^[0-9.]+$/|gt:0',
+            'nominal' => 'required|regex:/^[0-9.,]+$/|gt:0',
         ], [
             'kendaraan_id.required' => 'Kendaraan harus dipilih',
             'km_tempuh.required' => 'KM tempuh tidak boleh kosong',
             'km_tempuh.regex' => 'KM tempuh harus berupa angka',
+            'km_tempuh.gt' => 'KM tempuh harus lebih besar dari 0',
             'nominal.required' => 'Nominal tidak boleh kosong',
             'nominal.regex' => 'Nominal harus berupa angka',
+            'nominal.gt' => 'Nominal harus lebih besar dari 0',
         ]);
 
         $nominal = str_replace(',', '', $request->nominal);
