@@ -24,6 +24,7 @@ class ReimbursementController extends Controller
 
     public function pengajuanPost(Request $request)
     {
+        $request['nominal'] = str_replace(',', '', $request['nominal']);
         $request->validate([
             'kendaraan_id' => 'required',
             'km_tempuh' => 'required|regex:/^[0-9.]+$/|gt:0',
