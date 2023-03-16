@@ -1,3 +1,4 @@
+/cgi-bin
 /node_modules
 /public/build
 /public/hot
@@ -13,6 +14,7 @@ Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
+error_log
 /.fleet
 /.idea
 /.vscode
