@@ -68,8 +68,8 @@ class PeminjamanController extends Controller
             'nama_tujuan' => 'required',
             'keperluan' => 'required',
             'tanggal_peminjaman' => 'required',
-            'waktu_peminjaman' => 'required|date_format:H:i|after_or_equal:' . date('H:i', strtotime('-5 minutes')) . '|before:17:00',
-            'waktu_selesai' => 'required|after_or_equal:' . date('Y-m-d H:i'),
+            'waktu_peminjaman' => 'required',
+            'waktu_selesai' => 'required',
         ], [
             'nama_tujuan.required' => 'Nama tujuan tidak boleh kosong',
             'keperluan.required' => 'Keperluan tidak boleh kosong',
@@ -88,18 +88,28 @@ class PeminjamanController extends Controller
         ]);
 
         if ($request->driver_id != null || $request->kendaraan_id != null) {
-            if ($request->driver_id != 0) {
+            if ($request->tanggal_peminjaman != date('Y-m-d')) {
+                $status = 'menunggu';
+            } else if ($request->driver_id != 0 && $request->kendaraan_id != 0) {
+                $driver = Driver::find($request->driver_id);
+                $driver->isReady = 0;
+                $driver->save();
+
+                $kendaraan = Kendaraan::find($request->kendaraan_id);
+                $kendaraan->isReady = 0;
+                $kendaraan->save();
+            } else if ($request->kendaraan_id != 0 && $request->driver_id == 0) {
+                $kendaraan = Kendaraan::find($request->kendaraan_id);
+                $kendaraan->isReady = 0;
+                $kendaraan->save();
+            } else if ($request->driver_id != 0 && $request->kendaraan_id == 0) {
                 $driver = Driver::find($request->driver_id);
                 $driver->isReady = 0;
                 $driver->save();
             }
-            $kendaraan = Kendaraan::find($request->kendaraan_id);
-            $kendaraan->isReady = 0;
-
-            $kendaraan->save();
         }
 
-        $status = ($request->driver_id == null || $request->kendaraan_id == null) ? 'menunggu' : 'dipakai';
+        $status = ($request->driver_id == null || $request->kendaraan_id == null || $request->tanggal_peminjaman != date('Y-m-d')) ? 'menunggu' : 'dipakai';
 
         $nomorPeminjaman = Peminjaman::whereMonth('created_at', Carbon::now()->month)->get()->count() + 1;
         $dtPeminjaman = Peminjaman::create([

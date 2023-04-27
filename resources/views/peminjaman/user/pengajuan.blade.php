@@ -82,7 +82,7 @@
                 <div class="col-md-4">
                   <div class="validation-container mb-4">
                     <div class="form-floating">
-                      <input class="form-control form-control-lg @error('tanggal_peminjaman') is-invalid @enderror" type="date" id="tanggal_peminjaman" placeholder="Tanggal Peminjaman" name="tanggal_peminjaman" value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}" readonly>
+                      <input class="form-control form-control-lg @error('tanggal_peminjaman') is-invalid @enderror" type="date" id="tanggal_peminjaman" placeholder="Tanggal Peminjaman" name="tanggal_peminjaman" value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}" >
                       <label for="tanggal_peminjaman">Tanggal Peminjaman</label>
                       @error('tanggal_peminjaman')
                         <div class="invalid-feedback">{{ $message }}</div>

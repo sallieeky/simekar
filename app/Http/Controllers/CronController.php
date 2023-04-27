@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Kendaraan;
+use App\Models\Peminjaman;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class CronController extends Controller
 {
@@ -17,6 +18,38 @@ class CronController extends Controller
         $this->reminderPajakStnk_Hplus3_Admin();
         $this->reminderPajakAsuransi_Hplus3_Admin();
         $this->reminderServiceRutinKendaraan_Admin();
+        $this->cekPeminjaman_H_user();
+    }
+
+    private function cekPeminjaman_H_user()
+    {
+        $peminjaman = Peminjaman::where('status', 'menunggu')
+            ->whereDate('tanggal_pinjam', Carbon::now()->format('Y-m-d'))
+            ->get();
+
+        $kendaraan = Kendaraan::where('isReady', 1)->inRandomOrder()->get();
+        $driver = Driver::where('isReady', 1)->inRandomOrder()->get();
+
+        if ($peminjaman->count() > 0 && $kendaraan && $driver) {
+            $i = 0;
+            foreach ($peminjaman as $p) {
+                if ($i == $kendaraan->count() || $i == $driver->count()) {
+                    break;
+                }
+                $p->kendaraan_id = $kendaraan[$i]->id;
+                $p->driver_id = $driver[$i]->id;
+                $p->status = 'dipakai';
+                $p->save();
+
+                $kendaraan[$i]->isReady = 0;
+                $kendaraan[$i]->save();
+
+                $driver[$i]->isReady = 0;
+                $driver[$i]->save();
+
+                $i++;
+            }
+        }
     }
 
     private function reminderPajakKendaraan_Hmin14_Admin()
