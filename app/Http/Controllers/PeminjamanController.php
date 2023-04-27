@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Driver;
+use App\Models\DriverRating;
 use App\Models\Kendaraan;
+use App\Models\KendaraanRating;
 use App\Models\Peminjaman;
 use App\Models\TujuanPeminjaman;
 use Carbon\Carbon;
@@ -181,12 +183,25 @@ class PeminjamanController extends Controller
         }
     }
 
-    public function selesai(Peminjaman $peminjaman)
+    public function selesai(Request $request, Peminjaman $peminjaman)
     {
         $kendaraan = Kendaraan::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
         $driver = Driver::where('isShow', 1)->where('isReady', 1)->inRandomOrder()->first();
         if (Auth::user()->role == "user") {
             if ($peminjaman->user_id == Auth::user()->id) {
+
+                DriverRating::create([
+                    'driver_id' => $peminjaman->driver->id,
+                    'peminjaman_id' => $peminjaman->id,
+                    'rating' => $request->rating_driver,
+                ]);
+                KendaraanRating::create([
+                    'kendaraan_id' => $peminjaman->kendaraan->id,
+                    'peminjaman_id' => $peminjaman->id,
+                    'rating' => $request->rating_kendaraan,
+                    'keterangan' => $request->keterangan,
+                ]);
+
                 $peminjaman->status = "selesai";
                 $peminjaman->save();
 
@@ -218,7 +233,6 @@ class PeminjamanController extends Controller
                 } else {
                     Driver::where("id", $peminjaman->driver_id)->update(["isReady" => true]);
                     Kendaraan::where("id", $peminjaman->kendaraan_id)->update(["isReady" => true]);
-
 
                     $dataWA = [
                         "nama_pegawai" => $peminjaman->user->nama,

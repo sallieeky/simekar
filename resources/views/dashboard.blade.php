@@ -597,6 +597,31 @@
 </script>
 @endif
 
+@isset($peminjaman->status)
+<script>
+  $(document).ready(function () {
+    $("#btn-selesai").click(function () {
+      let html = "<form action='/peminjaman/selesai/{{ $peminjaman->id }}' method='POST'>" + '{{ csrf_field() }}' + "<div class='form-group mb-3'> <label for='rating_driver' class='mb-2'><strong>Rating Driver</strong></label><br><div class='form-check form-check-inline'> <input class='form-check-input' type='radio' name='rating_driver' id='rating_driver_puas' value='puas' checked /> <label class='form-check-label' for='rating_driver_puas'>Puas</label> </div> <div class='form-check form-check-inline'> <input class='form-check-input' type='radio' name='rating_driver' id='rating_driver_tidak_puas' value='tidak puas' /> <label class='form-check-label' for='rating_driver_tidak_puas'>Tidak Puas</label> </div> </div> <div class='form-group mb-3'> <label for='rating_kendaraan' class='mb-2'><strong>Rating Kendaraan</strong></label><br><div class='form-check form-check-inline'> <input class='form-check-input' type='radio' name='rating_kendaraan' id='rating_kendaraan_baik' value='baik' checked/> <label class='form-check-label' for='rating_kendaraan_baik'>Baik</label> </div> <div class='form-check form-check-inline'> <input class='form-check-input' type='radio' name='rating_kendaraan' id='rating_kendaraan_kurang_baik' value='kurang baik' /> <label class='form-check-label' for='rating_kendaraan_kurang_baik'>Kurang Baik</label> </div> </div> <div class='form-group mb-3' style='display:none' id='form_komentar'> <label for='keterangan'>Keterangan Kendaraan</label> <textarea class='form-control' id='keterangan' name='keterangan' rows='3'></textarea> </div> <button type='submit' class='btn btn-primary'>Kirim</button> </form>";
+      Swal.fire({
+        title: "<strong>Kondisi Setelah Penggunaan</strong>",
+        icon: "info",
+        html: html,
+        showCloseButton: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        focusConfirm: false,
+      });
+
+      $("#rating_kendaraan_kurang_baik").click(function () {
+        $("#form_komentar").css("display", "block");
+      });
+      $("#rating_kendaraan_baik").click(function () {
+        $("#form_komentar").css("display", "none");
+      });
+    });
+  });
+</script>
+@endif
 
 <script>
   $(document).ready(function () {
@@ -616,22 +641,6 @@
       });
     });
 
-    $("#btn-selesai").click(function () {
-      Swal.fire({
-        title: "Apakah anda yakin telah selesai melakukan peminjaman?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Ya",
-        cancelButtonText: "Tidak",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $("#form-selesai").submit();
-        }
-      });
-    });
-
     $(".btn-admin-hapus").click(function () {
       Swal.fire({
         title: "Apakah anda yakin ingin menghapus data ini?",
@@ -647,7 +656,6 @@
         }
       });
     });
-    
   });
 </script>
 @endsection

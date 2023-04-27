@@ -45,4 +45,14 @@ class Peminjaman extends Model
     {
         return $this->belongsTo(User::class)->withTrashed();
     }
+
+    public function kendaraan_rating()
+    {
+        return $this->hasOne(KendaraanRating::class);
+    }
+
+    public function driver_rating()
+    {
+        return $this->hasOne(DriverRating::class);
+    }
 }
