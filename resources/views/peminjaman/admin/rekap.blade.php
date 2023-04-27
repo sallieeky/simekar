@@ -67,6 +67,9 @@
                     <th>Tanggal Kembali</th>  
                     <th>Tujuan</th>  
                     <th>Keperluan</th>  
+                    <th>Rating Driver</th>  
+                    <th>Kondisi Kendaraan</th>
+                    <th>Keterangan Kendaraan</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -82,6 +85,9 @@
                     <td>{{ $dt->waktuSelesaiFormated }}</td>
                     <td>{{ $dt->tujuan_peminjaman->nama }}</td>
                     <td>{{ $dt->keperluan }}</td>
+                    <td>{{ $dt->driver_rating->rating }}</td>
+                    <td>{{ $dt->kendaraan_rating->rating }}</td>
+                    <td>{{ $dt->kendaraan_rating->keterangan ?? "Baik" }}</td>
                   </tr>
                   @endforeach
                 </tbody>

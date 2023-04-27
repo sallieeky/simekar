@@ -330,7 +330,7 @@ class PeminjamanController extends Controller
 
     public function rekap()
     {
-        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user', 'driver_rating', 'kendaraan_rating')
             ->where("status", "selesai")
             ->orderBy('waktu_peminjaman', 'asc')
             ->get();
@@ -339,7 +339,7 @@ class PeminjamanController extends Controller
 
     public function rekapExport(Request $request)
     {
-        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user')
+        $data = Peminjaman::with('driver', 'kendaraan', 'tujuan_peminjaman', 'user', 'driver_rating', 'kendaraan_rating')
             ->whereDate('created_at', '>=', $request->tanggal_dari)
             ->whereDate('created_at', '<=', $request->tanggal_sampai)
             ->where("status", "selesai")
@@ -356,7 +356,7 @@ class PeminjamanController extends Controller
         fputcsv($handle, array('Tanggal Dari', $request->tanggal_dari), ';');
         fputcsv($handle, array('Tanggal Sampai', $request->tanggal_sampai), ';');
 
-        fputcsv($handle, array('Nomor', 'Nomor Nota', 'Nama Karyawan', 'Nomor Telepon', 'Nomor Polisi', 'Merk Kendaraan', 'Tipe Kendaraan', 'Nama Driver', 'Tanggal Peminjaman', 'Estimasi Selesai', 'Nama Tujuan', 'Alamat Tujuan', 'Keperluan'), ';');
+        fputcsv($handle, array('Nomor', 'Nomor Nota', 'Nama Karyawan', 'Nomor Telepon', 'Nomor Polisi', 'Merk Kendaraan', 'Tipe Kendaraan', 'Nama Driver', 'Tanggal Peminjaman', 'Estimasi Selesai', 'Nama Tujuan', 'Alamat Tujuan', 'Keperluan', 'Rating Driver', 'Kondisi Kendaraan', 'Keterangan Kendaraan'), ';');
 
         $no = 1;
         foreach ($data as $row) {
@@ -367,7 +367,7 @@ class PeminjamanController extends Controller
                 $nomor_peminjaman = '0' . $nomor_peminjaman;
             }
             $ns = "UMUM/PKR/$nomor_peminjaman/" . date('m', strtotime($row->created_at)) . "/" . date('Y', strtotime($row->created_at));
-            fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver_id != 0 ? $row->driver->nama : "Tanpa Driver", $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan), ';');
+            fputcsv($handle, array($no, $ns, $row->user->nama, $row->user->no_hp, $row->kendaraan->no_polisi, $row->kendaraan->merk, $row->kendaraan->tipe, $row->driver_id != 0 ? $row->driver->nama : "Tanpa Driver", $row->waktu_peminjaman, $row->waktu_selesai, $row->tujuan_peminjaman->nama, $row->tujuan_peminjaman->alamat, $row->keperluan, $row->driver_rating->rating, $row->kendaraan_rating->rating, $row->kendaraan_rating->keterangan ?? "Baik"), ';');
             $no++;
         }
         fclose($handle);
