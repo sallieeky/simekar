@@ -27,6 +27,7 @@
                     <th>Nama Pegawai</th>
                     <th>Nomor Handphone</th>
                     <th>Tanggal Pengajuan</th>
+                    <th>Kategori</th>
                     <th>Nomor Polisi</th>
                     <th>KM Tempuh</th>
                     <th>Nominal</th>
@@ -40,8 +41,9 @@
                     <td>{{ $dt->user->nama }}</td>
                     <td>{{ $dt->user->no_hp }}</td>
                     <td>{{ $dt->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $dt->kategori }}</td>
                     <td>{{ $dt->kendaraan->no_polisi }}</td>
-                    <td>{{ $dt->km_tempuh }}</td>
+                    <td>{{ $dt->km_tempuh ?? "Null" }}</td>
                     <td>
                       Rp. {{ number_format((int) $dt->nominal,2,',','.') }}  
                     </td>

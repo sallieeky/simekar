@@ -44,7 +44,18 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <label for="kategori">Kategori</label>
+                  <select class="form-select form-select-lg @error('kategori') is-invalid @enderror" name="kategori">
+                    <option value="BBM">BBM</option>
+                    <option value="Tol">Tol</option>
+                    <option value="Parkir">Parkir</option>
+                  </select>
+                  @error('kategori')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-md-3">
                   <label for="no_hp">Kendaraan</label>
                   <select class="form-select form-select-lg @error('kendaraan_id') is-invalid @enderror" name="kendaraan_id">
                     <option value="">Pilih Kendaraan</option>
@@ -56,14 +67,14 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="km_tempuh">KM pada kendaraan</label>
                   <input class="form-control form-control-lg @error('km_tempuh') is-invalid @enderror" type="number" id="km_tempuh" placeholder="KM tempuh" name="km_tempuh" value="{{ old('km_tempuh') }}">
                   @error('km_tempuh')
                     <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="nominal">Nominal pengajuan</label>
                   <div class="input-group">
                     <span class="input-group-text">Rp.</span>
@@ -122,6 +133,17 @@
       var format = nominal.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
       $(this).val(format);
       
+    });
+
+    // if kategori is bbm then show km tempuh
+    $("select[name='kategori']").on('change', function () {
+      var kategori = $(this).val();
+      if(kategori==="BBM") {
+        $("#km_tempuh").prop('readonly', false);
+      } else {
+        $("#km_tempuh").prop('readonly', true);
+        $("#km_tempuh").val("");
+      }
     });
 
   });
