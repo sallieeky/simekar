@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nota Peminjaman Kendaraan</title>
+    <title>Nota Pemakaian Kendaraan</title>
 
     <link rel="icon" href="logo_nota.jpeg" type="image/x-icon">
 
@@ -33,7 +33,7 @@
 
 <body style="margin: 3rem 1rem">
     <img src="logo_nota.jpeg" alt="logo" width="20%" style="position: absolute; top: 0">
-    <h3 style="text-decoration: underline; text-align: center">NOTA PERSETUJUAN PEMINJAMAN</h3>
+    <h3 style="text-decoration: underline; text-align: center">NOTA PERSETUJUAN PEMAKAIAN</h3>
 
     <p style="text-align: right; font-size: 12px; margin: 16px 0;">Balikpapan, {{ Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
 
@@ -52,13 +52,13 @@
         </tr>
         <tr align="justify">
             <td width="20%">Hal</td>
-            <td width="80%">: Peminjaman Kendaraan</td> 
+            <td width="80%">: Pemakaian Kendaraan</td> 
         </tr>
     </table>
 
     <div style="margin: 32px 0;">
         <p>Yth. {{ $peminjaman->user->nama }}</p>
-        <p>Persetujuan Peminjaman kendaraan anda telah disetujui dengan ketentuan sebagai berikut:</p>
+        <p>Persetujuan Pemakaian kendaraan anda telah disetujui dengan ketentuan sebagai berikut:</p>
 
         <table align="center" style="margin-top: 16px">
             <tr align="justify">
@@ -109,7 +109,7 @@
         </table>
     </div>
 
-    <p style="text-align: justify">Harap melakukan konfirmasi apabila telah selesai melakukan peminjaman. Dan menghubungi pihak <span style="font-weight: 700">Sub Bagian Umum</span> apabila ada kendala dalam peminjaman.</p>
+    <p style="text-align: justify">Harap melakukan konfirmasi apabila telah selesai melakukan pemakaian. Dan menghubungi pihak <span style="font-weight: 700">Sub Bagian Umum</span> apabila ada kendala dalam pemakain.</p>
 
     <p style="margin-top: 32px; text-align:right">Umum PT. Jasa Raharja Cabang Kalimantan Timur</p>
 

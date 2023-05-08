@@ -47,10 +47,10 @@
               @elseif($data["status_peminjaman"] == "menunggu")
               Dalam Antrian
               @elseif($data["status_peminjaman"] == "dipakai")
-              Dalam Peminjaman
+              Dalam Pemakaian
               @endif
             </h2>
-            <span class="widget10-subtitle">Status Peminjaman</span>
+            <span class="widget10-subtitle">Status Pemakaian</span>
           </div>
           <div class="widget10-addon">
             <!-- BEGIN Avatar -->
@@ -471,7 +471,7 @@
         <div class="portlet-icon">
           <i class="fa fa-clipboard-list"></i>
         </div>
-        <h3 class="portlet-title">Antrian Peminjaman</h3>
+        <h3 class="portlet-title">Antrian Pemakaian</h3>
       </div>
       <div class="portlet-body">
         <div class="d-grid gap-2">
@@ -494,11 +494,11 @@
                 <h4 class="widget5-title">{{ $dt->user->nama }}</h4>
                 <div class="widget5-group">
                   <div class="widget5-item">
-                    <span class="widget5-info">Tanggal Peminjaman</span>
+                    <span class="widget5-info">Tanggal Pemakaian</span>
                     <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_peminjaman)->translatedFormat('l, d M Y') }}</span>
                   </div>
                   <div class="widget5-item">
-                    <span class="widget5-info">Waktu Peminjaman</span>
+                    <span class="widget5-info">Waktu Pemakaian</span>
                     <span class="widget5-value">{{ Carbon\Carbon::parse($dt->waktu_selesai)->translatedFormat('H:i') }}</span>
                   </div>
                   <div class="widget5-item">

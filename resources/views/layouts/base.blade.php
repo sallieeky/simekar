@@ -162,7 +162,7 @@
 							<div class="menu-item-icon">
 								<i class="fa fa-car"></i>
 							</div>
-							<span class="menu-item-text">Peminjaman</span>
+							<span class="menu-item-text">Pemakaian</span>
 							<div class="menu-item-addon">
 								<i class="menu-item-caret caret"></i>
 							</div>

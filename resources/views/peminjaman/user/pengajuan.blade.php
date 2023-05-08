@@ -1,8 +1,8 @@
 @extends("layouts.base")
-@section("title", "Pengajuan Peminjaman")
+@section("title", "Pengajuan Pemakaian")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Peminjaman</span>
+  <span class="breadcrumb-text">Pemakaian</span>
 </a>
 <a href="#" class="breadcrumb-item">
   <span class="breadcrumb-text">Pengajuan</span>
@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Formulir Peminjaman</h3>
+        <h3 class="portlet-title">Formulir Pemakaian</h3>
       </div>
       <div class="portlet-body">
         <div class="row">
@@ -83,7 +83,7 @@
                   <div class="validation-container mb-4">
                     <div class="form-floating">
                       <input class="form-control form-control-lg @error('tanggal_peminjaman') is-invalid @enderror" type="date" id="tanggal_peminjaman" placeholder="Tanggal Peminjaman" name="tanggal_peminjaman" value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}" >
-                      <label for="tanggal_peminjaman">Tanggal Peminjaman</label>
+                      <label for="tanggal_peminjaman">Tanggal Pemakaian</label>
                       @error('tanggal_peminjaman')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -94,7 +94,7 @@
                   <div class="validation-container mb-4">
                     <div class="form-floating">
                       <input class="form-control form-control-lg @error('waktu_peminjaman') is-invalid @enderror" type="time" id="waktu_peminjaman" placeholder="Waktu Peminjaman" name="waktu_peminjaman" value="{{ date('H:i') }}" min="{{ date('H:i') }}" max="16:59">
-                      <label for="waktu_peminjaman">Waktu Peminjaman</label>
+                      <label for="waktu_peminjaman">Waktu Pemakaian</label>
                       @error('waktu_peminjaman')
                         <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -164,7 +164,7 @@
 
             Swal.fire({
               title: data.message,
-              text: "Dikarenakan peminjaman sedang berlangsung",
+              text: "Dikarenakan pemakaian sedang berlangsung",
               icon: "error",
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
@@ -173,7 +173,7 @@
           } else if(data.status == "no_driver") {
             Swal.fire({
               title: data.message,
-              text: "Apakah anda ingin melakukan peminjaman tanpa driver?",
+              text: "Apakah anda ingin melakukan pemakaian tanpa driver?",
               icon: "error",
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",

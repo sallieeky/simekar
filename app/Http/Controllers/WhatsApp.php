@@ -30,18 +30,18 @@ class WhatsApp
 
     $pesan = "Dear ADMIN
 
-      Kami ingin memberitahukan bahwa peminjaman kendaraan telah berhasil dilakukan oleh $data[nama_pegawai]. Berikut adalah detail peminjaman kendaraan:
+      Kami ingin memberitahukan bahwa pemakaian kendaraan telah berhasil dilakukan oleh $data[nama_pegawai]. Berikut adalah detail pemakaian kendaraan:
       
       Nama Pegawai: $data[nama_pegawai]
       Nama Driver: $data[nama_driver]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Sekian dari informasi peminjaman yang dapat kami berikan
+      Sekian dari informasi pemakaian yang dapat kami berikan
       
       Terima kasih.
     ";
@@ -61,17 +61,17 @@ class WhatsApp
 
     $pesan = "Dear $data[nama_driver],
 
-      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar $data[nama_pegawai] dalam keperluan kantor. Berikut adalah detail peminjaman kendaraan:
+      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar $data[nama_pegawai] dalam keperluan kantor. Berikut adalah detail pemakaian kendaraan:
       
       Nama Pegawai: $data[nama_pegawai]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Silakan menghubungi pegawai untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut
+      Silakan menghubungi pegawai untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai pemakaian kendaraan tersebut
       
       Terima kasih.
     ";
@@ -91,19 +91,19 @@ class WhatsApp
 
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahukan bahwa peminjaman kendaraan Anda telah berhasil tercatat dalam sistem kami.
+      Kami ingin memberitahukan bahwa pemakaian kendaraan Anda telah berhasil tercatat dalam sistem kami.
       
-      Berikut adalah detail peminjaman kendaraan Anda:
+      Berikut adalah detail pemakaian kendaraan Anda:
       
       Nama Driver: $data[nama_driver]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai peminjaman pada sistem
+      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai pemakaian kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai pemakaian pada sistem
       
       Terima kasih
     ";
@@ -123,17 +123,17 @@ class WhatsApp
 
     $pesan = "Dear ADMIN
 
-      Kami ingin memberitahukan bahwa peminjaman kendaraan telah berhasil dilakukan oleh $data[nama_pegawai]. Berikut adalah detail peminjaman kendaraan:
+      Kami ingin memberitahukan bahwa pemakaian kendaraan telah berhasil dilakukan oleh $data[nama_pegawai]. Berikut adalah detail pemakaian kendaraan:
       
       Nama Pegawai: $data[nama_pegawai]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Sekian dari informasi peminjaman yang dapat kami berikan
+      Sekian dari informasi pemakaian yang dapat kami berikan
       
       Terima kasih.
     ";
@@ -153,18 +153,18 @@ class WhatsApp
 
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahukan bahwa peminjaman kendaraan Anda telah berhasil tercatat dalam sistem kami.
+      Kami ingin memberitahukan bahwa pemakaian kendaraan Anda telah berhasil tercatat dalam sistem kami.
       
-      Berikut adalah detail peminjaman kendaraan Anda:
+      Berikut adalah detail pemakaian kendaraan Anda:
       
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai peminjaman pada sistem
+      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai pemakaian kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai pemakaian pada sistem
       
       Terima kasih
     ";
@@ -181,7 +181,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahukan bahwa $data[nama_pegawai] sedang dalam antrian peminjaman kendaraan dan sedang menunggu ketersediaan driver.
+      Kami ingin memberitahukan bahwa $data[nama_pegawai] sedang dalam antrian pemakaian kendaraan dan sedang menunggu ketersediaan driver.
       
       Terima kasih atas perhatiannya.
     ";
@@ -198,8 +198,8 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Terima kasih telah menggunakan layanan peminjaman kendaraan kami.
-      Kami ingin memberitahu bahwa status anda sedang dalam antrian untuk melakukan peminjaman kendaraan dan saat ini kami sedang mencari driver yang tersedia untuk melayani Anda.
+      Terima kasih telah menggunakan layanan pemakaian kendaraan kami.
+      Kami ingin memberitahu bahwa status anda sedang dalam antrian untuk melakukan pemakaian kendaraan dan saat ini kami sedang mencari driver yang tersedia untuk melayani Anda.
       Mohon bersabar dan tunggu sebentar, sistem akan segera menghubungi Anda setelah driver tersedia.
       
       Terima kasih atas kesabaran dan pengertiannya.    
@@ -217,18 +217,18 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Ini adalah pemberitahuan bahwa $data[nama_pegawai] telah mendapatkan ketersediaan driver setelah menunggu pada antrian kendaraan. Berikut adalah detail peminjaman kendaraan:
+      Ini adalah pemberitahuan bahwa $data[nama_pegawai] telah mendapatkan ketersediaan driver setelah menunggu pada antrian kendaraan. Berikut adalah detail pemakaian kendaraan:
       
       Nama Pegawai: $data[nama_pegawai]
       Nama Driver: $data[nama_driver]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Sekian dari informasi peminjaman yang dapat kami berikan
+      Sekian dari informasi pemakaian yang dapat kami berikan
       
       Terima kasih.    
     ";
@@ -245,17 +245,17 @@ class WhatsApp
   {
     $pesan = "Dear $data[nama_driver],
 
-      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar $data[nama_pegawai] dalam keperluan kantor. Berikut adalah detail peminjaman kendaraan:
+      Kami ingin memberitahukan bahwa Anda telah dipilih untuk bertugas dalam menemani dan mengantar $data[nama_pegawai] dalam keperluan kantor. Berikut adalah detail pemakaian kendaraan:
       
       Nama Pegawai: $data[nama_pegawai]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Silakan menghubungi pegawai untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut    
+      Silakan menghubungi pegawai untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai pemakaian kendaraan tersebut    
     ";
 
     $pesan = nl2br($pesan);
@@ -270,18 +270,18 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahukan bahwa peminjaman  Anda telah berhasil dilakukan setelah menunggu pada antrian kendaraan.
-      Berikut adalah detail peminjaman kendaraan Anda:
+      Kami ingin memberitahukan bahwa pemakaian  Anda telah berhasil dilakukan setelah menunggu pada antrian kendaraan.
+      Berikut adalah detail pemakaian kendaraan Anda:
       
       Nama Driver: $data[nama_driver]
       No Polisi Kendaraan : $data[no_polisi]
       Kendaraan yang Dipinjam: $data[merk] - $data[tipe]
-      Waktu Peminjaman: $data[waktu_peminjaman] hingga $data[waktu_selesai]
+      Waktu Pemakaian: $data[waktu_peminjaman] hingga $data[waktu_selesai]
       Tujuan: $data[tujuan]
       Alamat Tujuan: $data[alamat]
       Keperluan : $data[keperluan]
       
-      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai peminjaman kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai peminjaman pada sistem
+      Silakan menghubungi driver untuk memberikan konfirmasi dan koordinasi lebih lanjut mengenai pemakaian kendaraan tersebut dan apabila telah selesai harap melakukan konfirmasi selesai pemakaian pada sistem
       
       Terima kasih    
     ";
@@ -298,7 +298,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_driver] telah selesai dilakukan.
+      Kami ingin memberitahu bahwa pemakaian kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_driver] telah selesai dilakukan.
       
       Terima kasih .
     ";
@@ -315,7 +315,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_driver]
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda telah selesai dilakukan.
+      Kami ingin memberitahu bahwa pemakaian kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda telah selesai dilakukan.
       
       Terima kasih .
     ";
@@ -332,7 +332,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan $data[no_polisi] telah selesai dilakukan.
+      Kami ingin memberitahu bahwa pemakaian Anda dengan menggunakan kendaraan $data[no_polisi] telah selesai dilakukan.
       
       Terima kasih telah menggunakan layanan kami.
     ";
@@ -349,7 +349,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_pegawai] status peminjamannya telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa pemakaian kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani $data[nama_pegawai] status pemakaiannya telah diselesaikan oleh Admin.
       
       Terima kasih .    
     ";
@@ -366,7 +366,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_driver]
 
-      Kami ingin memberitahu bahwa peminjaman kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda  bahwa status peminjaman telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa pemakaian kendaraan atas nama $data[nama_pegawai] dengan menggunakan kendaraan $data[no_polisi] dan ditemani driver yang ditugaskan adalah Anda  bahwa status pemakaian telah diselesaikan oleh Admin.
       
       Terima kasih .
     ";
@@ -383,7 +383,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu bahwa peminjaman Anda dengan menggunakan kendaraan $data[no_polisi] status peminjaman telah diselesaikan oleh Admin.
+      Kami ingin memberitahu bahwa pemakaian Anda dengan menggunakan kendaraan $data[no_polisi] status pemakaian telah diselesaikan oleh Admin.
       
       Terima kasih telah menggunakan layanan kami.
     ";
@@ -400,7 +400,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
+      Kami ingin memberitahu Anda bahwa pemakaian kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
       Terima kasih.
     ";
@@ -417,7 +417,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
+      Kami ingin memberitahu Anda bahwa pemakaian kendaraan yang Anda ajukan yang statusnya sedang dalam antrian telah dibatalkan lewat sistem.
       
       Silakan hubungi Admin jika Anda memiliki pertanyaan atau ingin membahas opsi lain untuk mendapatkan kendaraan yang Anda butuhkan.
       
@@ -436,7 +436,7 @@ class WhatsApp
   {
     $pesan = "Halo Admin,
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan oleh anda.
+      Kami ingin memberitahu Anda bahwa pemakaian kendaraan yang diajukan $data[nama_pegawai] yang statusnya sedang dalam antrian telah dibatalkan oleh anda.
       
       Terima kasih.
     ";
@@ -453,7 +453,7 @@ class WhatsApp
   {
     $pesan = "Halo $data[nama_pegawai],
 
-      Kami ingin memberitahu Anda bahwa peminjaman kendaraan yang Anda ajukan yang statusnya sedang dalam anntrian telah dibatalkan oleh admin.
+      Kami ingin memberitahu Anda bahwa pemakaian kendaraan yang Anda ajukan yang statusnya sedang dalam anntrian telah dibatalkan oleh admin.
       
       Silakan hubungi Admin jika Anda memiliki pertanyaan atau ingin membahas opsi lain untuk mendapatkan kendaraan yang Anda butuhkan.
       

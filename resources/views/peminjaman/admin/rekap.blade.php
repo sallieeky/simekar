@@ -1,11 +1,11 @@
 @extends("layouts.base")
-@section("title", "Data Rekapitulasi Peminjaman")
+@section("title", "Data Rekapitulasi Pemakaian")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Peminjaman</span>
+  <span class="breadcrumb-text">Pemakaian</span>
 </a>
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Data Rekapitulasi Peminjaman</span>
+  <span class="breadcrumb-text">Data Rekapitulasi Pemakaian</span>
 </a>
 @endsection
 @section("content")
@@ -48,7 +48,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Data Rekapitulasi Peminjaman</h3>
+        <h3 class="portlet-title">Data Rekapitulasi Pemakaian</h3>
       </div>
       <div class="portlet-body">
         <div class="row">

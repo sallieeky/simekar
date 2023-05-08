@@ -1,11 +1,11 @@
 @extends("layouts.base")
-@section("title", "Data Pengajuan Peminjaman")
+@section("title", "Data Pengajuan Pemakaian")
 @section("breadcrumb")
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Peminjaman</span>
+  <span class="breadcrumb-text">Pemakaian</span>
 </a>
 <a href="#" class="breadcrumb-item">
-  <span class="breadcrumb-text">Data Pengajuan Peminjaman</span>
+  <span class="breadcrumb-text">Data Pengajuan Pemakaian</span>
 </a>
 @endsection
 @section("content")
@@ -14,7 +14,7 @@
   <div class="col-md-12">
     <div class="portlet">
       <div class="portlet-header d-flex justify-content-between">
-        <h3 class="portlet-title">Data Pengajuan Peminjaman Hari Ini ( {{ Carbon\Carbon::parse(date('d-m-Y'))->translatedFormat('l, d M Y') }} )</h3>
+        <h3 class="portlet-title">Data Pengajuan Pemakaian Hari Ini ( {{ Carbon\Carbon::parse(date('d-m-Y'))->translatedFormat('l, d M Y') }} )</h3>
       </div>
       <div class="portlet-body">
         <div class="row">
@@ -98,7 +98,7 @@
     $(".btn-batal").click(function () {
       Swal.fire({
         title: "Apakah anda yakin?",
-        text: "Anda akan membatalkan peminjaman ini",
+        text: "Anda akan membatalkan pemakaian ini",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -117,7 +117,7 @@
     $(".btn-selesai").click(function () {
       Swal.fire({
         title: "Apakah anda yakin?",
-        text: "Anda akan menyelesaikan peminjaman ini",
+        text: "Anda akan menyelesaikan pemakaian ini",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
