@@ -10,8 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
-	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>Login | SIMEKAR</title>
+	<link href="/logo_new.png" rel="shortcut icon" type="image/x-icon">
+	<title>Login | SIGAP</title>
 </head>
 
 <body class="preload-active">
