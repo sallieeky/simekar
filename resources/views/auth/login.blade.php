@@ -32,8 +32,8 @@
 			<div class="content">
 				<div class="container-fluid g-4">
 					<div class="row g-0 align-items-center justify-content-center h-100" style="flex-direction: column">
-						<img src="/logo.png" alt="Logo JR" class="img-fluid" style="width: 150px">
-						<h3 class="text-center">Sistem Informasi Manajemen Kendaraan</h3>
+						<img src="/logo_new.png" alt="Logo JR" class="img-fluid" style="width: 300px">
+						{{-- <h3 class="text-center">Sistem Informasi Manajemen Kendaraan</h3> --}}
 
 						<div class="col-sm-8 col-md-6 col-lg-4 col-xl-3">
 							<!-- BEGIN Portlet -->

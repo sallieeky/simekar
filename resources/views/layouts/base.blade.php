@@ -8,8 +8,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
-	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>@yield("title") | SIMEKAR</title>
+	<link href="/logo_new.png" rel="shortcut icon" type="image/x-icon">
+	<title>@yield("title") | SIGAP</title>
 
 	{{-- style scrollbar --}}
 	<style>
@@ -45,7 +45,7 @@
 		<!-- BEGIN Aside -->
 		<div class="aside">
 			<div class="aside-header">
-				<h3 class="aside-title">SIMEKAR</h3>
+				<h3 class="aside-title">SIGAP</h3>
 				<div class="aside-addon">
 					<button class="btn btn-label-primary btn-icon btn-lg" data-toggle="aside">
 						<i class="fa fa-times aside-icon-minimize"></i>
