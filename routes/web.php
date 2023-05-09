@@ -185,24 +185,25 @@ Route::post('/reset-password', function (Request $request) {
 
 
 Route::get("/tes", function () {
-    // $file = fopen(public_path('user.csv'), 'r');
-    // $i = 1;
-    // while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
-    //     // continue if first row
-    //     if ($i == 1) {
-    //         $i++;
-    //         continue;
-    //     }
-    //     $data = explode(";", $row[0]);
-    //     User::create([
-    //         'nama' => $data[0],
-    //         'email' => $data[3],
-    //         'password' => bcrypt($data[4]),
-    //         'role' => 'user',
-    //         'no_hp' => $data[1]
-    //     ]);
-    //     $i++;
-    // }
+    $file = fopen(public_path('kendaraan2.csv'), 'r');
+    $i = 1;
+    while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
+        // continue if first row
+        if ($i == 1 || $i == 2) {
+            $i++;
+            continue;
+        }
+        $data = explode(";", $row[0]);
+        echo $data[4] . "<br>";
+        // User::create([
+        //     'nama' => $data[0],
+        //     'email' => $data[3],
+        //     'password' => bcrypt($data[4]),
+        //     'role' => 'user',
+        //     'no_hp' => $data[1]
+        // ]);
+        // $i++;
+    }
 
-    // fclose($file);
+    fclose($file);
 });
