@@ -19,6 +19,8 @@ class CronController extends Controller
         $this->reminderPajakAsuransi_Hplus3_Admin();
         $this->reminderServiceRutinKendaraan_Admin();
         $this->cekPeminjaman_H_user();
+
+        WhatsApp::send("081717616711", "tes");
     }
 
     private function cekPeminjaman_H_user()
