@@ -119,7 +119,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::prefix('cron')->group(function () {
-    Route::get("/daily", [CronController::class, "daily"]);
+    Route::post("/daily", [CronController::class, "daily"]);
 });
 
 // FORGET PASSWORD
