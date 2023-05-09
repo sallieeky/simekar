@@ -26,7 +26,7 @@ class CronController extends Controller
     private function cekPeminjaman_H_user()
     {
         $peminjaman = Peminjaman::where('status', 'menunggu')
-            ->whereDate('tanggal_pinjam', Carbon::now()->format('Y-m-d'))
+            ->whereDate('waktu_peminjaman', Carbon::now()->format('Y-m-d'))
             ->get();
 
         $kendaraan = Kendaraan::where('isReady', 1)->inRandomOrder()->get();
