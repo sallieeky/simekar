@@ -71,17 +71,14 @@ class PeminjamanController extends Controller
             'keperluan' => 'required',
             'tanggal_peminjaman' => 'required',
             'waktu_peminjaman' => 'required',
-            'waktu_selesai' => 'required',
+            'waktu_selesai' => 'required|after_or_equal:' . $request->tanggal_peminjaman . ' ' . $request->waktu_peminjaman,
         ], [
             'nama_tujuan.required' => 'Nama tujuan tidak boleh kosong',
             'keperluan.required' => 'Keperluan tidak boleh kosong',
-            'tanggal_peminjaman.required' => 'Tanggal peminjaman tidak boleh kosong',
-            'waktu_peminjaman.required' => 'Waktu peminjaman tidak boleh kosong',
-            'waktu_peminjaman.after_or_equal' => 'Waktu peminjaman tidak boleh kurang dari jam sekarang',
-            'waktu_peminjaman.before' => 'Waktu peminjaman tidak boleh lebih dari jam 16:59',
+            'tanggal_peminjaman.required' => 'Tanggal pemakaian tidak boleh kosong',
+            'waktu_peminjaman.required' => 'Waktu pemakaian tidak boleh kosong',
             'waktu_selesai.required' => 'Waktu selesai tidak boleh kosong',
-            'waktu_selesai.date_format' => 'Format waktu selesai tidak valid',
-            'waktu_selesai.after_or_equal' => 'Waktu selesai tidak boleh kurang dari tanggal dan jam sekarang',
+            'waktu_selesai.after_or_equal' => 'Waktu selesai tidak boleh kurang dari waktu pemakaian',
         ]);
 
         $tujuanPeminjaman = TujuanPeminjaman::create([
