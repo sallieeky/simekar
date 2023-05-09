@@ -19,8 +19,6 @@ class CronController extends Controller
         $this->reminderPajakAsuransi_Hplus3_Admin();
         $this->reminderServiceRutinKendaraan_Admin();
         $this->cekPeminjaman_H_user();
-
-        WhatsApp::send("081717616711", "tes");
     }
 
     private function cekPeminjaman_H_user()
@@ -50,6 +48,26 @@ class CronController extends Controller
                 $driver[$i]->save();
 
                 $i++;
+
+                // data nama pegawai, nama driver, no polisi, merk, tipe, waktu peminjaman, waktu selesai, tujuan, alamat, keperluan
+                $dataWA = [
+                    "nama_pegawai" => $p->user->nama,
+                    "nohp_pegawai" => $p->user->no_hp,
+                    "nama_driver" => $p->driver->nama ?? null,
+                    "nohp_driver" => $p->driver->no_hp ?? null,
+                    "no_polisi" => $p->kendaraan->no_polisi ?? null,
+                    "merk" => $p->kendaraan->merk ?? null,
+                    "tipe" => $p->kendaraan->tipe ?? null,
+                    "waktu_peminjaman" => $p->waktu_peminjaman,
+                    "waktu_selesai" => $p->waktu_selesai,
+                    "tujuan" => $p->tujuan_peminjaman->nama,
+                    "alamat" => $p->tujuan_peminjaman->alamat,
+                    "keperluan" => $p->keperluan,
+                ];
+
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($dataWA);
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($dataWA);
+                WhatsApp::mendapatkanKendaraanSetelahMenungguPadaAntrian_User($dataWA);
             }
         }
     }
