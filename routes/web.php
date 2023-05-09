@@ -185,6 +185,24 @@ Route::post('/reset-password', function (Request $request) {
 
 
 Route::get("/tes", function () {
-    WhatsApp::send("081717616711", "tes");
-    return redirect("/");
+    // $file = fopen(public_path('user.csv'), 'r');
+    // $i = 1;
+    // while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
+    //     // continue if first row
+    //     if ($i == 1) {
+    //         $i++;
+    //         continue;
+    //     }
+    //     $data = explode(";", $row[0]);
+    //     User::create([
+    //         'nama' => $data[0],
+    //         'email' => $data[3],
+    //         'password' => bcrypt($data[4]),
+    //         'role' => 'user',
+    //         'no_hp' => $data[1]
+    //     ]);
+    //     $i++;
+    // }
+
+    // fclose($file);
 });

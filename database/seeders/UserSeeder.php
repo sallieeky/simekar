@@ -24,14 +24,6 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'nama' => 'User',
-            'email' => 'user1@gmail.com',
-            'password' => bcrypt('user12345'),
-            'role' => 'user',
-            'no_hp' => '081928172839'
-        ]);
-
-        User::create([
             'nama' => "Yus Fadillah",
             "email" => "10191059@student.itk.ac.id",
             "password" => bcrypt("yus12345"),
@@ -39,12 +31,24 @@ class UserSeeder extends Seeder
             'no_hp' => '081717616711'
         ]);
 
-        User::create([
-            'nama' => "Sallie Eky",
-            "email" => "sallieeky@gmail.com",
-            'password' => bcrypt('eky12345'),
-            'role' => 'user',
-            'no_hp' => '081243942304'
-        ]);
+        $file = fopen(public_path('user.csv'), 'r');
+        $i = 1;
+        while (($row = fgetcsv($file, 1000, ",")) !== FALSE) {
+            if ($i == 1) {
+                $i++;
+                continue;
+            }
+            $data = explode(";", $row[0]);
+            User::create([
+                'nama' => $data[0],
+                'email' => $data[3],
+                'password' => bcrypt($data[4]),
+                'role' => 'user',
+                'no_hp' => $data[1]
+            ]);
+            $i++;
+        }
+
+        fclose($file);
     }
 }
