@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nota Persetujuan Reimburse BBM</title>
+    <title>Nota Persetujuan Reimburse</title>
 
     <link rel="icon" href="logo_nota.jpeg" type="image/x-icon">
 
@@ -33,7 +33,7 @@
 
 <body style="margin: 3rem 1rem">
     <img src="logo_nota.jpeg" alt="logo" width="20%" style="position: absolute; top: 0">
-    <h3 style="text-decoration: underline; text-align: center">NOTA PERSETUJUAN REIMBURSE BBM</h3>
+    <h3 style="text-decoration: underline; text-align: center">NOTA PERSETUJUAN REIMBURSE</h3>
 
     <p style="text-align: right; font-size: 12px; margin: 16px 0;">Balikpapan, {{ Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
 
@@ -58,7 +58,7 @@
 
     <div style="margin: 32px 0;">
         <p>Yth. {{ $reimbursement->user->nama }}</p>
-        <p>Persetujuan Reimburse dana BBM anda telah disetujui dengan ketentuan sebagai berikut:</p>
+        <p>Persetujuan Reimburse dana anda telah disetujui dengan ketentuan sebagai berikut:</p>
 
         <table align="center" style="margin-top: 16px">
             <tr align="justify">
@@ -88,7 +88,7 @@
             </tr>
         </table>
     </div>
-    <p style="text-align: justify">Harap menyimpan nota pembelian BBM dan menyerahkan ke pihak <span style="font-weight: 700">Sub Bagian Umum</span> untuk segera diproses.</p>
+    <p style="text-align: justify">Harap menyimpan nota pembelian dan menyerahkan ke pihak <span style="font-weight: 700">Sub Bagian Umum</span> untuk segera diproses.</p>
 
     <p style="margin-top: 32px; text-align:right">Umum PT. Jasa Raharja Cabang Kalimantan Timur</p>
 </body>
