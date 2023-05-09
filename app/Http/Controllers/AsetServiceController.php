@@ -13,6 +13,7 @@ class AsetServiceController extends Controller
 {
     public function data()
     {
+        // kendaraan yang belum ada aset dan di hapus
         $kendaraan = Kendaraan::doesntHave('asetKendaraan')->get();
         $kendaraanService = Kendaraan::all();
 

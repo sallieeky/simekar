@@ -27,7 +27,7 @@ return new class extends Migration
             $table->year('tahun_pembuatan');
             $table->year('tahun_pengadaan');
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

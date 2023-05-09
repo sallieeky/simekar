@@ -15,11 +15,11 @@ class Kendaraan extends Model
 
     public function serviceKendaraans()
     {
-        return $this->hasMany(ServiceKendaraan::class)->withTrashed();
+        return $this->hasMany(ServiceKendaraan::class);
     }
 
     public function asetKendaraan()
     {
-        return $this->hasOne(AsetKendaraan::class)->withTrashed();
+        return $this->hasOne(AsetKendaraan::class);
     }
 }

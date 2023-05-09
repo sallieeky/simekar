@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('uraian');
             $table->date('tgl_service');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ServiceKendaraan extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $guarded = ["id"];
 
