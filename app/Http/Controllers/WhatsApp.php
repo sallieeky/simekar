@@ -19,7 +19,7 @@ class WhatsApp
     } catch (Throwable $th) {
       throw $th;
     } finally {
-      return $result;
+      // return $result;
     }
   }
 
