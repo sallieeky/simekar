@@ -51,7 +51,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function peminjamanBerhasilKendaraanDriver_Driver($data)
@@ -81,7 +81,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data['nohp_driver'], $pesan);
+    self::send($data['nohp_driver'], $pesan);
   }
 
   public static function peminjamanBerhasilKendaraanDriver_User($data)
@@ -113,7 +113,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data['nohp_pegawai'], $pesan);
+    self::send($data['nohp_pegawai'], $pesan);
   }
 
   public static function peminjamanBerhasilKendaraan_Admin($data)
@@ -143,7 +143,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function peminjamanBerhasilKendaraan_User($data)
@@ -174,7 +174,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data['nohp_pegawai'], $pesan);
+    self::send($data['nohp_pegawai'], $pesan);
   }
 
   public static function masukAntrianKendaraan_Admin($data)
@@ -191,7 +191,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function masukAntrianKendaraan_User($data)
@@ -210,7 +210,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_Admin($data)
@@ -238,7 +238,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_Driver($data)
@@ -263,7 +263,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_driver"], $pesan);
+    self::send($data["nohp_driver"], $pesan);
   }
 
   public static function mendapatkanKendaraanSetelahMenungguPadaAntrian_User($data)
@@ -291,7 +291,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_Admin($data)
@@ -308,7 +308,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_Driver($data)
@@ -325,7 +325,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_driver"], $pesan);
+    self::send($data["nohp_driver"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjaman_User($data)
@@ -342,7 +342,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_Admin($data)
@@ -359,7 +359,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_Driver($data)
@@ -376,7 +376,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_driver"], $pesan);
+    self::send($data["nohp_driver"], $pesan);
   }
 
   public static function melakukanKonfirmasiSelesaiPeminjamanAdmin_User($data)
@@ -393,7 +393,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraan_Admin($data)
@@ -410,7 +410,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraan_User($data)
@@ -429,7 +429,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_Admin($data)
@@ -446,7 +446,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function melakukanPembatalanPeminjamanDiAntrianKendaraanAdmin_User($data)
@@ -465,7 +465,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function pengajuanReimburseMasukDiproses_Admin($data)
@@ -491,7 +491,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function pengajuanReimburseMasukDiproses_User($data)
@@ -515,7 +515,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reimburseDisetujui_User($data)
@@ -541,7 +541,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reimburseDitolak_User($data)
@@ -560,7 +560,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send($data["nohp_pegawai"], $pesan);
+    self::send($data["nohp_pegawai"], $pesan);
   }
 
   public static function reminderPajakKendaraan_Hmin14_Admin($data)
@@ -585,7 +585,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderPajakStnk_Hmin14_Admin($data)
@@ -610,7 +610,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderPajakAsuransi_Hmin14_Admin($data)
@@ -635,7 +635,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderPajakKendaraan_Hplus3_Admin($data)
@@ -658,7 +658,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderPajakStnk_Hplus3_Admin($data)
@@ -681,7 +681,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderPajakAsuransi_Hplus3_Admin($data)
@@ -704,7 +704,7 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 
   public static function reminderServiceRutinKendaraan_Admin($data)
@@ -727,6 +727,6 @@ class WhatsApp
     $pesan = str_replace("      ", "", $pesan);
     $pesan = urlencode($pesan);
 
-    return self::send(env("WA_ADMIN"), $pesan);
+    self::send(env("WA_ADMIN"), $pesan);
   }
 }
