@@ -10,6 +10,7 @@ use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReimbursementController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WhatsApp;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
@@ -181,3 +182,9 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+
+Route::get("/tes", function () {
+    WhatsApp::send("081717616711", "tes");
+    return redirect("/");
+});

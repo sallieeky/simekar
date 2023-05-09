@@ -17,7 +17,7 @@ class WhatsApp
       $result = curl_exec($curl);
       curl_close($curl);
     } catch (Throwable $th) {
-      throw $th;
+      // throw $th;
     } finally {
       // return $result;
     }
