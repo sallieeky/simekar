@@ -10,8 +10,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&amp;family=Roboto+Mono&amp;display=swap" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-core.css" rel="stylesheet">
 	<link href="/dashboard_assets/assets/build/styles/ltr-vendor.css" rel="stylesheet">
-	<link href="/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>Lupa Password | SIMEKAR</title>
+	<link href="/logo_new.png" rel="shortcut icon" type="image/x-icon">
+	<title>Lupa Password | SIGAP</title>
 </head>
 
 <body class="preload-active">
@@ -32,15 +32,15 @@
 			<div class="content">
 				<div class="container-fluid g-4">
 					<div class="row g-0 align-items-center justify-content-center h-100" style="flex-direction: column">
-						<img src="/logo.png" alt="Logo JR" class="img-fluid" style="width: 150px">
-						<h3 class="text-center">Sistem Informasi Manajemen Kendaraan</h3>
+						<img src="/logo_new.png" alt="Logo JR" class="img-fluid" style="width: 150px">
+						<h3 class="text-center">Sistem Integrasi General Affairs Terpadu</h3>
 
 						<div class="col-sm-8 col-md-6 col-lg-4 col-xl-4">
 							<!-- BEGIN Portlet -->
 							<div class="portlet">
 								<div class="portlet-body">
 									<div class="mt-3 mb-3">
-                                        <h5>Lupa Password</h5>
+										<h5>Lupa Password</h5>
 									</div>
 									<!-- BEGIN Form -->
 									<form class="d-grid gap-3" id="login-form" method="POST" action="/lupa-password">
@@ -69,20 +69,24 @@
 										<div class="d-flex align-items-center justify-content-between">
 											<button type="submit" class="btn btn-label-primary btn-lg btn-widest w-100" id="login-button">Kirim Reset Password Link</button>
 										</div>
-                                        @if(session('status'))
-                                        <div class="alert alert-dismissible alert-outline-success fade show">
-                                            <div class="alert-content">
-                                                <strong>Berhasil!</strong> Link untuk merubah password telah di kirim ke email anda.
-                                            </div>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        </div>
-                                        @endif
+										@if(session('status'))
+										<div class="alert alert-dismissible alert-outline-success fade show">
+												<div class="alert-content">
+														<strong>Berhasil!</strong> Link untuk merubah password telah di kirim ke email anda.
+												</div>
+												<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+										</div>
+										@endif
 										<!-- END Flex -->
 									</form>
 									<!-- END Form -->
 								</div>
 							</div>
 							<!-- END Portlet -->
+
+							<div class="text-center">
+								<a href="/login" class="text-decoration-none">Kembali ke halaman login</a>
+							</div>
 						</div>
 					</div>
 				</div>
