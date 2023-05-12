@@ -234,7 +234,8 @@
     $("#table-user").DataTable();
 
     // make ajax for edit user
-    $(".btn-edit").click(function () {
+    // .on('click', 'tbody tr td .btn-edit',  function () {
+    $("#table-user").on('click', 'tbody tr td .btn-edit',  function () {
       let id = $(this).data("id");
       $.ajax({
         url: "/master-data/user/get/" + id,
@@ -250,7 +251,7 @@
     });
 
     // make ajax for delete user
-    $(".btn-hapus").click(function () {
+    $("#table-user").on('click', 'tbody tr td .btn-hapus',  function () {
       let id = $(this).data("id");
       $("#hapus_id").val(id);
       $("#hapus-modal").modal("show");
